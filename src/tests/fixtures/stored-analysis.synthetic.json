@@ -1,0 +1,977 @@
+{
+  "_fixture_notice": "SYNTHETIC TEST DATA generated from the local mock-only report. LIVE_QLOO labels describe a hypothetical state transition, not actual provider calls. Contains no recorded Qloo response.",
+  "result": {
+    "id": "analysis_791f9b4e-2ef8-4410-a146-dd547f6ca6fd",
+    "brief": "Tokyo Sound Bar — capsule croisant le jazz spirituel, le denim brut et la céramique japonaise artisanale",
+    "branchA_without_qloo": {
+      "id": "baseline_f2111f5e-bb6f-4579-a901-1928ed49b363",
+      "title": "Sélection sans Qloo",
+      "pitch": "Même interprétation du brief, catalogue et contraintes. Aucun signal Qloo ajouté au classement.",
+      "target_audience": "Tokyo Sound Bar — capsule croisant le jazz spirituel, le denim brut et la céramique japonaise artisanale",
+      "data_state": "NO_QLOO",
+      "items": [
+        {
+          "product": {
+            "sku": "SKU-SYNTH-036",
+            "name": "Tasse Céramique Faite Main Finition Émail Mat Châtaigne",
+            "category": "decoration",
+            "description": "Contenance 300ml, ergonomie parfaite pour latte et café filtre.",
+            "price_eur": 26,
+            "cost_eur": 8.5,
+            "stock_units": 45,
+            "margin_pct": 0.67,
+            "tags_style": [
+              "cozy",
+              "japan-chic",
+              "craft"
+            ],
+            "notes_matieres": [
+              "gres",
+              "organic"
+            ],
+            "marques_affinitaires": [
+              "Hasami Porcelain",
+              "Kinto"
+            ],
+            "is_synthetic": true,
+            "cultural_features": [
+              "ceramics",
+              "japanese-design",
+              "craft"
+            ]
+          },
+          "affinity_score": 0.1333,
+          "margin_score": 0.64,
+          "stock_score": 0.9,
+          "mai_total": 0.5888,
+          "matched_tags": [
+            "craft"
+          ],
+          "semantic_matches": [
+            "Céramique",
+            "Design japonais",
+            "Fabrication artisanale"
+          ],
+          "brief_matches": [
+            {
+              "concept": "ceramics",
+              "feature": "ceramics",
+              "label": "Céramique",
+              "strength": 1,
+              "method": "catalog_feature"
+            },
+            {
+              "concept": "japanese-design",
+              "feature": "japanese-design",
+              "label": "Design japonais",
+              "strength": 1,
+              "method": "catalog_feature"
+            },
+            {
+              "concept": "craft",
+              "feature": "craft",
+              "label": "Fabrication artisanale",
+              "strength": 1,
+              "method": "catalog_feature"
+            }
+          ],
+          "brief_score": 0.8,
+          "qloo_score": 0,
+          "product_kind": "ceramics",
+          "qloo_evidence": []
+        },
+        {
+          "product": {
+            "sku": "SKU-SYNTH-042",
+            "name": "Ceinture Cuir Plein Tannage Végétal Boucle Noire",
+            "category": "fashion",
+            "description": "Largeur 35mm, tranches cirées à chaud, boucle zamak anodisé.",
+            "price_eur": 55,
+            "cost_eur": 18,
+            "stock_units": 25,
+            "margin_pct": 0.67,
+            "tags_style": [
+              "minimalist",
+              "dark-academia",
+              "indie-rock"
+            ],
+            "notes_matieres": [
+              "leather",
+              "matte-black"
+            ],
+            "marques_affinitaires": [
+              "Nudie Jeans"
+            ],
+            "is_synthetic": true,
+            "cultural_features": [
+              "denim",
+              "workwear"
+            ]
+          },
+          "affinity_score": 0,
+          "margin_score": 0.64,
+          "stock_score": 0.5,
+          "mai_total": 0.5568,
+          "matched_tags": [],
+          "semantic_matches": [
+            "Denim"
+          ],
+          "brief_matches": [
+            {
+              "concept": "denim",
+              "feature": "denim",
+              "label": "Denim",
+              "strength": 1,
+              "method": "catalog_feature"
+            }
+          ],
+          "brief_score": 0.8,
+          "qloo_score": 0,
+          "product_kind": "denim",
+          "qloo_evidence": []
+        },
+        {
+          "product": {
+            "sku": "SKU-SYNTH-007",
+            "name": "Casque Audio Hi-Fi Filaire Coques Bois de Noyer",
+            "category": "audio_accessoires",
+            "description": "Transducteurs 50mm ouverts, coussinets velours et câble tressé détachable.",
+            "price_eur": 199,
+            "cost_eur": 105,
+            "stock_units": 12,
+            "margin_pct": 0.47,
+            "tags_style": [
+              "indie-rock",
+              "audiophile",
+              "vintage-80s",
+              "dark-academia"
+            ],
+            "notes_matieres": [
+              "noyer",
+              "leather",
+              "aluminium"
+            ],
+            "marques_affinitaires": [
+              "Sennheiser",
+              "Meze Audio"
+            ],
+            "is_synthetic": true,
+            "cultural_features": [
+              "analog-audio",
+              "craft"
+            ]
+          },
+          "affinity_score": 0,
+          "margin_score": 0.24,
+          "stock_score": 0.24,
+          "mai_total": 0.488,
+          "matched_tags": [],
+          "semantic_matches": [
+            "Jazz → Écoute et vinyle",
+            "Fabrication artisanale"
+          ],
+          "brief_matches": [
+            {
+              "concept": "jazz",
+              "feature": "analog-audio",
+              "label": "Jazz → Écoute et vinyle",
+              "strength": 0.7,
+              "method": "editorial_bridge"
+            },
+            {
+              "concept": "craft",
+              "feature": "craft",
+              "label": "Fabrication artisanale",
+              "strength": 1,
+              "method": "catalog_feature"
+            }
+          ],
+          "brief_score": 0.8,
+          "qloo_score": 0,
+          "product_kind": "analog-audio",
+          "qloo_evidence": []
+        },
+        {
+          "product": {
+            "sku": "SKU-SYNTH-017",
+            "name": "Diffuseur Ultrasonique Céramique Grège & Huile Hinoki",
+            "category": "decoration",
+            "description": "Diffusion à froid silencieuse avec flacon 15ml d'huile essentielle de cyprès japonais.",
+            "price_eur": 85,
+            "cost_eur": 33,
+            "stock_units": 20,
+            "margin_pct": 0.61,
+            "tags_style": [
+              "japan-chic",
+              "minimalist",
+              "cozy"
+            ],
+            "notes_matieres": [
+              "ceramique",
+              "hinoki",
+              "wood"
+            ],
+            "marques_affinitaires": [
+              "Muji",
+              "Aesop"
+            ],
+            "is_synthetic": true,
+            "cultural_features": [
+              "home-decor",
+              "ceramics",
+              "japanese-design"
+            ]
+          },
+          "affinity_score": 0,
+          "margin_score": 0.52,
+          "stock_score": 0.4,
+          "mai_total": 0.5344,
+          "matched_tags": [],
+          "semantic_matches": [
+            "Céramique",
+            "Design japonais"
+          ],
+          "brief_matches": [
+            {
+              "concept": "ceramics",
+              "feature": "ceramics",
+              "label": "Céramique",
+              "strength": 1,
+              "method": "catalog_feature"
+            },
+            {
+              "concept": "japanese-design",
+              "feature": "japanese-design",
+              "label": "Design japonais",
+              "strength": 1,
+              "method": "catalog_feature"
+            }
+          ],
+          "brief_score": 0.8,
+          "qloo_score": 0,
+          "product_kind": "home-decor",
+          "qloo_evidence": []
+        }
+      ],
+      "metrics": {
+        "total_basket_eur": 365,
+        "total_cost_eur": 164.5,
+        "total_margin_eur": 200.5,
+        "average_margin_pct": 0.5493,
+        "average_mai_score": 0.542
+      },
+      "decision_trace": [
+        "[Init] Brief : Tokyo Sound Bar — capsule croisant le jazz spirituel, le denim brut et la céramique japonaise artisanale",
+        "[Contraintes Inviolables] Marge >= 35%, stock > 0, cible 4 SKUs.",
+        "[Agentic Tool Selection] Règles locales : ancre John Coltrane, outils urn:tag, urn:entity:artist.",
+        "[Agentic Reasoning] Ancre exploratoire \"John Coltrane\" choisie par les règles locales à partir du brief ; ce choix n’est pas une affinité fournie par Qloo.",
+        "[Interprétation] Concepts : jazz, ceramics, denim, japanese-design, craft. Source : brief. 9/48 candidats pertinents ; aucun complément par la seule marge.",
+        "[Qloo Insights] 7 signaux collectés ; état MOCK_SIMULATED.",
+        "[Filtrage Dur Stock/Marge] 48 références éligibles, 2 exclues. 9 correspondent aussi au brief.",
+        "[Matching Qloo] 4/4 produits retenus avec correspondance explicite de tag ou marque. Les déductions locales restent séparées."
+      ],
+      "created_at": "2026-10-16T13:00:17.317Z"
+    },
+    "branchB_with_qloo": {
+      "id": "qloo_27758f88-91ba-4997-b128-f9f53854790a",
+      "title": "Capsule Culturelle Qloo — Tokyo Sound Bar  capsule croisant le jazz spirituel le denim brut et la cramique japonaise artisanale",
+      "pitch": "Collection conçue sur mesure pour l'audience \"Tokyo Sound Bar — capsule croisant le jazz spirituel, le denim brut et la céramique japonaise artisanale\". Sélection de 4 références selon les tags de travail (jazz, ceramics, denim) et les contraintes de marge et de stock. Consultez les preuves par produit pour identifier les correspondances Qloo.",
+      "target_audience": "Tokyo Sound Bar — capsule croisant le jazz spirituel, le denim brut et la céramique japonaise artisanale",
+      "data_state": "LIVE_QLOO",
+      "items": [
+        {
+          "product": {
+            "sku": "SKU-SYNTH-036",
+            "name": "Tasse Céramique Faite Main Finition Émail Mat Châtaigne",
+            "category": "decoration",
+            "description": "Contenance 300ml, ergonomie parfaite pour latte et café filtre.",
+            "price_eur": 26,
+            "cost_eur": 8.5,
+            "stock_units": 45,
+            "margin_pct": 0.67,
+            "tags_style": [
+              "cozy",
+              "japan-chic",
+              "craft"
+            ],
+            "notes_matieres": [
+              "gres",
+              "organic"
+            ],
+            "marques_affinitaires": [
+              "Hasami Porcelain",
+              "Kinto"
+            ],
+            "is_synthetic": true,
+            "cultural_features": [
+              "ceramics",
+              "japanese-design",
+              "craft"
+            ]
+          },
+          "affinity_score": 0.5893,
+          "margin_score": 0.64,
+          "stock_score": 0.9,
+          "mai_total": 0.7788,
+          "matched_tags": [
+            "craft"
+          ],
+          "semantic_matches": [
+            "Céramique",
+            "Design japonais",
+            "Fabrication artisanale"
+          ],
+          "brief_matches": [
+            {
+              "concept": "ceramics",
+              "feature": "ceramics",
+              "label": "Céramique",
+              "strength": 1,
+              "method": "catalog_feature"
+            },
+            {
+              "concept": "japanese-design",
+              "feature": "japanese-design",
+              "label": "Design japonais",
+              "strength": 1,
+              "method": "catalog_feature"
+            },
+            {
+              "concept": "craft",
+              "feature": "craft",
+              "label": "Fabrication artisanale",
+              "strength": 1,
+              "method": "catalog_feature"
+            }
+          ],
+          "brief_score": 0.8,
+          "qloo_score": 0.76,
+          "product_kind": "ceramics",
+          "qloo_evidence": [
+            {
+              "id": "tag_japan",
+              "name": "japan-chic",
+              "type": "urn:tag",
+              "affinity_score": 0.76,
+              "score_available": true,
+              "state": "LIVE_QLOO",
+              "anchor_id": "ent_generic_John%20Coltrane",
+              "anchor_name": "John Coltrane",
+              "captured_at": "2026-10-16T13:00:17.313Z",
+              "weight": 3,
+              "match_method": "exact_tag",
+              "matched_feature": "japan-chic",
+              "mapping_note": "Même tag dans Qloo et dans le catalogue."
+            },
+            {
+              "id": "tag_craft",
+              "name": "craft",
+              "type": "urn:tag",
+              "affinity_score": 0.72,
+              "score_available": true,
+              "state": "LIVE_QLOO",
+              "anchor_id": "ent_generic_John%20Coltrane",
+              "anchor_name": "John Coltrane",
+              "captured_at": "2026-10-16T13:00:17.313Z",
+              "weight": 3,
+              "match_method": "exact_tag",
+              "matched_feature": "craft",
+              "mapping_note": "Même tag dans Qloo et dans le catalogue."
+            }
+          ]
+        },
+        {
+          "product": {
+            "sku": "SKU-SYNTH-042",
+            "name": "Ceinture Cuir Plein Tannage Végétal Boucle Noire",
+            "category": "fashion",
+            "description": "Largeur 35mm, tranches cirées à chaud, boucle zamak anodisé.",
+            "price_eur": 55,
+            "cost_eur": 18,
+            "stock_units": 25,
+            "margin_pct": 0.67,
+            "tags_style": [
+              "minimalist",
+              "dark-academia",
+              "indie-rock"
+            ],
+            "notes_matieres": [
+              "leather",
+              "matte-black"
+            ],
+            "marques_affinitaires": [
+              "Nudie Jeans"
+            ],
+            "is_synthetic": true,
+            "cultural_features": [
+              "denim",
+              "workwear"
+            ]
+          },
+          "affinity_score": 0.486,
+          "margin_score": 0.64,
+          "stock_score": 0.5,
+          "mai_total": 0.7593,
+          "matched_tags": [],
+          "semantic_matches": [
+            "Denim"
+          ],
+          "brief_matches": [
+            {
+              "concept": "denim",
+              "feature": "denim",
+              "label": "Denim",
+              "strength": 1,
+              "method": "catalog_feature"
+            }
+          ],
+          "brief_score": 0.8,
+          "qloo_score": 0.81,
+          "product_kind": "denim",
+          "qloo_evidence": [
+            {
+              "id": "tag_minimalist",
+              "name": "minimalist",
+              "type": "urn:tag",
+              "affinity_score": 0.81,
+              "score_available": true,
+              "state": "LIVE_QLOO",
+              "anchor_id": "ent_generic_John%20Coltrane",
+              "anchor_name": "John Coltrane",
+              "captured_at": "2026-10-16T13:00:17.313Z",
+              "weight": 3,
+              "match_method": "exact_tag",
+              "matched_feature": "minimalist",
+              "mapping_note": "Même tag dans Qloo et dans le catalogue."
+            }
+          ]
+        },
+        {
+          "product": {
+            "sku": "SKU-SYNTH-007",
+            "name": "Casque Audio Hi-Fi Filaire Coques Bois de Noyer",
+            "category": "audio_accessoires",
+            "description": "Transducteurs 50mm ouverts, coussinets velours et câble tressé détachable.",
+            "price_eur": 199,
+            "cost_eur": 105,
+            "stock_units": 12,
+            "margin_pct": 0.47,
+            "tags_style": [
+              "indie-rock",
+              "audiophile",
+              "vintage-80s",
+              "dark-academia"
+            ],
+            "notes_matieres": [
+              "noyer",
+              "leather",
+              "aluminium"
+            ],
+            "marques_affinitaires": [
+              "Sennheiser",
+              "Meze Audio"
+            ],
+            "is_synthetic": true,
+            "cultural_features": [
+              "analog-audio",
+              "craft"
+            ]
+          },
+          "affinity_score": 0.432,
+          "margin_score": 0.24,
+          "stock_score": 0.24,
+          "mai_total": 0.668,
+          "matched_tags": [],
+          "semantic_matches": [
+            "Jazz → Écoute et vinyle",
+            "Fabrication artisanale"
+          ],
+          "brief_matches": [
+            {
+              "concept": "jazz",
+              "feature": "analog-audio",
+              "label": "Jazz → Écoute et vinyle",
+              "strength": 0.7,
+              "method": "editorial_bridge"
+            },
+            {
+              "concept": "craft",
+              "feature": "craft",
+              "label": "Fabrication artisanale",
+              "strength": 1,
+              "method": "catalog_feature"
+            }
+          ],
+          "brief_score": 0.8,
+          "qloo_score": 0.72,
+          "product_kind": "analog-audio",
+          "qloo_evidence": [
+            {
+              "id": "tag_craft",
+              "name": "craft",
+              "type": "urn:tag",
+              "affinity_score": 0.72,
+              "score_available": true,
+              "state": "LIVE_QLOO",
+              "anchor_id": "ent_generic_John%20Coltrane",
+              "anchor_name": "John Coltrane",
+              "captured_at": "2026-10-16T13:00:17.313Z",
+              "weight": 3,
+              "match_method": "editorial_translation",
+              "matched_feature": "craft",
+              "mapping_note": "Traduction éditoriale locale : craft → Fabrication artisanale. Qloo fournit le signal ; cette interprétation est celle de CultMerch."
+            },
+            {
+              "id": "tag_vintage80s",
+              "name": "vintage-80s",
+              "type": "urn:tag",
+              "affinity_score": 0.69,
+              "score_available": true,
+              "state": "LIVE_QLOO",
+              "anchor_id": "ent_generic_John%20Coltrane",
+              "anchor_name": "John Coltrane",
+              "captured_at": "2026-10-16T13:00:17.313Z",
+              "weight": 3,
+              "match_method": "exact_tag",
+              "matched_feature": "vintage-80s",
+              "mapping_note": "Même tag dans Qloo et dans le catalogue."
+            }
+          ]
+        },
+        {
+          "product": {
+            "sku": "SKU-SYNTH-017",
+            "name": "Diffuseur Ultrasonique Céramique Grège & Huile Hinoki",
+            "category": "decoration",
+            "description": "Diffusion à froid silencieuse avec flacon 15ml d'huile essentielle de cyprès japonais.",
+            "price_eur": 85,
+            "cost_eur": 33,
+            "stock_units": 20,
+            "margin_pct": 0.61,
+            "tags_style": [
+              "japan-chic",
+              "minimalist",
+              "cozy"
+            ],
+            "notes_matieres": [
+              "ceramique",
+              "hinoki",
+              "wood"
+            ],
+            "marques_affinitaires": [
+              "Muji",
+              "Aesop"
+            ],
+            "is_synthetic": true,
+            "cultural_features": [
+              "home-decor",
+              "ceramics",
+              "japanese-design"
+            ]
+          },
+          "affinity_score": 0.486,
+          "margin_score": 0.52,
+          "stock_score": 0.4,
+          "mai_total": 0.7369,
+          "matched_tags": [],
+          "semantic_matches": [
+            "Céramique",
+            "Design japonais"
+          ],
+          "brief_matches": [
+            {
+              "concept": "ceramics",
+              "feature": "ceramics",
+              "label": "Céramique",
+              "strength": 1,
+              "method": "catalog_feature"
+            },
+            {
+              "concept": "japanese-design",
+              "feature": "japanese-design",
+              "label": "Design japonais",
+              "strength": 1,
+              "method": "catalog_feature"
+            }
+          ],
+          "brief_score": 0.8,
+          "qloo_score": 0.81,
+          "product_kind": "home-decor",
+          "qloo_evidence": [
+            {
+              "id": "tag_minimalist",
+              "name": "minimalist",
+              "type": "urn:tag",
+              "affinity_score": 0.81,
+              "score_available": true,
+              "state": "LIVE_QLOO",
+              "anchor_id": "ent_generic_John%20Coltrane",
+              "anchor_name": "John Coltrane",
+              "captured_at": "2026-10-16T13:00:17.313Z",
+              "weight": 3,
+              "match_method": "exact_tag",
+              "matched_feature": "minimalist",
+              "mapping_note": "Même tag dans Qloo et dans le catalogue."
+            },
+            {
+              "id": "tag_japan",
+              "name": "japan-chic",
+              "type": "urn:tag",
+              "affinity_score": 0.76,
+              "score_available": true,
+              "state": "LIVE_QLOO",
+              "anchor_id": "ent_generic_John%20Coltrane",
+              "anchor_name": "John Coltrane",
+              "captured_at": "2026-10-16T13:00:17.313Z",
+              "weight": 3,
+              "match_method": "exact_tag",
+              "matched_feature": "japan-chic",
+              "mapping_note": "Même tag dans Qloo et dans le catalogue."
+            }
+          ]
+        }
+      ],
+      "metrics": {
+        "total_basket_eur": 365,
+        "total_cost_eur": 164.5,
+        "total_margin_eur": 200.5,
+        "average_margin_pct": 0.5493,
+        "average_mai_score": 0.7358
+      },
+      "decision_trace": [
+        "[Init] Brief : Tokyo Sound Bar — capsule croisant le jazz spirituel, le denim brut et la céramique japonaise artisanale",
+        "[Contraintes Inviolables] Marge >= 35%, stock > 0, cible 4 SKUs.",
+        "[Agentic Tool Selection] Règles locales : ancre John Coltrane, outils urn:tag, urn:entity:artist.",
+        "[Agentic Reasoning] Ancre exploratoire \"John Coltrane\" choisie par les règles locales à partir du brief ; ce choix n’est pas une affinité fournie par Qloo.",
+        "[Interprétation] Concepts : jazz, ceramics, denim, japanese-design, craft. Source : brief. 9/48 candidats pertinents ; aucun complément par la seule marge.",
+        "[Qloo Insights] 7 signaux collectés ; état MOCK_SIMULATED.",
+        "[Filtrage Dur Stock/Marge] 48 références éligibles, 2 exclues. 9 correspondent aussi au brief.",
+        "[Matching Qloo] 4/4 produits retenus avec correspondance explicite de tag ou marque. Les déductions locales restent séparées."
+      ],
+      "created_at": "2026-10-16T13:00:17.317Z"
+    },
+    "comparison_metrics": {
+      "qloo_unique_insights": [
+        "synthwave",
+        "neo-noir",
+        "minimalist",
+        "japan-chic",
+        "craft"
+      ],
+      "cultural_relevance_delta": 0,
+      "changed_skus": 0,
+      "qloo_alignment_a": 0.775,
+      "qloo_alignment_b": 0.775,
+      "brief_coverage_a": 1,
+      "brief_coverage_b": 1,
+      "margin_delta_eur": 0,
+      "basket_delta_eur": 0,
+      "summary": "0 référence(s) différente(s) sur 4. Écart de marge théorique : 0.00 €. 4 produit(s) avec correspondance Qloo explicite. Catalogue fictif ; aucune vente ou conversion mesurée."
+    },
+    "status": "PENDING_REVIEW",
+    "provenance": {
+      "qloo_state": "LIVE_QLOO",
+      "planner": "Règles locales",
+      "copywriter": "Texte local",
+      "catalog_count": 50,
+      "catalog_is_synthetic": true,
+      "anchors": [
+        {
+          "query": "John Coltrane",
+          "id": "ent_generic_John%20Coltrane",
+          "name": "John Coltrane",
+          "state": "LIVE_QLOO",
+          "weight": 3
+        }
+      ],
+      "calls": [
+        {
+          "endpoint": "/search catalogue (Hasami Porcelain)",
+          "state": "LIVE_QLOO",
+          "count": 1,
+          "captured_at": "2026-10-16T13:00:17.312Z"
+        },
+        {
+          "endpoint": "/search catalogue (Nudie Jeans)",
+          "state": "LIVE_QLOO",
+          "count": 1,
+          "captured_at": "2026-10-16T13:00:17.312Z"
+        },
+        {
+          "endpoint": "/search catalogue (Muji)",
+          "state": "LIVE_QLOO",
+          "count": 1,
+          "captured_at": "2026-10-16T13:00:17.312Z"
+        },
+        {
+          "endpoint": "/search catalogue (Sennheiser)",
+          "state": "LIVE_QLOO",
+          "count": 1,
+          "captured_at": "2026-10-16T13:00:17.312Z"
+        },
+        {
+          "endpoint": "/search catalogue (Menu)",
+          "state": "LIVE_QLOO",
+          "count": 1,
+          "captured_at": "2026-10-16T13:00:17.312Z"
+        },
+        {
+          "endpoint": "/search catalogue (Our Legacy)",
+          "state": "LIVE_QLOO",
+          "count": 1,
+          "captured_at": "2026-10-16T13:00:17.312Z"
+        },
+        {
+          "endpoint": "/search catalogue (FiiO)",
+          "state": "LIVE_QLOO",
+          "count": 1,
+          "captured_at": "2026-10-16T13:00:17.312Z"
+        },
+        {
+          "endpoint": "/search catalogue (Marshall)",
+          "state": "LIVE_QLOO",
+          "count": 1,
+          "captured_at": "2026-10-16T13:00:17.312Z"
+        },
+        {
+          "endpoint": "/search catalogue (Pro-Ject)",
+          "state": "LIVE_QLOO",
+          "count": 1,
+          "captured_at": "2026-10-16T13:00:17.312Z"
+        },
+        {
+          "endpoint": "/search (John Coltrane)",
+          "state": "LIVE_QLOO",
+          "count": 1,
+          "captured_at": "2026-10-16T13:00:17.313Z"
+        },
+        {
+          "endpoint": "/v2/insights (John Coltrane, urn:tag)",
+          "state": "LIVE_QLOO",
+          "count": 6,
+          "captured_at": "2026-10-16T13:00:17.313Z"
+        },
+        {
+          "endpoint": "/v2/insights (John Coltrane, urn:entity:brand)",
+          "state": "LIVE_QLOO",
+          "count": 3,
+          "captured_at": "2026-10-16T13:00:17.313Z"
+        },
+        {
+          "endpoint": "/v2/insights (John Coltrane, urn:entity:artist)",
+          "state": "LIVE_QLOO",
+          "count": 1,
+          "captured_at": "2026-10-16T13:00:17.313Z"
+        }
+      ],
+      "signals": [
+        {
+          "id": "tag_synthwave",
+          "name": "synthwave",
+          "type": "urn:tag",
+          "affinity_score": 0.94,
+          "score_available": true,
+          "state": "LIVE_QLOO",
+          "anchor_id": "ent_generic_John%20Coltrane",
+          "anchor_name": "John Coltrane",
+          "captured_at": "2026-10-16T13:00:17.313Z",
+          "weight": 3
+        },
+        {
+          "id": "tag_neonoir",
+          "name": "neo-noir",
+          "type": "urn:tag",
+          "affinity_score": 0.88,
+          "score_available": true,
+          "state": "LIVE_QLOO",
+          "anchor_id": "ent_generic_John%20Coltrane",
+          "anchor_name": "John Coltrane",
+          "captured_at": "2026-10-16T13:00:17.313Z",
+          "weight": 3
+        },
+        {
+          "id": "tag_minimalist",
+          "name": "minimalist",
+          "type": "urn:tag",
+          "affinity_score": 0.81,
+          "score_available": true,
+          "state": "LIVE_QLOO",
+          "anchor_id": "ent_generic_John%20Coltrane",
+          "anchor_name": "John Coltrane",
+          "captured_at": "2026-10-16T13:00:17.313Z",
+          "weight": 3
+        },
+        {
+          "id": "tag_japan",
+          "name": "japan-chic",
+          "type": "urn:tag",
+          "affinity_score": 0.76,
+          "score_available": true,
+          "state": "LIVE_QLOO",
+          "anchor_id": "ent_generic_John%20Coltrane",
+          "anchor_name": "John Coltrane",
+          "captured_at": "2026-10-16T13:00:17.313Z",
+          "weight": 3
+        },
+        {
+          "id": "tag_craft",
+          "name": "craft",
+          "type": "urn:tag",
+          "affinity_score": 0.72,
+          "score_available": true,
+          "state": "LIVE_QLOO",
+          "anchor_id": "ent_generic_John%20Coltrane",
+          "anchor_name": "John Coltrane",
+          "captured_at": "2026-10-16T13:00:17.313Z",
+          "weight": 3
+        },
+        {
+          "id": "tag_vintage80s",
+          "name": "vintage-80s",
+          "type": "urn:tag",
+          "affinity_score": 0.69,
+          "score_available": true,
+          "state": "LIVE_QLOO",
+          "anchor_id": "ent_generic_John%20Coltrane",
+          "anchor_name": "John Coltrane",
+          "captured_at": "2026-10-16T13:00:17.313Z",
+          "weight": 3
+        },
+        {
+          "id": "item_generic_1",
+          "name": "Ambiance Électronique",
+          "type": "urn:entity:artist",
+          "affinity_score": 0.75,
+          "score_available": true,
+          "state": "LIVE_QLOO",
+          "anchor_id": "ent_generic_John%20Coltrane",
+          "anchor_name": "John Coltrane",
+          "captured_at": "2026-10-16T13:00:17.313Z",
+          "weight": 3
+        }
+      ],
+      "target_brands": [
+        {
+          "query": "Hasami Porcelain",
+          "id": "ent_generic_Hasami%20Porcelain",
+          "name": "Hasami Porcelain",
+          "state": "LIVE_QLOO"
+        },
+        {
+          "query": "Nudie Jeans",
+          "id": "ent_generic_Nudie%20Jeans",
+          "name": "Nudie Jeans",
+          "state": "LIVE_QLOO"
+        },
+        {
+          "query": "Muji",
+          "id": "ent_generic_Muji",
+          "name": "Muji",
+          "state": "LIVE_QLOO"
+        },
+        {
+          "query": "Sennheiser",
+          "id": "ent_generic_Sennheiser",
+          "name": "Sennheiser",
+          "state": "LIVE_QLOO"
+        },
+        {
+          "query": "Menu",
+          "id": "ent_generic_Menu",
+          "name": "Menu",
+          "state": "LIVE_QLOO"
+        },
+        {
+          "query": "Our Legacy",
+          "id": "ent_generic_Our%20Legacy",
+          "name": "Our Legacy",
+          "state": "LIVE_QLOO"
+        },
+        {
+          "query": "FiiO",
+          "id": "ent_generic_FiiO",
+          "name": "FiiO",
+          "state": "LIVE_QLOO"
+        },
+        {
+          "query": "Marshall",
+          "id": "ent_generic_Marshall",
+          "name": "Marshall",
+          "state": "LIVE_QLOO"
+        },
+        {
+          "query": "Pro-Ject",
+          "id": "ent_generic_Pro-Ject",
+          "name": "Pro-Ject",
+          "state": "LIVE_QLOO"
+        }
+      ]
+    },
+    "brief_profile": {
+      "version": "editorial-v1",
+      "concepts": [
+        "jazz",
+        "ceramics",
+        "denim",
+        "japanese-design",
+        "craft"
+      ],
+      "core_concepts": [
+        "jazz",
+        "ceramics",
+        "denim"
+      ],
+      "excluded_concepts": [],
+      "required_concepts": [],
+      "source": "brief"
+    },
+    "matching_diagnostics": {
+      "financially_eligible": 48,
+      "relevant_candidates": 9,
+      "excluded_as_irrelevant": 39,
+      "targeted_brands": [
+        "Hasami Porcelain",
+        "Nudie Jeans",
+        "Muji",
+        "Sennheiser",
+        "Menu",
+        "Our Legacy",
+        "FiiO",
+        "Marshall",
+        "Pro-Ject"
+      ]
+    },
+    "request": {
+      "brief": "Tokyo Sound Bar — capsule croisant le jazz spirituel, le denim brut et la céramique japonaise artisanale",
+      "bundleSize": 4,
+      "minMargin": 0.35,
+      "seeds": []
+    },
+    "product_reviews": {
+      "SKU-SYNTH-036": {
+        "status": "pending"
+      },
+      "SKU-SYNTH-042": {
+        "status": "pending"
+      },
+      "SKU-SYNTH-007": {
+        "status": "pending"
+      },
+      "SKU-SYNTH-017": {
+        "status": "pending"
+      }
+    },
+    "decision_trace": [
+      "[Init] Brief : Tokyo Sound Bar — capsule croisant le jazz spirituel, le denim brut et la céramique japonaise artisanale",
+      "[Contraintes Inviolables] Marge >= 35%, stock > 0, cible 4 SKUs.",
+      "[Agentic Tool Selection] Règles locales : ancre John Coltrane, outils urn:tag, urn:entity:artist.",
+      "[Agentic Reasoning] Ancre exploratoire \"John Coltrane\" choisie par les règles locales à partir du brief ; ce choix n’est pas une affinité fournie par Qloo.",
+      "[Interprétation] Concepts : jazz, ceramics, denim, japanese-design, craft. Source : brief. 9/48 candidats pertinents ; aucun complément par la seule marge.",
+      "[Qloo Insights] 7 signaux collectés ; état MOCK_SIMULATED.",
+      "[Filtrage Dur Stock/Marge] 48 références éligibles, 2 exclues. 9 correspondent aussi au brief.",
+      "[Matching Qloo] 4/4 produits retenus avec correspondance explicite de tag ou marque. Les déductions locales restent séparées.",
+      "[Comparaison A/B] 0 référence(s) différente(s) sur 4. Écart de marge théorique : 0.00 €. 4 produit(s) avec correspondance Qloo explicite. Catalogue fictif ; aucune vente ou conversion mesurée."
+    ],
+    "created_at": "2026-10-16T13:00:17.317Z"
+  }
+}

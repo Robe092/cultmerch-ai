@@ -1,0 +1,40 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
+
+# Next.js build output
+/.next/
+/out/
+
+# Production
+/build
+
+# Misc
+.DS_Store
+*.pem
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local environment files
+.env*.local
+.env
+.cultmerch_store.json
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Qloo's hackathon guide prohibits publishing recorded API responses in a public repo.
+# Keep evaluation captures and caches private. Tests use explicitly synthetic fixtures.
+/docs/recommendation-evaluation/
+/docs/screenshots/
+/docs/audit-20261029/
+/docs/*.jpg
+/cultmerch-argon-src.zip

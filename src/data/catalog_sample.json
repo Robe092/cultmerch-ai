@@ -1,0 +1,1415 @@
+[
+  {
+    "sku": "SKU-SYNTH-001",
+    "name": "Veste Bomber Néon Cyberpunk",
+    "category": "fashion",
+    "description": "Veste technique imperméable avec détails réfléchissants et doublure violet holographique.",
+    "price_eur": 149.0,
+    "cost_eur": 58.0,
+    "stock_units": 24,
+    "margin_pct": 0.61,
+    "tags_style": [
+      "cyberpunk",
+      "synthwave",
+      "neo-noir",
+      "streetwear"
+    ],
+    "notes_matieres": [
+      "nylon-technique",
+      "reflective",
+      "matte-black"
+    ],
+    "marques_affinitaires": [
+      "Acne Studios",
+      "Undercover"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "cyberpunk",
+      "synthwave",
+      "streetwear",
+      "techwear"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-002",
+    "name": "Lunettes de Soleil Aviateur Néo-80s",
+    "category": "fashion",
+    "description": "Monture fine en titane noir mat avec verres dégradés ambre.",
+    "price_eur": 89.0,
+    "cost_eur": 29.0,
+    "stock_units": 45,
+    "margin_pct": 0.67,
+    "tags_style": [
+      "synthwave",
+      "vintage-80s",
+      "retro-futurism"
+    ],
+    "notes_matieres": [
+      "titane",
+      "matte-black"
+    ],
+    "marques_affinitaires": [
+      "Ray-Ban",
+      "Gentle Monster"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "synthwave",
+      "streetwear"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-003",
+    "name": "Clavier Mécanique Rétro-Éclairé Violet Pastel",
+    "category": "audio_accessoires",
+    "description": "Clavier sans fil compact avec switches tactiles lubrifiés et keycaps PVD.",
+    "price_eur": 129.0,
+    "cost_eur": 62.0,
+    "stock_units": 18,
+    "margin_pct": 0.52,
+    "tags_style": [
+      "synthwave",
+      "lo-fi",
+      "minimalist",
+      "gaming-aesthetic"
+    ],
+    "notes_matieres": [
+      "aluminium-anodise",
+      "pbt"
+    ],
+    "marques_affinitaires": [
+      "Teenage Engineering",
+      "Keychron"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "electronic",
+      "techwear"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-004",
+    "name": "Lampe d'Ambiance Tube Néon 'Sunset Horizon'",
+    "category": "decoration",
+    "description": "Éclairage d'ambiance LED graduable reproduisant les teintes orangées et pourpres d'un coucher de soleil numérique.",
+    "price_eur": 75.0,
+    "cost_eur": 28.0,
+    "stock_units": 32,
+    "margin_pct": 0.63,
+    "tags_style": [
+      "synthwave",
+      "neo-noir",
+      "lo-fi",
+      "retro-futurism"
+    ],
+    "notes_matieres": [
+      "verre-opalin",
+      "aluminium"
+    ],
+    "marques_affinitaires": [
+      "HAY",
+      "Flos"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "synthwave",
+      "electronic",
+      "home-decor"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-005",
+    "name": "Gin Artisanal Infusé au Yuzu & Baies de Genévrier Noir",
+    "category": "epicurien",
+    "description": "Distillation en petit alambic cuivre, profil aromatique frais et boisé.",
+    "price_eur": 46.0,
+    "cost_eur": 19.5,
+    "stock_units": 28,
+    "margin_pct": 0.58,
+    "tags_style": [
+      "japan-chic",
+      "craft",
+      "neo-noir",
+      "cocktail-culture"
+    ],
+    "notes_matieres": [
+      "yuzu",
+      "juniper",
+      "smoked"
+    ],
+    "marques_affinitaires": [
+      "Ki No Bi",
+      "Roku"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "spirits",
+      "craft"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-006",
+    "name": "Bougie Cire Végétale Senteur 'Asphalte Humide & Cèdre'",
+    "category": "lifestyle",
+    "description": "Notes de tête ozone et béton après la pluie, cœur de cèdre fumé et fond ambré.",
+    "price_eur": 38.0,
+    "cost_eur": 11.5,
+    "stock_units": 50,
+    "margin_pct": 0.7,
+    "tags_style": [
+      "neo-noir",
+      "minimalist",
+      "dark-academia"
+    ],
+    "notes_matieres": [
+      "cire-soja",
+      "smoked",
+      "wood"
+    ],
+    "marques_affinitaires": [
+      "Aesop",
+      "Byredo",
+      "Le Labo"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "home-decor",
+      "minimalist"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-007",
+    "name": "Casque Audio Hi-Fi Filaire Coques Bois de Noyer",
+    "category": "audio_accessoires",
+    "description": "Transducteurs 50mm ouverts, coussinets velours et câble tressé détachable.",
+    "price_eur": 199.0,
+    "cost_eur": 105.0,
+    "stock_units": 12,
+    "margin_pct": 0.47,
+    "tags_style": [
+      "indie-rock",
+      "audiophile",
+      "vintage-80s",
+      "dark-academia"
+    ],
+    "notes_matieres": [
+      "noyer",
+      "leather",
+      "aluminium"
+    ],
+    "marques_affinitaires": [
+      "Sennheiser",
+      "Meze Audio"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "analog-audio",
+      "craft"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-008",
+    "name": "Vin Naturel Rouge Cépage Syrah - Domaine des Éclipses",
+    "category": "epicurien",
+    "description": "Sans sulfites ajoutés, notes de fruits noirs écrasés, poivre blanc et cuir.",
+    "price_eur": 24.0,
+    "cost_eur": 11.0,
+    "stock_units": 60,
+    "margin_pct": 0.54,
+    "tags_style": [
+      "natural-wine",
+      "craft",
+      "organic",
+      "indie-rock"
+    ],
+    "notes_matieres": [
+      "syrah",
+      "leather",
+      "smoked"
+    ],
+    "marques_affinitaires": [
+      "Vins Vivants"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "wine",
+      "gastronomy",
+      "craft"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-009",
+    "name": "T-Shirt Graphique Coton Lourd 'Tokyo Drift 1993'",
+    "category": "fashion",
+    "description": "Coton bio peigné 240g/m², sérigraphie dos rétro typographique.",
+    "price_eur": 45.0,
+    "cost_eur": 14.0,
+    "stock_units": 38,
+    "margin_pct": 0.69,
+    "tags_style": [
+      "streetwear",
+      "japan-chic",
+      "vintage-80s",
+      "lo-fi"
+    ],
+    "notes_matieres": [
+      "coton-lourd",
+      "organic"
+    ],
+    "marques_affinitaires": [
+      "Carhartt WIP",
+      "Stussy"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "streetwear",
+      "japanese-design",
+      "typography"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-010",
+    "name": "Platine Vinyle Minimaliste Noir Mat avec Préampli",
+    "category": "audio_accessoires",
+    "description": "Entraînement par courroie, bras carbone et cellule Ortofon prémontée.",
+    "price_eur": 289.0,
+    "cost_eur": 175.0,
+    "stock_units": 8,
+    "margin_pct": 0.39,
+    "tags_style": [
+      "minimalist",
+      "audiophile",
+      "lo-fi",
+      "indie-rock"
+    ],
+    "notes_matieres": [
+      "mdf-dense",
+      "matte-black",
+      "carbon"
+    ],
+    "marques_affinitaires": [
+      "Pro-Ject",
+      "Audio-Technica"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "analog-audio",
+      "minimalist"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-011",
+    "name": "Chemise Col Revers Viscose 'Midnight Palm'",
+    "category": "fashion",
+    "description": "Coupe boxy décontractée, tombé fluide imprimé floral sombre.",
+    "price_eur": 79.0,
+    "cost_eur": 28.0,
+    "stock_units": 19,
+    "margin_pct": 0.65,
+    "tags_style": [
+      "vintage-80s",
+      "neo-noir",
+      "summer-noir"
+    ],
+    "notes_matieres": [
+      "viscose",
+      "matte-black"
+    ],
+    "marques_affinitaires": [
+      "Sandro",
+      "AllSaints"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "streetwear",
+      "synthwave"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-012",
+    "name": "Carnet de Notes Cuir Pleine Fleur Papier Japonais",
+    "category": "lifestyle",
+    "description": "Reliure cousue à la main, papier Tomoe River 68g parfait pour stylo-plume.",
+    "price_eur": 34.0,
+    "cost_eur": 12.0,
+    "stock_units": 42,
+    "margin_pct": 0.65,
+    "tags_style": [
+      "dark-academia",
+      "japan-chic",
+      "minimalist"
+    ],
+    "notes_matieres": [
+      "leather",
+      "papier-japonais"
+    ],
+    "marques_affinitaires": [
+      "Midori",
+      "Leuchtturm1917"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "stationery",
+      "japanese-design",
+      "craft"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-013",
+    "name": "Set de 2 Verres à Cocktail Cristal Cannelé",
+    "category": "decoration",
+    "description": "Verre soufflé bouche, texture cannelée géométrique façon Art Déco moderne.",
+    "price_eur": 42.0,
+    "cost_eur": 15.0,
+    "stock_units": 26,
+    "margin_pct": 0.64,
+    "tags_style": [
+      "neo-noir",
+      "minimalist",
+      "cocktail-culture"
+    ],
+    "notes_matieres": [
+      "cristal",
+      "fluted"
+    ],
+    "marques_affinitaires": [
+      "Ferm Living",
+      "Iittala"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "spirits",
+      "home-decor"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-014",
+    "name": "Café de Spécialité Torréfaction Claire Origine Éthiopie Yirgacheffe",
+    "category": "epicurien",
+    "description": "Notes de jasmin, bergamote et pêche blanche. Idéal pour extraction V60.",
+    "price_eur": 16.5,
+    "cost_eur": 6.8,
+    "stock_units": 75,
+    "margin_pct": 0.59,
+    "tags_style": [
+      "craft",
+      "minimalist",
+      "japan-chic",
+      "lo-fi"
+    ],
+    "notes_matieres": [
+      "cafe-arabica",
+      "organic"
+    ],
+    "marques_affinitaires": [
+      "Blue Bottle",
+      "Kurasu"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "coffee",
+      "craft"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-015",
+    "name": "Gourde Isotherme Acier Inox Noir Mat 'Stealth'",
+    "category": "lifestyle",
+    "description": "Double paroi sous vide, garde au frais 24h, finition poudrée texturée.",
+    "price_eur": 36.0,
+    "cost_eur": 13.0,
+    "stock_units": 65,
+    "margin_pct": 0.64,
+    "tags_style": [
+      "minimalist",
+      "cyberpunk",
+      "streetwear"
+    ],
+    "notes_matieres": [
+      "acier-inox",
+      "matte-black"
+    ],
+    "marques_affinitaires": [
+      "Snow Peak",
+      "Kinto"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "techwear",
+      "minimalist"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-016",
+    "name": "Pantalon Cargo Ample Ceinture Intégrée",
+    "category": "fashion",
+    "description": "Toile ripstop robuste déperlante, multiples poches ergonomiques.",
+    "price_eur": 110.0,
+    "cost_eur": 42.0,
+    "stock_units": 15,
+    "margin_pct": 0.62,
+    "tags_style": [
+      "streetwear",
+      "cyberpunk",
+      "japan-chic"
+    ],
+    "notes_matieres": [
+      "ripstop",
+      "coton-technique"
+    ],
+    "marques_affinitaires": [
+      "Arc'teryx",
+      "Nike ACG"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "workwear",
+      "techwear",
+      "streetwear"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-017",
+    "name": "Diffuseur Ultrasonique Céramique Grège & Huile Hinoki",
+    "category": "decoration",
+    "description": "Diffusion à froid silencieuse avec flacon 15ml d'huile essentielle de cyprès japonais.",
+    "price_eur": 85.0,
+    "cost_eur": 33.0,
+    "stock_units": 20,
+    "margin_pct": 0.61,
+    "tags_style": [
+      "japan-chic",
+      "minimalist",
+      "cozy"
+    ],
+    "notes_matieres": [
+      "ceramique",
+      "hinoki",
+      "wood"
+    ],
+    "marques_affinitaires": [
+      "Muji",
+      "Aesop"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "home-decor",
+      "ceramics",
+      "japanese-design"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-018",
+    "name": "Chocolat Noir 75% Fèves Fumé au Bois de Chêne",
+    "category": "epicurien",
+    "description": "Bean-to-bar artisanal, origine Madagascar, fumage doux au bois de fût.",
+    "price_eur": 8.5,
+    "cost_eur": 2.9,
+    "stock_units": 90,
+    "margin_pct": 0.66,
+    "tags_style": [
+      "craft",
+      "epicurien",
+      "smoked",
+      "dark-academia"
+    ],
+    "notes_matieres": [
+      "cacao",
+      "smoked",
+      "organic"
+    ],
+    "marques_affinitaires": [
+      "Dandelion Chocolate"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "gastronomy",
+      "craft"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-019",
+    "name": "Enceinte Portable Bluetooth Revêtement Laiton & Cuir",
+    "category": "audio_accessoires",
+    "description": "Autonomie 20h, son chaleureux équilibré, potentiomètres analogiques.",
+    "price_eur": 159.0,
+    "cost_eur": 92.0,
+    "stock_units": 14,
+    "margin_pct": 0.42,
+    "tags_style": [
+      "vintage-80s",
+      "indie-rock",
+      "audiophile"
+    ],
+    "notes_matieres": [
+      "laiton",
+      "leather"
+    ],
+    "marques_affinitaires": [
+      "Marshall",
+      "Klipsch"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "analog-audio",
+      "rock"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-020",
+    "name": "Porte-Cartes Minimaliste Cuir Végétal Noir",
+    "category": "fashion",
+    "description": "Capacité 6 cartes + billet, tannage végétal vieillissant avec patine.",
+    "price_eur": 49.0,
+    "cost_eur": 16.0,
+    "stock_units": 35,
+    "margin_pct": 0.67,
+    "tags_style": [
+      "minimalist",
+      "dark-academia",
+      "neo-noir"
+    ],
+    "notes_matieres": [
+      "leather",
+      "matte-black"
+    ],
+    "marques_affinitaires": [
+      "Bellroy",
+      "Maison Margiela"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "minimalist"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-021",
+    "name": "Affiche Sérigraphiée Cinéma Néo-Noir 'Circuit City'",
+    "category": "decoration",
+    "description": "Affiche de cinéma fictif néo-noir, sérigraphie en deux couleurs sur papier épais. Aucun film ou artiste sous licence.",
+    "price_eur": 65.0,
+    "cost_eur": 18.0,
+    "stock_units": 17,
+    "margin_pct": 0.72,
+    "tags_style": [
+      "synthwave",
+      "cyberpunk",
+      "retro-futurism"
+    ],
+    "notes_matieres": [
+      "papier-art",
+      "serigraphie"
+    ],
+    "marques_affinitaires": [
+      "Mondo"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "cinema",
+      "cyberpunk",
+      "typography"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-022",
+    "name": "Thé Vert Genmaicha Artisanal aux Grains de Riz Soufflé",
+    "category": "epicurien",
+    "description": "Récolte de printemps à Shizuoka, saveur toastée réconfortante.",
+    "price_eur": 14.0,
+    "cost_eur": 4.8,
+    "stock_units": 55,
+    "margin_pct": 0.66,
+    "tags_style": [
+      "japan-chic",
+      "cozy",
+      "minimalist"
+    ],
+    "notes_matieres": [
+      "the-vert",
+      "organic"
+    ],
+    "marques_affinitaires": [
+      "Ippodo",
+      "Jugetsudo"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "gastronomy",
+      "japanese-design"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-023",
+    "name": "Casquette 6 Panels Broderie Coton Délavé",
+    "category": "fashion",
+    "description": "Visière incurvée, attache métallique laiton vieilli, coupe déstructurée.",
+    "price_eur": 35.0,
+    "cost_eur": 10.5,
+    "stock_units": 40,
+    "margin_pct": 0.7,
+    "tags_style": [
+      "lo-fi",
+      "streetwear",
+      "indie-rock"
+    ],
+    "notes_matieres": [
+      "coton-delave"
+    ],
+    "marques_affinitaires": [
+      "Norse Projects",
+      "A.P.C."
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "streetwear",
+      "workwear"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-024",
+    "name": "Bière Stout Artisanale Vieillie en Fût de Bourbon",
+    "category": "epicurien",
+    "description": "Texture soyeuse, arômes intenses de vanille, cacao et café torréfié.",
+    "price_eur": 9.5,
+    "cost_eur": 3.8,
+    "stock_units": 48,
+    "margin_pct": 0.6,
+    "tags_style": [
+      "craft",
+      "indie-rock",
+      "smoked"
+    ],
+    "notes_matieres": [
+      "malt-torrefie",
+      "bourbon-barrel"
+    ],
+    "marques_affinitaires": [
+      "BrewDog",
+      "To Øl"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "beer",
+      "craft"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-025",
+    "name": "Vase Céramique Brut Effet Grès Volcanique",
+    "category": "decoration",
+    "description": "Sculpté à la main, surface poreuse texturée, parfait pour fleurs séchées.",
+    "price_eur": 58.0,
+    "cost_eur": 21.0,
+    "stock_units": 15,
+    "margin_pct": 0.64,
+    "tags_style": [
+      "japan-chic",
+      "minimalist",
+      "dark-academia"
+    ],
+    "notes_matieres": [
+      "gres",
+      "volcanic-texture"
+    ],
+    "marques_affinitaires": [
+      "Menu",
+      "101 Copenhagen"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "ceramics",
+      "brutalism",
+      "home-decor"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-026",
+    "name": "Sweat à Capuche Molleton Lourd 450g Noir Anthracite",
+    "category": "fashion",
+    "description": "Sans cordon, coupe oversize moderne, intérieur brossé ultra-doux.",
+    "price_eur": 95.0,
+    "cost_eur": 36.0,
+    "stock_units": 22,
+    "margin_pct": 0.62,
+    "tags_style": [
+      "streetwear",
+      "minimalist",
+      "lo-fi"
+    ],
+    "notes_matieres": [
+      "coton-molleton",
+      "matte-black"
+    ],
+    "marques_affinitaires": [
+      "Fear of God",
+      "Cole Buxton"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "streetwear",
+      "workwear",
+      "minimalist"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-027",
+    "name": "Plaid Laine Mérinos Tissé Géométrique Gris & Terracotta",
+    "category": "decoration",
+    "description": "100% laine vierge mérinos d'Australie, finitions frangées artisanales.",
+    "price_eur": 120.0,
+    "cost_eur": 52.0,
+    "stock_units": 10,
+    "margin_pct": 0.57,
+    "tags_style": [
+      "cozy",
+      "dark-academia",
+      "minimalist"
+    ],
+    "notes_matieres": [
+      "laine-merinos"
+    ],
+    "marques_affinitaires": [
+      "Klippan",
+      "Tekla"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "cozy",
+      "home-decor"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-028",
+    "name": "Whisky Single Malt Tourbé 10 Ans d'Âge",
+    "category": "epicurien",
+    "description": "Caractère maritime affirmé, tourbe fumée puissante et finale épicée.",
+    "price_eur": 68.0,
+    "cost_eur": 32.0,
+    "stock_units": 18,
+    "margin_pct": 0.53,
+    "tags_style": [
+      "craft",
+      "smoked",
+      "dark-academia",
+      "neo-noir"
+    ],
+    "notes_matieres": [
+      "tourbe",
+      "smoked",
+      "oak"
+    ],
+    "marques_affinitaires": [
+      "Laphroaig",
+      "Ardbeg"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "spirits",
+      "craft"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-029",
+    "name": "Boîtier Clé USB Rétro Forme Cassette Audio Métal",
+    "category": "audio_accessoires",
+    "description": "128 Go USB 3.2 haute vitesse dans une reproduction fidèle d'une K7 C-90.",
+    "price_eur": 29.0,
+    "cost_eur": 9.0,
+    "stock_units": 50,
+    "margin_pct": 0.69,
+    "tags_style": [
+      "vintage-80s",
+      "synthwave",
+      "lo-fi"
+    ],
+    "notes_matieres": [
+      "zinc-diecast"
+    ],
+    "marques_affinitaires": [
+      "Sony Retro"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "electronic",
+      "synthwave"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-030",
+    "name": "Miroir Ondulé Contour Acrylique Lilas Pastel",
+    "category": "decoration",
+    "description": "Inspiration design italien Memphis 80s, fixation murale ou à poser.",
+    "price_eur": 82.0,
+    "cost_eur": 31.0,
+    "stock_units": 12,
+    "margin_pct": 0.62,
+    "tags_style": [
+      "synthwave",
+      "vintage-80s",
+      "retro-futurism"
+    ],
+    "notes_matieres": [
+      "verre",
+      "acrylique"
+    ],
+    "marques_affinitaires": [
+      "Gustaf Westman",
+      "Poltronova"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "home-decor",
+      "synthwave"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-031",
+    "name": "Huile à Barbe & Visage Cèdre Noir et Bergamote",
+    "category": "lifestyle",
+    "description": "Flacon compte-gouttes verre fumé 50ml, formule 100% naturelle non grasse.",
+    "price_eur": 28.0,
+    "cost_eur": 8.0,
+    "stock_units": 60,
+    "margin_pct": 0.71,
+    "tags_style": [
+      "dark-academia",
+      "minimalist",
+      "craft"
+    ],
+    "notes_matieres": [
+      "huiles-vegetales",
+      "wood"
+    ],
+    "marques_affinitaires": [
+      "Aesop",
+      "Horace"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "skincare",
+      "craft"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-032",
+    "name": "Surchemise Denim Brut Japonais 13 oz Coupe Droite",
+    "category": "fashion",
+    "description": "Surchemise en denim brut japonais 13 oz, coupe droite et boutons métalliques. Produit fictif de démonstration.",
+    "price_eur": 115.0,
+    "cost_eur": 45.0,
+    "stock_units": 16,
+    "margin_pct": 0.61,
+    "tags_style": [
+      "denim",
+      "workwear",
+      "japan-chic",
+      "indie-rock"
+    ],
+    "notes_matieres": [
+      "denim-brut",
+      "coton",
+      "metal"
+    ],
+    "marques_affinitaires": [
+      "Our Legacy",
+      "Engineered Garments"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "denim",
+      "workwear",
+      "japanese-design"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-033",
+    "name": "Stylo Plume Corps Aluminium Sablé Encre Noire Intense",
+    "category": "lifestyle",
+    "description": "Plume acier trait fin gravée, recharge universelle standard.",
+    "price_eur": 39.0,
+    "cost_eur": 13.5,
+    "stock_units": 35,
+    "margin_pct": 0.65,
+    "tags_style": [
+      "dark-academia",
+      "minimalist",
+      "japan-chic"
+    ],
+    "notes_matieres": [
+      "aluminium-sable",
+      "acier"
+    ],
+    "marques_affinitaires": [
+      "Kaweco",
+      "Lamy"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "stationery",
+      "typography"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-034",
+    "name": "Vinaigre Balsamique Traditionnel Vieilli 12 Ans en Fût",
+    "category": "epicurien",
+    "description": "Origine Modène, densité sirupeuse exceptionnelle, équilibre acide-doux.",
+    "price_eur": 32.0,
+    "cost_eur": 12.0,
+    "stock_units": 25,
+    "margin_pct": 0.63,
+    "tags_style": [
+      "epicurien",
+      "craft",
+      "dark-academia"
+    ],
+    "notes_matieres": [
+      "raisin-trebbiano",
+      "chene"
+    ],
+    "marques_affinitaires": [
+      "Giusti"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "gastronomy",
+      "craft"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-035",
+    "name": "Sac Banane Bandoulière Cordura Étanche",
+    "category": "fashion",
+    "description": "Zip étanche YKK, clip magnétique Fidlock rapide, compartiment molletonné.",
+    "price_eur": 62.0,
+    "cost_eur": 21.0,
+    "stock_units": 30,
+    "margin_pct": 0.66,
+    "tags_style": [
+      "streetwear",
+      "cyberpunk",
+      "minimalist"
+    ],
+    "notes_matieres": [
+      "cordura-500d",
+      "matte-black"
+    ],
+    "marques_affinitaires": [
+      "Taikan",
+      "Porter-Yoshida"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "techwear",
+      "streetwear"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-036",
+    "name": "Tasse Céramique Faite Main Finition Émail Mat Châtaigne",
+    "category": "decoration",
+    "description": "Contenance 300ml, ergonomie parfaite pour latte et café filtre.",
+    "price_eur": 26.0,
+    "cost_eur": 8.5,
+    "stock_units": 45,
+    "margin_pct": 0.67,
+    "tags_style": [
+      "cozy",
+      "japan-chic",
+      "craft"
+    ],
+    "notes_matieres": [
+      "gres",
+      "organic"
+    ],
+    "marques_affinitaires": [
+      "Hasami Porcelain",
+      "Kinto"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "ceramics",
+      "japanese-design",
+      "craft"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-037",
+    "name": "Préampli Casque Audio Nomade DAC USB-C Haute Résolution",
+    "category": "audio_accessoires",
+    "description": "Décodage DSD512 et MQA, sortie 3.5mm et 4.4mm symétrique.",
+    "price_eur": 99.0,
+    "cost_eur": 54.0,
+    "stock_units": 15,
+    "margin_pct": 0.45,
+    "tags_style": [
+      "audiophile",
+      "cyberpunk",
+      "minimalist"
+    ],
+    "notes_matieres": [
+      "aluminium",
+      "glass"
+    ],
+    "marques_affinitaires": [
+      "FiiO",
+      "iFi Audio"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "analog-audio",
+      "electronic"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-038",
+    "name": "Cidre Brut de Garde Vieillissement Sous Bois",
+    "category": "epicurien",
+    "description": "Cuvée parcellaire bretonne, effervescence fine naturelle, sans intrant.",
+    "price_eur": 12.5,
+    "cost_eur": 4.8,
+    "stock_units": 40,
+    "margin_pct": 0.62,
+    "tags_style": [
+      "craft",
+      "natural-wine",
+      "cozy"
+    ],
+    "notes_matieres": [
+      "pommes-anciennes",
+      "chene"
+    ],
+    "marques_affinitaires": [
+      "Cidrerie du Léguer"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "wine",
+      "craft"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-039",
+    "name": "Bague Anneau Argent Massif 925 Brossé Brut",
+    "category": "fashion",
+    "description": "Forme biseautée moderne, poinçon d'artisan joaillier indépendant.",
+    "price_eur": 79.0,
+    "cost_eur": 24.0,
+    "stock_units": 20,
+    "margin_pct": 0.7,
+    "tags_style": [
+      "minimalist",
+      "dark-academia",
+      "neo-noir"
+    ],
+    "notes_matieres": [
+      "argent-925",
+      "brushed"
+    ],
+    "marques_affinitaires": [
+      "Tom Wood",
+      "Werkstatt:München"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "minimalist",
+      "craft"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-040",
+    "name": "Support Ordinateur Portable Bois Contreplaqué Cintre",
+    "category": "lifestyle",
+    "description": "Élévation ergonomique 15°, passage de câbles intégré, finition noyer.",
+    "price_eur": 49.0,
+    "cost_eur": 17.0,
+    "stock_units": 35,
+    "margin_pct": 0.65,
+    "tags_style": [
+      "minimalist",
+      "japan-chic",
+      "lo-fi"
+    ],
+    "notes_matieres": [
+      "noyer",
+      "wood"
+    ],
+    "marques_affinitaires": [
+      "Grovemade"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "minimalist",
+      "home-decor",
+      "craft"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-041",
+    "name": "Savon Saponifié à Froid Charbon Actif & Romarin",
+    "category": "lifestyle",
+    "description": "Pain de 120g détoxifiant pour corps et visage, surgras nourrissant.",
+    "price_eur": 9.0,
+    "cost_eur": 2.2,
+    "stock_units": 80,
+    "margin_pct": 0.76,
+    "tags_style": [
+      "organic",
+      "minimalist",
+      "craft"
+    ],
+    "notes_matieres": [
+      "charbon-actif",
+      "matte-black"
+    ],
+    "marques_affinitaires": [
+      "Buly 1803",
+      "Clémence & Vivien"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "skincare",
+      "craft"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-042",
+    "name": "Ceinture Cuir Plein Tannage Végétal Boucle Noire",
+    "category": "fashion",
+    "description": "Largeur 35mm, tranches cirées à chaud, boucle zamak anodisé.",
+    "price_eur": 55.0,
+    "cost_eur": 18.0,
+    "stock_units": 25,
+    "margin_pct": 0.67,
+    "tags_style": [
+      "minimalist",
+      "dark-academia",
+      "indie-rock"
+    ],
+    "notes_matieres": [
+      "leather",
+      "matte-black"
+    ],
+    "marques_affinitaires": [
+      "Nudie Jeans"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "denim",
+      "workwear"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-043",
+    "name": "Boîte de Rangement Métal Industriel Empilable",
+    "category": "decoration",
+    "description": "Tôle d'acier pliée finition époxy noir mat avec porte-étiquette laiton.",
+    "price_eur": 38.0,
+    "cost_eur": 14.0,
+    "stock_units": 30,
+    "margin_pct": 0.63,
+    "tags_style": [
+      "minimalist",
+      "cyberpunk",
+      "japan-chic"
+    ],
+    "notes_matieres": [
+      "acier",
+      "laiton"
+    ],
+    "marques_affinitaires": [
+      "Toyo Steel"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "brutalism",
+      "workwear",
+      "home-decor"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-044",
+    "name": "Miel Sauvage de Forêt Fumé au Bois de Pommier",
+    "category": "epicurien",
+    "description": "Récolte confidentielle en sous-bois, notes de caramel boisé et résine.",
+    "price_eur": 13.5,
+    "cost_eur": 4.5,
+    "stock_units": 40,
+    "margin_pct": 0.67,
+    "tags_style": [
+      "craft",
+      "smoked",
+      "organic"
+    ],
+    "notes_matieres": [
+      "miel-sauvage",
+      "smoked"
+    ],
+    "marques_affinitaires": [
+      "Miels d'Origine"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "gastronomy",
+      "craft"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-045",
+    "name": "Lampe Torche Porte-Clés LED Aluminium Anodisé 400 Lumens",
+    "category": "lifestyle",
+    "description": "Rechargeable USB-C, étanche IPX8, format compact 6cm.",
+    "price_eur": 24.0,
+    "cost_eur": 7.5,
+    "stock_units": 60,
+    "margin_pct": 0.69,
+    "tags_style": [
+      "cyberpunk",
+      "streetwear",
+      "minimalist"
+    ],
+    "notes_matieres": [
+      "aluminium",
+      "matte-black"
+    ],
+    "marques_affinitaires": [
+      "Olight",
+      "Nitecore"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "techwear"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-046",
+    "name": "Sous-Verres Liège & Ardoise Noire (Set de 4)",
+    "category": "decoration",
+    "description": "Découpe laser biseautée, protection thermique et hydrofuge.",
+    "price_eur": 22.0,
+    "cost_eur": 6.0,
+    "stock_units": 50,
+    "margin_pct": 0.73,
+    "tags_style": [
+      "minimalist",
+      "craft",
+      "dark-academia"
+    ],
+    "notes_matieres": [
+      "ardoise",
+      "liege"
+    ],
+    "marques_affinitaires": [
+      "Muuto"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "home-decor",
+      "brutalism"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-047",
+    "name": "Veste Cuir Vintage Biker (Pièce de Démonstration Hors Stock)",
+    "category": "fashion",
+    "description": "Cuir de buffle vieilli patiné main. Utilisé pour tester le filtre de rupture.",
+    "price_eur": 380.0,
+    "cost_eur": 190.0,
+    "stock_units": 0,
+    "margin_pct": 0.5,
+    "tags_style": [
+      "indie-rock",
+      "vintage-80s",
+      "neo-noir"
+    ],
+    "notes_matieres": [
+      "leather"
+    ],
+    "marques_affinitaires": [
+      "Schott"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "rock",
+      "streetwear"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-048",
+    "name": "Gobelet Carton Événementiel (Test Marge Faible Disqualifié)",
+    "category": "epicurien",
+    "description": "Accessoire générique à marge minimale de 15%. Utilisé pour tester le filtre de marge.",
+    "price_eur": 5.0,
+    "cost_eur": 4.25,
+    "stock_units": 100,
+    "margin_pct": 0.15,
+    "tags_style": [
+      "craft"
+    ],
+    "notes_matieres": [
+      "carton"
+    ],
+    "marques_affinitaires": [
+      "Generique"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "coffee"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-049",
+    "name": "Porte-Encens Laiton Massif Forme Disque Minimaliste",
+    "category": "decoration",
+    "description": "Usiné dans la masse, accepte bâtonnets japonais fins et cônes.",
+    "price_eur": 34.0,
+    "cost_eur": 10.0,
+    "stock_units": 38,
+    "margin_pct": 0.71,
+    "tags_style": [
+      "japan-chic",
+      "minimalist",
+      "lo-fi"
+    ],
+    "notes_matieres": [
+      "laiton"
+    ],
+    "marques_affinitaires": [
+      "Danese Milano"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "home-decor",
+      "japanese-design"
+    ]
+  },
+  {
+    "sku": "SKU-SYNTH-050",
+    "name": "Sac de Voyage Weekender Toile Coton & Renforts Cuir",
+    "category": "fashion",
+    "description": "Volume 40L conforme cabine avion, bandoulière matelassée détachable.",
+    "price_eur": 169.0,
+    "cost_eur": 65.0,
+    "stock_units": 14,
+    "margin_pct": 0.62,
+    "tags_style": [
+      "dark-academia",
+      "minimalist",
+      "indie-rock"
+    ],
+    "notes_matieres": [
+      "coton-canvas",
+      "leather"
+    ],
+    "marques_affinitaires": [
+      "Filson",
+      "Mismo"
+    ],
+    "is_synthetic": true,
+    "cultural_features": [
+      "workwear",
+      "craft"
+    ]
+  }
+]
