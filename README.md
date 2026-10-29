@@ -6,7 +6,9 @@ Built for the [Qloo Agentic Hackathon](https://qloo.devpost.com/). Next.js 15.5.
 
 **Source:** [Robe092/cultmerch-ai](https://github.com/Robe092/cultmerch-ai), public with a GitHub-recognized MIT license.
 
-**Release status:** locally audited on 29 October 2026. The public application and a fresh live Qloo run remain to be verified. Publishing the source does not deploy the application.
+**Application endpoint:** https://cultmerch-ai.onrender.com — hosted on Render Free. The homepage is publicly accessible, but Qloo is not configured on the host yet, so this is not a verified functional Qloo demo.
+
+**Release status:** locally audited on 29 October 2026. Current Qloo access/billing and the full hosted Qloo workflow remain unverified. No provider key has been uploaded; production rejects analysis without a Qloo key rather than silently using simulated signals.
 
 ## What the agent does
 
