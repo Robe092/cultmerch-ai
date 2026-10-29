@@ -1,6 +1,6 @@
 # Deployment requirements before submission
 
-Status on 29 October 2026: the separate source repository https://github.com/Robe092/cultmerch-ai is public, with a verified MIT license. The Render Free deployment at https://cultmerch-ai.onrender.com serves the homepage. Qloo is not configured on the host, so the full Qloo workflow is not verified and the application is not submission-ready. Do not publish the parent multi-project repository or `.env.local`.
+Status on 29 October 2026: the separate source repository https://github.com/Robe092/cultmerch-ai is public, with a verified MIT license. The Render Free deployment at https://cultmerch-ai.onrender.com completed a real Qloo workflow on 30 October 2026, including human approval and JSON/CSV exports. The provider key is configured only as a server secret; Gemini is absent. Do not publish the parent multi-project repository or `.env.local`.
 
 ## Supported demonstration topology
 
@@ -27,7 +27,7 @@ https://render.com/docs/free
 https://render.com/docs/faq
 https://render.com/docs/deploy-nextjs-app
 
-A single Free instance was created with explicit user authorization. The account showed Hobby, no card on file, no pending charges, and unused free allowances before deployment. The deployment from commit `490b799d2503bf4e6e36b196c4e2766c4fe4e45e` succeeded. Anonymous homepage/status checks passed; a valid analysis is intentionally rejected because no Qloo key has been uploaded. These checks do not establish current Qloo connectivity or billing conditions.
+A single Free instance was created with explicit user authorization. The account showed Hobby, no card on file, no pending charges, and unused free allowances before deployment. The initial deployment succeeded. After explicit owner authorization, QLOO_API_KEY was configured as a server secret and the service rebuilt from commit `822ec9ff4550f54a5662922e8ebb0978c66e6014`. The hosted live workflow passed on 30 October. Provider billing remains unconfirmed; the owner authorized the bounded checks and public activation despite that uncertainty.
 
 - Service: Node Web Service, single Free instance. Do not select a static site for these API routes.
 - Source: https://github.com/Robe092/cultmerch-ai, branch `main` (public source verified).
@@ -38,4 +38,4 @@ A single Free instance was created with explicit user authorization. The account
 - No custom domain, paid database, persistent disk or paid instance is required for this candidate.
 - Before creation: inspect the workspace payment method, remaining free quotas and billing controls. A Free compute plan can still incur bandwidth/build charges if a payment method is present. With no payment method, Render documents suspension rather than those charges when allowances are exceeded.
 - Expect about one minute of cold-start loading after 15 minutes idle. All temporary data disappears on sleep/restart; approval/export must be completed during an active session. Explicitly disclose this prototype limitation.
-- An account connection, terms acceptance, publication and any transfer of the Qloo secret are separate steps requiring appropriate user participation/authorization. Only this Free web service has been created. No provider secrets, card, paid resources, disks, database or custom domain were added.
+- An account connection, terms acceptance, publication and any transfer of the Qloo secret are separate steps requiring appropriate user participation/authorization. Only this Free web service has been created. The Qloo key was added with explicit authorization. No Gemini secret, card, paid resources, disk, database or custom domain was added. HTML and six public JavaScript assets were checked and contained no copy of the actual Qloo key.

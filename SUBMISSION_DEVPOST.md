@@ -1,6 +1,6 @@
 # CultMerch AI — Devpost submission draft (English)
 
-**Status: DRAFT.** Do not submit until a public functional application, a public repository with license, and current Qloo connectivity have been verified. Review the current form's required fields before final submission.
+**Status: DRAFT — not submitted.** The public application, source, MIT license and a hosted Qloo workflow were verified on 30 October 2026. Review the current form and obtain the owner's final approval before official submission.
 
 ## Project name
 CultMerch AI
@@ -20,9 +20,11 @@ Next.js 15.5, React 19, TypeScript, Tailwind and Zod provide the application and
 Optional Gemini can interpret briefs and write copy; the agent can also use disclosed deterministic rules. Qloo is the sponsor-specific source of cross-domain signals. The comparator isolates those signals from the shared brief interpretation, catalog and hard constraints.
 
 ## Evidence and what it means
-An offline replay on 29 October reproduced six historical scenario calculations from archived response signals using the current catalog/scorer. Tokyo Jazz changed two references with a theoretical margin difference of +€60.50; Monolith changed one with −€8.50; Cinema changed none with €0 difference. These are historical catalog calculations, not current live benchmarks, observed revenue or independent evidence of better taste. The archived files report live Qloo capture on 16 October; their external origin cannot be authenticated from the saved JSON alone.
+On 30 October 2026, a fresh hosted run for “Fans of John Coltrane, Japanese raw denim, analog audio and handmade ceramics” completed 12 logical Qloo operations and collected 53 signals. All recorded provider calls succeeded; all four selected products had explicit Qloo evidence. The comparison changed two products and calculated a +€60.50 margin difference using the synthetic catalog, while both branches retained the same 35% margin threshold and stock rules.
 
-Current results may differ with audience seeds, LLM interpretation, provider responses and catalog changes. The final demonstration must describe the values actually shown. Do not present the baseline as a benchmark against every generic LLM.
+This is a live integration result and a catalog calculation, not observed revenue, conversion lift or independent evidence of better taste. Product-to-brand associations remain editorial. The browser replay is labeled cached and retains the run's original timestamps. We also checked the human-approval gate, JSON/CSV exports and approval persistence on the public host. Gemini was disabled; the disclosed local rules selected the Qloo tools.
+
+Current results can differ with audience references, provider responses and catalog changes. The baseline is not a benchmark against every generic LLM. Historical offline replays are separate evidence and are not counted as new live calls.
 
 ## Challenges
 Connecting broad cultural signals to specific stock required an explicit matching layer. We separate exact tags, local translations and declared catalog-brand associations. Missing scores contribute no invented affinity bonus. We preserve negative and zero comparison outcomes. Another challenge was approval consistency after reload: saved item decisions and notes now restore correctly, while stored live responses are labeled cached.
@@ -43,7 +45,7 @@ See `TESTING_EN.md`. The UI includes an expandable English guide. All catalog da
 Qloo API, Next.js, React, TypeScript, Tailwind CSS, Zod, Lucide; optional Google Gemini. Node test and Puppeteer for local verification.
 
 ## Links and verification status
-- Public application endpoint: https://cultmerch-ai.onrender.com — homepage reachable; **functional Qloo demo BLOCKED** until provider access/billing and host configuration are verified. This is not ready for submission.
+- Public application: https://cultmerch-ai.onrender.com — hosted Qloo workflow verified on 30 October 2026. Free-instance cold starts and temporary storage apply. Start a new analysis if a previously saved link has expired.
 - Public source repository: https://github.com/Robe092/cultmerch-ai — verified accessible without authentication on 29 October 2026.
 - License: MIT, `LICENSE`; detected as MIT by GitHub and verified through its public API on 29 October 2026.
 - Optional demo video: **not recorded**

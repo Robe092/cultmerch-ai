@@ -6,9 +6,11 @@ Built for the [Qloo Agentic Hackathon](https://qloo.devpost.com/). Next.js 15.5.
 
 **Source:** [Robe092/cultmerch-ai](https://github.com/Robe092/cultmerch-ai), public with a GitHub-recognized MIT license.
 
-**Application endpoint:** https://cultmerch-ai.onrender.com — hosted on Render Free. The homepage is publicly accessible, but Qloo is not configured on the host yet, so this is not a verified functional Qloo demo.
+**Application:** https://cultmerch-ai.onrender.com — Render Free. A real hosted Qloo workflow was verified on 30 October 2026: analysis, item approval, blocked exports before full approval, JSON/CSV exports, and saved-result reload. Free hosting can sleep and its temporary storage can be cleared; start a new analysis if an old analysis URL has expired.
 
-**Release status:** locally audited on 29 October 2026. Current Qloo access/billing and the full hosted Qloo workflow remain unverified. No provider key has been uploaded; production rejects analysis without a Qloo key rather than silently using simulated signals.
+**Verification:** the hosted run made 12 logical Qloo operations, received 53 signals without provider errors, and linked all four selected items to explicit evidence. Two products changed; the synthetic catalog's calculated margin differed by +€60.50. This is not observed revenue, conversion lift, or independent proof of taste quality. Gemini was disabled. Saved results are labeled `CACHED_QLOO` and retain their original timestamps.
+
+Provider billing conditions have not been independently confirmed. The owner explicitly authorized the bounded checks and server-key activation despite that uncertainty. Do not infer API pricing from the successful requests or from the absence of a payment card.
 
 ## What the agent does
 
