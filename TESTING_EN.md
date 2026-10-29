@@ -2,7 +2,7 @@
 
 The current application uses French labels. An expandable English guide is visible at the top of each screen.
 
-1. On **Dashboard**, enter an audience brief such as `Fans of John Coltrane, Japanese raw denim, analog audio and handmade ceramics`. For a controlled single-anchor run, review/remove unwanted references under **Analyses** first. The three example buttons also populate their own named references; their results need not equal the historical evaluation cases, which used no manual seeds.
+1. On **Dashboard**, enter an audience brief such as `Fans of John Coltrane, Japanese raw denim, analog audio and handmade ceramics`. For the controlled single-anchor run verified on 30 October, remove **all** manual references under **Analyses** first (the counter should read 0), then use that exact English brief. The three example buttons also populate their own named references; their results need not equal the historical evaluation cases, which used no manual seeds.
 2. Keep the minimum margin at **35%**. Click **Exécuter l’analyse** (Run analysis). With authorized credentials, wait for real Qloo results; without credentials in development this is explicitly a simulation. Do not infer connectivity from the presence of a key.
 3. On **Collections**, inspect A (without Qloo) and B (with Qloo). Both use the same brief interpretation, catalog and constraints. Read the actual changed-reference count and signed theoretical margin difference. A zero or negative difference is a valid outcome.
 4. On **Analyses**, expand **Voir les entités résolues et la provenance des appels** to inspect anchors, request states and original timestamps. **Voir les étapes de décision de l’agent** shows tool selection, filters and matching.
@@ -20,4 +20,8 @@ The current application uses French labels. An expandable English guide is visib
 
 ## What the demo establishes
 
-The workflow, calculations, traceability and approval/export guards can be tested locally. Archived signals can be replayed through the current scorer. Neither proves sales, conversion lift, independent cultural relevance, or current external API availability. Public deployment must be tested from a fresh external browser through approval and export.
+On 30 October 2026, the public host completed that controlled brief with 12 successful logical Qloo operations, 53 signals, four products with evidence and two changed references. The calculated margin difference was +EUR60.50 on the synthetic catalog. Human approval, blocked exports, JSON/CSV export and saved-result reload were verified on the public host; the evidence drawer and revision/reapproval were also exercised in the browser. Gemini was disabled.
+
+These checks establish current integration and workflow behavior, not sales, conversion lift or independent cultural relevance. Provider responses can change. The Dashboard percentage is the arithmetic mean of individual product margin rates; the comparator uses total gross margin in euros, and the exported collection rate is weighted by retail value.
+
+Render Free can sleep and clear its temporary storage. Start a new analysis if an old analysis URL is unavailable. New analyses consume the provider quota; provider costs must be checked for your own credentials. The owner authorized the recorded live checks and server activation despite unconfirmed provider billing conditions.
