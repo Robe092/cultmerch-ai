@@ -42,10 +42,10 @@ See `TESTING_EN.md`. The UI includes an expandable English guide. All catalog da
 ## Built with
 Qloo API, Next.js, React, TypeScript, Tailwind CSS, Zod, Lucide; optional Google Gemini. Node test and Puppeteer for local verification.
 
-## Links to fill only after verification
+## Links and verification status
 - Public application: **NOT_VERIFIED — required**
-- Public source repository: **NOT_VERIFIED — required**
-- License: MIT, `LICENSE`; visibility in the public repository **NOT_VERIFIED**
+- Public source repository: https://github.com/Robe092/cultmerch-ai — verified accessible without authentication on 29 October 2026.
+- License: MIT, `LICENSE`; detected as MIT by GitHub and verified through its public API on 29 October 2026.
 - Optional demo video: **not recorded**
 
 Official sources checked 29 October 2026: https://qloo.devpost.com/ ; https://qloo.devpost.com/rules ; https://qloo.devpost.com/details/dates . The video is optional and no video duration cap was found on these current pages. The former Qloo LLM hackathon's three-minute rule does not govern this event.

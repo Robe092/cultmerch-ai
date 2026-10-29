@@ -4,7 +4,9 @@ Turn a cultural audience brief into an explainable merchandise collection under 
 
 Built for the [Qloo Agentic Hackathon](https://qloo.devpost.com/). Next.js 15.5.28, React 19, TypeScript, Tailwind, Zod. See `LICENSE` (MIT).
 
-**Release status:** locally audited on 29 October 2026. Public application URL, public repository URL and a fresh live Qloo run remain to be verified. This source folder is not a deployed submission.
+**Source:** [Robe092/cultmerch-ai](https://github.com/Robe092/cultmerch-ai), public with a GitHub-recognized MIT license.
+
+**Release status:** locally audited on 29 October 2026. The public application and a fresh live Qloo run remain to be verified. Publishing the source does not deploy the application.
 
 ## What the agent does
 
@@ -77,7 +79,7 @@ The dedicated live integration test is **skipped** by default and does not read 
 
 All 50 catalog products, prices, costs, inventory levels and product-to-brand associations are synthetic/editorial. Qloo supplies entity/affinity signals; CultMerch performs local matching to those products. The internal alignment/MAI scores are neither purchase probabilities nor independent quality measurements. Historical JSON reports marked live are archives, not proof that today's API works.
 
-The store uses process memory and a shared local temporary file. **It is not a distributed database.** A single long-running Node server is the supported demonstration topology; persistence is lost on temporary-disk cleanup and concurrent processes are unsupported. The included historical Vercel configuration does not establish functional multi-instance deployment. See `DEPLOYMENT_EN.md` before hosting.
+The store uses process memory and a shared local temporary file. **It is not a distributed database.** A single long-running Node server is the supported demonstration topology; persistence is lost on temporary-disk cleanup and concurrent processes are unsupported. The older local Vercel configuration, excluded from this public source, does not establish functional multi-instance deployment. See `DEPLOYMENT_EN.md` before hosting.
 
 ## Third-party tools
 

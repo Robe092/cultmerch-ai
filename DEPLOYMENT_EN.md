@@ -1,6 +1,6 @@
 # Deployment requirements before submission
 
-Status on 29 October 2026: no public app/repository URL was found in the local project or Git remote configuration. Verify any existing deployment before creating one. Do not publish the parent multi-project repository or `.env.local`.
+Status on 29 October 2026: the separate source repository https://github.com/Robe092/cultmerch-ai is public, with a verified MIT license. No public application deployment has been verified. Do not publish the parent multi-project repository or `.env.local`.
 
 ## Supported demonstration topology
 
@@ -30,7 +30,7 @@ https://render.com/docs/deploy-nextjs-app
 This is a candidate, not an existing deployment or a guarantee about the user's current billing account.
 
 - Service: Node Web Service, single Free instance. Do not select a static site for these API routes.
-- Source: sanitized CultMerch-only public repository, once its existence/access is verified.
+- Source: https://github.com/Robe092/cultmerch-ai, branch `main` (public source verified).
 - Build: `npm ci --include=dev && npm run build`.
 - Start: `npm start -- --hostname 0.0.0.0 --port "$PORT"`.
 - Node: application tested locally on 24.11.1; confirm host Node version in its build log.
