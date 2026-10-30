@@ -1,3 +1,4 @@
+import { matchedQlooInsights } from "./analysis-summary";
 /** English presentation only. Original catalog text remains unchanged for matching. */
 const PRODUCT_NAMES: Record<string, string> = {
   "SKU-SYNTH-001": "Cyberpunk Neon Bomber Jacket",
@@ -125,6 +126,7 @@ export function displayAnalysisEn(original: import("@/types").ABComparisonResult
   }
   result.decision_trace = result.decision_trace.map(textEn);
   result.comparison_metrics.summary = summaryEn(result);
+  result.comparison_metrics.qloo_unique_insights = matchedQlooInsights(result.brief, result.branchB_with_qloo.items);
   if (result.provenance) {
     result.provenance.planner = labelEn(result.provenance.planner) as typeof result.provenance.planner;
     result.provenance.copywriter = labelEn(result.provenance.copywriter) as typeof result.provenance.copywriter;

@@ -42,4 +42,29 @@ describe("Rechargement et isolation des analyses", () => {
     const text = await page.evaluate(() => document.body.innerText);
     assert.ok(text.includes('Illustrative preview'));
   });
+  it("locks JSON preview and copying after revision, then copies exactly the approved preview", async () => {
+    const saved = await (await fetch(`${base}/api/analysis/${id}`)).json();
+    const sku=saved.data.branchB_with_qloo.items[0].product.sku;
+    const revise=await fetch(`${base}/api/collection/${id}/approve`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'REQUEST_REVISION',productSku:sku})});
+    assert.equal(revise.status,200);
+    const click=async (label:string)=>{
+      for(const button of await page.$$('button')) if((await button.evaluate(b=>b.textContent||'')).trim()===label){await button.click();return;}
+      throw new Error('Missing button '+label);
+    };
+    await page.goto(`${base}/?analysisId=${id}`,{waitUntil:'networkidle0'});
+    await click('Exports & provenance');
+    assert.equal(await page.$('pre'),null);
+    assert.equal(await page.$$eval('button',buttons=>buttons.filter(b=>b.textContent?.trim()==='Copy JSON').length),0);
+    assert.ok((await page.evaluate(()=>document.body.innerText)).includes('JSON preview and copying remain locked'));
+    assert.equal((await fetch(`${base}/api/export/${id}?format=json`)).status,409);
+    const approve=await fetch(`${base}/api/collection/${id}/approve`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'APPROVE'})});
+    assert.equal(approve.status,200);
+    await page.reload({waitUntil:'networkidle0'});await click('Exports & provenance');
+    const shown=await page.$eval('pre',el=>el.textContent);
+    await page.evaluate("Object.defineProperty(navigator, 'clipboard', {configurable:true, value:{writeText:function(text){window.__testCopied=text; return Promise.resolve();}}})");
+    await click('Copy JSON');
+    assert.equal(await page.evaluate(()=>(window as any).__testCopied),shown);
+    assert.equal((await fetch(`${base}/api/export/${id}?format=json`)).status,200);
+  });
+
 });

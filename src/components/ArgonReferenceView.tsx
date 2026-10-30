@@ -1323,8 +1323,36 @@ export default function App() {
     },
   ];
 
+  const exportPreview = canExport && realComparison ? {
+    analysisId: activeAnalysisId,
+    provenance,
+    branchA_without_qloo: {
+      total_basket_eur: realComparison.branchA_without_qloo.metrics.total_basket_eur,
+      average_margin_pct: realComparison.branchA_without_qloo.metrics.average_margin_pct,
+      item_count: realComparison.branchA_without_qloo.items.length,
+    },
+    branchB_with_qloo: {
+      total_basket_eur: realComparison.branchB_with_qloo.metrics.total_basket_eur,
+      average_margin_pct: realComparison.branchB_with_qloo.metrics.average_margin_pct,
+      average_mai_score: realComparison.branchB_with_qloo.metrics.average_mai_score,
+      item_count: realComparison.branchB_with_qloo.items.length,
+    },
+    comparison_metrics: realComparison.comparison_metrics,
+    decision_trace: realComparison.decision_trace,
+    approved_products: products
+      .filter((p) => p.status === "approved")
+      .map((p) => ({
+        sku: p.sku,
+        name: productNameEn(p),
+        unitCost: p.unitCost,
+        retailPrice: p.retailPrice,
+        note: p.reviewerNote,
+      })),
+  } : null;
+
   const handleCopyPayload = () => {
-    const payload = JSON.stringify(realComparison || { mode: "PREVIEW", workspace: currentWorkspace.id, seeds, minMargin: profile.targetMargin / 100 }, null, 2);
+    if (!exportPreview) return;
+    const payload = JSON.stringify(exportPreview, null, 2);
     navigator.clipboard.writeText(payload);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -2892,55 +2920,9 @@ export default function App() {
               </a>
             </div>
 
-            <div className="relative">
+            {exportPreview ? <div className="relative">
               <pre className="bg-slate-950 text-slate-100 rounded-xl p-4 text-xs font-mono overflow-x-auto max-h-80 leading-relaxed">
-                {JSON.stringify(
-                  realComparison
-                    ? {
-                        analysisId: activeAnalysisId,
-                        provenance,
-                        branchA_without_qloo: {
-                          total_basket_eur: realComparison.branchA_without_qloo.metrics.total_basket_eur,
-                          average_margin_pct: realComparison.branchA_without_qloo.metrics.average_margin_pct,
-                          item_count: realComparison.branchA_without_qloo.items.length,
-                        },
-                        branchB_with_qloo: {
-                          total_basket_eur: realComparison.branchB_with_qloo.metrics.total_basket_eur,
-                          average_margin_pct: realComparison.branchB_with_qloo.metrics.average_margin_pct,
-                          average_mai_score: realComparison.branchB_with_qloo.metrics.average_mai_score,
-                          item_count: realComparison.branchB_with_qloo.items.length,
-                        },
-                        comparison_metrics: realComparison.comparison_metrics,
-                        decision_trace: realComparison.decision_trace,
-                        approved_products: products
-                          .filter((p) => p.status === "approved")
-                          .map((p) => ({
-                            sku: p.sku,
-                            name: productNameEn(p),
-                            unitCost: p.unitCost,
-                            retailPrice: p.retailPrice,
-                            note: p.reviewerNote,
-                          })),
-                      }
-                    : {
-                        _simulationNotice: "UI Preview Data — Run analysis to export actual Qloo results",
-                        workspaceId: displayWorkspace.id,
-                        season: displayWorkspace.season,
-                        audienceProfile: profile,
-                        culturalSeeds: seeds,
-                        approvedSkus: products
-                          .filter((p) => p.status === "approved")
-                          .map((p) => ({
-                            sku: p.sku,
-                            name: productNameEn(p),
-                            unitCost: p.unitCost,
-                            retailPrice: p.retailPrice,
-                            note: p.reviewerNote,
-                          })),
-                      },
-                  null,
-                  2
-                )}
+                {JSON.stringify(exportPreview, null, 2)}
               </pre>
               <button
                 onClick={handleCopyPayload}
@@ -2958,7 +2940,7 @@ export default function App() {
                   </>
                 )}
               </button>
-            </div>
+            </div> : <div role="status" className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">JSON preview and copying remain locked until every product is approved for the current analysis.</div>}
           </div>
         </div>
       )}

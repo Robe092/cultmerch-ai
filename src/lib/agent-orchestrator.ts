@@ -1,3 +1,4 @@
+import { matchedQlooInsights } from "./analysis-summary";
 import { buildBriefProfile, normalizeBrand } from "./cultural-mapping";
 import catalogData from "@/data/catalog_sample.json";
 import { calculateMerchandisingScores, normalizeSignal, filterEligibleProducts, generateCollectionBundle } from "./inventory-engine";
@@ -133,7 +134,7 @@ export class AgentOrchestrator {
     return {
       id: `analysis_${crypto.randomUUID()}`, brief, branchA_without_qloo: branchA, branchB_with_qloo: branchB,
       comparison_metrics: {
-        qloo_unique_insights: Array.from(new Set(provenance.signals.map((signal) => signal.name))).filter((name) => !brief.toLowerCase().includes(name.toLowerCase())).slice(0, 5),
+        qloo_unique_insights: matchedQlooInsights(brief, b.items),
         cultural_relevance_delta: Number((alignmentB - alignmentA).toFixed(4)),
         changed_skus: changed, qloo_alignment_a: alignmentA, qloo_alignment_b: alignmentB,
         brief_coverage_a: coverage(a.items), brief_coverage_b: coverage(b.items),
