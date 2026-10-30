@@ -22,15 +22,15 @@ describe("🌐 Interface Navigateur & Audit DOM Headless Chrome", () => {
     assert.ok(domOutput.includes("CultMerch"), "Le logo/titre CultMerch doit être présent");
     assert.ok(domOutput.includes("Cultural Retail OS"), "Le sous-titre de l'application doit être présent");
     assert.ok(domOutput.includes("Dashboard"), "L'onglet Dashboard doit être présent");
-    assert.ok(domOutput.includes("Analyses"), "L'onglet Analyses doit être présent");
+    assert.ok(domOutput.includes("Analysis"), "L'onglet Analysis doit être présent");
     assert.ok(domOutput.includes("Collections"), "L'onglet Collections doit être présent");
-    assert.ok(domOutput.includes("Catalogue"), "L'onglet Catalogue doit être présent");
-    assert.ok(domOutput.includes("Approbations"), "L'onglet Approbations doit être présent");
+    assert.ok(domOutput.includes("Catalog"), "L'onglet Catalog doit être présent");
+    assert.ok(domOutput.includes("Approvals"), "L'onglet Approvals doit être présent");
 
     // 2. Boîte de commande en langage naturel
     assert.ok(
-      domOutput.includes("Commande de l&#39;Agent IA en Langage Naturel") ||
-        domOutput.includes("Commande de l'Agent IA en Langage Naturel"),
+      domOutput.includes("Describe your audience") ||
+        domOutput.includes("Describe your audience"),
       "La barre de commande agentique doit être rendue dans le DOM"
     );
 

@@ -23,23 +23,23 @@ describe("Rechargement et isolation des analyses", () => {
   it("restaure les quatre décisions, leurs notes et les références vides exactes", async () => {
     await page.goto(`${base}/?analysisId=${id}`,{waitUntil:"networkidle0"});
     for (const button of await page.$$('button')) {
-      if (await button.evaluate(b => b.textContent?.includes('Approbations'))) { await button.click(); break; }
+      if (await button.evaluate(b => b.textContent?.includes('Approvals'))) { await button.click(); break; }
     }
-    await page.waitForFunction(() => document.body.innerText.includes('Avancement des validations'));
+    await page.waitForFunction(() => document.body.innerText.includes('Approval progress'));
     const text = await page.evaluate(() => document.body.innerText);
-    assert.match(text,/Avancement des validations\s*:\s*4\s*sur\s*4/);
-    assert.ok(!text.includes('Paramètres modifiés'));
+    assert.match(text,/Approval progress\s*:\s*4\s*of\s*4/);
+    assert.ok(!text.includes('Settings changed'));
     assert.equal(await page.$$eval('input', els => els.filter(t => t.value === 'Saved audit approval').length),4);
   });
   it("un identifiant manquant affiche une erreur sans ouvrir une autre analyse", async () => {
     await page.goto(`${base}/?analysisId=does-not-exist`,{waitUntil:"networkidle0"});
     const text = await page.evaluate(() => document.body.innerText);
-    assert.ok(text.includes('Analyse introuvable'));
-    assert.ok(text.includes('Aperçu illustratif'));
+    assert.ok(text.includes('Analysis not found'));
+    assert.ok(text.includes('Illustrative preview'));
   });
   it("une nouvelle visite ne charge pas la dernière analyse d’un autre onglet", async () => {
     await page.goto(base,{waitUntil:"networkidle0"});
     const text = await page.evaluate(() => document.body.innerText);
-    assert.ok(text.includes('Aperçu illustratif'));
+    assert.ok(text.includes('Illustrative preview'));
   });
 });

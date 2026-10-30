@@ -1,6 +1,6 @@
 # Verification on 30 October 2026
 
-Automated suite run on 29 October: 89 tests, 88 passed, 0 failed, 1 skipped (the dedicated live Qloo test requires explicit opt-in). TypeScript and the local production build passed. Local simulations and historical replays remain distinct from the separate live checks below.
+English-interface automated suite run on 30 October: 92 tests, 91 passed, 0 failed, 1 skipped (the dedicated live Qloo test requires explicit opt-in). TypeScript and the local production build passed. The English interface was checked locally on desktop and mobile using simulated data and a private cached replay. The presentation adapter preserves numeric scores, original evidence, request codes and dates. Seven core engine/catalog/contract files are unchanged. These checks make no provider calls; the separate live checks below preceded the presentation translation.
 
 On 30 October, two authorized direct requests returned HTTP 200 from the hackathon server. A separate authorized hosted journey then returned HTTP 201 for one real analysis: 12 logical Qloo operations, all LIVE_QLOO, 53 signals and four products with explicit evidence. No provider errors or simulated calls were recorded. Gemini was disabled. Two selected products changed and the synthetic catalog's calculated margin differed by +EUR60.50; this is not observed revenue or independent taste-quality evidence.
 

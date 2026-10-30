@@ -39,7 +39,7 @@ A higher internal Qloo-alignment score is not evidence of purchase intent. A use
 Merchant-owned catalog integration, shared durable storage for distributed hosting, direct commerce connectors, and a real conversion study. These are future work, not delivered integrations.
 
 ## Testing instructions
-See `TESTING_EN.md`. The UI includes an expandable English guide. All catalog data is synthetic. The current store is single-server temporary storage; distributed persistence is not implemented.
+See `TESTING_EN.md`. The UI is in English and includes an expandable Quick guide. All catalog data is synthetic. The current store is single-server temporary storage; distributed persistence is not implemented.
 
 ## Built with
 Qloo API, Next.js, React, TypeScript, Tailwind CSS, Zod, Lucide; optional Google Gemini. Node test and Puppeteer for local verification.

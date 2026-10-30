@@ -123,7 +123,7 @@ describe("🚀 Parcours Utilisateur End-to-End & Intégration API HTTP", () => {
 
     const csvText = await res.text();
     const lines = csvText.trim().split("\n");
-    assert.equal(lines[0], "SKU,Nom,Categorie,PrixEUR,MargePct,Stock,ScoreMAI");
+    assert.equal(lines[0], "SKU,Name,Category,PriceEUR,MarginPct,Stock,ScoreMAI");
     assert.equal(lines.length, 5); // 1 ligne entête + 4 lignes produits
   });
 

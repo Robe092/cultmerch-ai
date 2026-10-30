@@ -15,7 +15,7 @@ export async function POST(
       return NextResponse.json(
         {
           success: false,
-          error: "Action d'approbation invalide",
+          error: "Invalid approval action",
           details: parsed.error.format(),
         },
         { status: 400 }
@@ -24,7 +24,7 @@ export async function POST(
 
     const existing = analysisStore.getById(id);
     if (existing && existing.branchB_with_qloo.items.length === 0) {
-      return NextResponse.json({ success: false, error: "Aucune référence pertinente à approuver." }, { status: 409 });
+      return NextResponse.json({ success: false, error: "No relevant products to approve." }, { status: 409 });
     }
     const { action, notes, productSku, productNotes } = parsed.data;
     const newStatus = action === "APPROVE" ? "APPROVED" : "REJECTED";
@@ -36,8 +36,8 @@ export async function POST(
       return NextResponse.json(
         {
           success: false,
-          error: "Analyse introuvable",
-          message: `Impossible d'approuver l'analyse ${id} (inexistante)`,
+          error: "Analysis not found",
+          message: `Unable to approve analysis ${id} (not found)`,
         },
         { status: 404 }
       );
@@ -45,14 +45,14 @@ export async function POST(
 
     return NextResponse.json({
       success: true,
-      message: `Collection ${id} mise à jour avec le statut: ${updated.status}`,
+      message: `Collection ${id} updated with status: ${updated.status}`,
       data: updated,
     });
   } catch (error: any) {
     return NextResponse.json(
       {
         success: false,
-        error: "Erreur lors de la mise à jour du statut",
+        error: "Could not update approval status",
         message: error.message,
       },
       { status: 500 }

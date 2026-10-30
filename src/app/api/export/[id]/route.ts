@@ -1,3 +1,4 @@
+import { displayAnalysisEn } from "@/lib/display-en";
 import { NextRequest, NextResponse } from "next/server";
 import { analysisStore } from "@/lib/analysis-store";
 import { asStoredAnalysis } from "@/lib/stored-analysis";
@@ -8,21 +9,21 @@ export async function GET(
 ) {
   const { id } = await params;
   const saved = analysisStore.getById(id);
-  const analysis = saved ? asStoredAnalysis(saved) : undefined;
+  const analysis = saved ? displayAnalysisEn(asStoredAnalysis(saved)) : undefined;
 
   if (!analysis) {
     return NextResponse.json(
       {
         success: false,
-        error: "Analyse introuvable",
-        message: `Aucune analyse trouvée avec l'identifiant ${id}`,
+        error: "Analysis not found",
+        message: `No analysis found with ID ${id}`,
       },
       { status: 404 }
     );
   }
 
   if (analysis.status !== "APPROVED") {
-    return NextResponse.json({ success: false, error: "Approuvez toutes les références avant l’export." }, { status: 409 });
+    return NextResponse.json({ success: false, error: "Approve every product before exporting." }, { status: 409 });
   }
 
   const { searchParams } = new URL(req.url);
@@ -31,7 +32,7 @@ export async function GET(
 
   if (format === "csv") {
     const escape = (value: string) => `"${value.replaceAll('"', '""')}"`;
-    const headers = "SKU,Nom,Categorie,PrixEUR,MargePct,Stock,ScoreMAI\n";
+    const headers = "SKU,Name,Category,PriceEUR,MarginPct,Stock,ScoreMAI\n";
     const rows = branch.items
       .map(
         (i) =>

@@ -48,7 +48,7 @@ Set real keys **only in `.env.local`**, never in source or the browser, after ch
 npm run dev -- --hostname 127.0.0.1 --port 3107
 ```
 
-Open http://127.0.0.1:3107. The UI is French with an expandable **English guide** on every screen; see `TESTING_EN.md` for a walkthrough.
+Open http://127.0.0.1:3107. The interface is English-first, with an expandable **Quick guide** on every screen; see `TESTING_EN.md` for a walkthrough.
 
 For a development simulation with no provider credentials, override the local keys with empty environment values:
 

@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          error: "Requête invalide",
+          error: "Invalid request",
           details: parsed.error.format(),
         },
         { status: 400 }
@@ -43,8 +43,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       {
         success: false,
-        error: "Échec de l'analyse merchandising",
-        message: error.message || "Erreur interne du serveur",
+        error: "Merchandising analysis failed",
+        message: error.message || "Internal server error",
       },
       { status: 500 }
     );

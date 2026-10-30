@@ -13,8 +13,8 @@ export async function GET(
     return NextResponse.json(
       {
         success: false,
-        error: "Analyse introuvable",
-        message: `Aucune analyse trouvée avec l'identifiant ${id}`,
+        error: "Analysis not found",
+        message: `No analysis found with ID ${id}`,
       },
       { status: 404 }
     );

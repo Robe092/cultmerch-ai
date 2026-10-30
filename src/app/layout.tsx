@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "CultMerch AI — Cultural Commerce Agent",
-  description: "Agent autonome de merchandising alimenté par le Taste Graph de Qloo.",
+  description: "An explainable cultural merchandising agent powered by Qloo taste signals.",
 };
 
 export default function RootLayout({
@@ -12,7 +12,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
+    <html lang="en">
       <body className="antialiased bg-[#F9FAFB] text-slate-900">
         {children}
       </body>

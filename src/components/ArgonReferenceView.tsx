@@ -32,6 +32,7 @@ import {
 import { AnalysisEvidence, CollectionComparison, ProductEvidence, qlooStateLabel, signed } from "./AnalysisEvidence";
 import type { ABComparisonResult, MerchandisingScore, QlooDataState } from "@/types";
 import { asStoredAnalysis } from "@/lib/stored-analysis";
+import { productNameEn, labelEn, summaryEn, displayAnalysisEn, materialEn, textEn } from "@/lib/display-en";
 import { JuryGuide } from "./JuryGuide";
 
 // ============================================================================
@@ -101,7 +102,7 @@ export interface CatalogProduct {
   id: string;
   sku: string;
   name: string;
-  category: "Textile" | "Accessoires" | "Objets & Éditions";
+  category: "Textile" | "Accessories" | "Objects & Editions";
   garmentType: GarmentType;
   specs: string;
   fit: string;
@@ -149,13 +150,13 @@ export function mapScoreToCatalogProduct(
   const p = score.product;
   const lower = (p.sku + " " + p.name + " " + p.category).toLowerCase();
   let garmentType: GarmentType = "object";
-  if (lower.includes("casque") || lower.includes("dac") || lower.includes("audio") || lower.includes("hi-fi") || lower.includes("hifi") || lower.includes("ecouteur")) {
+  if (lower.includes("headphone") || lower.includes("casque") || lower.includes("dac") || lower.includes("audio") || lower.includes("hi-fi") || lower.includes("hifi") || lower.includes("ecouteur")) {
     garmentType = "audio";
   } else if (lower.includes("hd") || lower.includes("hoodie") || lower.includes("sweat")) {
     garmentType = "hoodie";
-  } else if (lower.includes("t-shirt") || lower.includes("tee") || lower.includes("chemise")) {
+  } else if (lower.includes("t-shirt") || lower.includes("tee") || lower.includes("chemise") || lower.includes("shirt")) {
     garmentType = "tee";
-  } else if (lower.includes("tb") || lower.includes("tote") || lower.includes("sac")) {
+  } else if (lower.includes("tb") || lower.includes("tote") || lower.includes("sac") || lower.includes("bag")) {
     garmentType = "tote";
   } else if (lower.includes("vn") || lower.includes("vinyl") || lower.includes("disque")) {
     garmentType = "vinyl";
@@ -165,12 +166,12 @@ export function mapScoreToCatalogProduct(
     lower.includes("mg") ||
     lower.includes("ceramic") ||
     lower.includes("gobelet") ||
-    lower.includes("cafe")
+    lower.includes("cafe") || lower.includes("cup") || lower.includes("tumbler")
   ) {
     garmentType = "ceramic";
   }
 
-  let category: "Textile" | "Accessoires" | "Objets & Éditions" = "Textile";
+  let category: "Textile" | "Accessories" | "Objects & Editions" = "Textile";
   if (p.category === "fashion") {
     category = "Textile";
   } else if (
@@ -178,9 +179,9 @@ export function mapScoreToCatalogProduct(
     garmentType === "tote" ||
     garmentType === "cap"
   ) {
-    category = "Accessoires";
+    category = "Accessories";
   } else {
-    category = "Objets & Éditions";
+    category = "Objects & Editions";
   }
 
   const defaultColors = [
@@ -195,479 +196,604 @@ export function mapScoreToCatalogProduct(
   return {
     id: p.sku,
     sku: p.sku,
-    name: p.name,
+    name: productNameEn(p),
     category,
     garmentType,
     specs:
       p.notes_matieres.length > 0
-        ? p.notes_matieres.join(" • ")
+        ? p.notes_matieres.map(materialEn).join(" • ")
         : `${p.category.toUpperCase()} Edition`,
-    fit: p.tags_style.length > 0 ? p.tags_style.join(", ") : "Coupe contemporaine",
+    fit: p.tags_style.length > 0 ? p.tags_style.join(", ") : "Contemporary fit",
     finish:
       p.marques_affinitaires.length > 0
-        ? `Affinité: ${p.marques_affinitaires.join(", ")}`
-        : "Finition atelier",
-    composition: p.notes_matieres.length > 0 ? p.notes_matieres[0] : "Non renseigné",
+        ? `Brand association: ${p.marques_affinitaires.join(", ")}`
+        : "Workshop finish",
+    composition: p.notes_matieres.length > 0 ? materialEn(p.notes_matieres[0]) : "Not specified",
     unitCost: p.cost_eur,
     retailPrice: p.price_eur,
     primaryColor: color.pri,
     secondaryColor: color.sec,
     accentColor: color.acc,
-    culturalRationale: `Score interne MAI : ${(score.mai_total * 100).toFixed(0)}/100. Correspondances Qloo explicites : ${score.qloo_evidence?.map((signal) => signal.name).join(", ") || "aucune"}.`,
-    standardAlternative: `Alternative promotionnelle standard sans Taste Graph (marge ${(p.margin_pct * 100).toFixed(0)}%).`,
+    culturalRationale: `Internal MAI score: ${(score.mai_total * 100).toFixed(0)}/100. Explicit Qloo matches: ${score.qloo_evidence?.map((signal) => signal.name).join(", ") || "none"}.`,
+    standardAlternative: `Standard promotional alternative without taste signals (margin ${(p.margin_pct * 100).toFixed(0)}%).`,
     status: "pending",
-    reviewerNote: `Score MAI: ${(score.mai_total * 100).toFixed(1)}% | Stock: ${p.stock_units} unités`,
+    reviewerNote: `Score MAI: ${(score.mai_total * 100).toFixed(1)}% | Stock: ${p.stock_units} units`,
   };
 }
 
 const WORKSPACES: Record<string, WorkspaceDataset> = {
-  monolith: {
-    id: "monolith",
-    brandName: "Monolith Festival",
-    campaignTitle: "Capsule Automne/Hiver — Architecture & Son",
-    season: "FW26",
-    summary:
-      "Collection destinée à un public urbain amateur de musique électronique modulaire, d'architecture brutaliste et de vêtements techniques durables.",
-    profile: {
-      positioning: "Premium",
-      aestheticDepth: 80,
-      targetMargin: 35,
+  "monolith": {
+    "id": "monolith",
+    "brandName": "Monolith Festival",
+    "campaignTitle": "Fall/Winter Capsule — Architecture & Sound",
+    "season": "FW26",
+    "summary": "A collection for urban audiences who enjoy modular electronic music, brutalist architecture and durable technical clothing.",
+    "profile": {
+      "positioning": "Premium",
+      "aestheticDepth": 80,
+      "targetMargin": 35
     },
-    seeds: [
-      { id: "s1", label: "Kraftwerk", domain: "Musique", weight: "Principal" },
-      { id: "s2", label: "Blade Runner 2049", domain: "Cinéma", weight: "Principal" },
-      { id: "s3", label: "Carhartt WIP", domain: "Mode", weight: "Secondaire" },
-      { id: "s4", label: "Helvetica", domain: "Cinéma", weight: "Subtil" },
-    ],
-    insights: [
+    "seeds": [
       {
-        id: "in1",
-        title: "Minimalisme Acoustique & Matière Brute",
-        domains: ["Musique", "Art & Design"],
-        direction:
-          "Privilégier des schémas techniques sobres et des grilles modulaires plutôt que des visuels musicaux explicites.",
-        materialGuideline: "Molleton très lourd (480 gsm) avec lavage minéral mat.",
-        pitfallsToAvoid: ["Couleurs fluo saturées", "Logos surdimensionnés", "Références rétro années 80"],
+        "id": "s1",
+        "label": "Kraftwerk",
+        "domain": "Musique",
+        "weight": "Principal"
       },
       {
-        id: "in2",
-        title: "Fonctionnalité & Signalétique Industrielle",
-        domains: ["Mode", "Édition"],
-        direction:
-          "Intégrer des étiquettes tissées inspirées de la signalétique d'équipement acoustique de laboratoire.",
-        materialGuideline: "Toile Jacquard dense, nylon ripstop et broderies ton sur ton.",
-        pitfallsToAvoid: ["Textiles promotionnels légers", "Slogans événementiels datés"],
+        "id": "s2",
+        "label": "Blade Runner 2049",
+        "domain": "Cinéma",
+        "weight": "Principal"
       },
+      {
+        "id": "s3",
+        "label": "Carhartt WIP",
+        "domain": "Mode",
+        "weight": "Secondaire"
+      },
+      {
+        "id": "s4",
+        "label": "Helvetica",
+        "domain": "Cinéma",
+        "weight": "Subtil"
+      }
     ],
-    comparison: {
-      standardApproach: {
-        title: "Approche Promotionnelle Standard",
-        subtitle: "Interprétation directe des mots-clés de l'événement",
-        positioningStatement:
-          "Merchandising événementiel classique centré sur le logo du festival et une imagerie musicale générique.",
-        fabricStrategy: "Sweatshirt standard 280 gsm (mélange coton/polyester) et t-shirt léger 160 gsm.",
-        visualIdentity: "Visuels centrés grand format, illustrations d'ondes sonores et couleurs vives.",
-        typography: "Caractères d'affichage génériques à fort impact",
-        palette: [
-          { hex: "#E11D48", name: "Rouge Vif" },
-          { hex: "#0284C7", name: "Bleu Électrique" },
-          { hex: "#18181B", name: "Noir Standard" },
+    "insights": [
+      {
+        "id": "in1",
+        "title": "Acoustic Minimalism & Raw Materials",
+        "domains": [
+          "Musique",
+          "Art & Design"
         ],
-        financials: {
-          avgUnitCost: 14.5,
-          avgRetailPrice: 45.0,
-          estimatedMargin: 67,
-          sellThroughProjection: "Modéré (achat souvenir uniquement)",
+        "direction": "Use restrained technical diagrams and modular grids.",
+        "materialGuideline": "Very heavyweight 480 gsm fleece with a matte mineral wash.",
+        "pitfallsToAvoid": [
+          "Saturated neon colours",
+          "Oversized logos",
+          "Overt 1980s nostalgia"
+        ]
+      },
+      {
+        "id": "in2",
+        "title": "Function & Industrial Signage",
+        "domains": [
+          "Mode",
+          "Édition"
+        ],
+        "direction": "Use woven labels inspired by acoustic laboratory equipment.",
+        "materialGuideline": "Dense jacquard canvas, ripstop nylon and tonal embroidery.",
+        "pitfallsToAvoid": [
+          "Lightweight promotional textiles",
+          "Dated event slogans"
+        ]
+      }
+    ],
+    "comparison": {
+      "standardApproach": {
+        "title": "Standard Promotional Approach",
+        "subtitle": "Interprétation directe des mots-clés de l'événement",
+        "positioningStatement": "An illustrative promotional collection based on the event identity.",
+        "fabricStrategy": "Sweatshirt standard 280 gsm (mélange coton/polyester) et t-shirt léger 160 gsm.",
+        "visualIdentity": "Visuels centrés grand format, illustrations d'ondes sonores et couleurs vives.",
+        "typography": "Caractères d'affichage génériques à fort impact",
+        "palette": [
+          {
+            "hex": "#E11D48",
+            "name": "Rouge Vif"
+          },
+          {
+            "hex": "#0284C7",
+            "name": "Bleu Électrique"
+          },
+          {
+            "hex": "#18181B",
+            "name": "Noir Standard"
+          }
+        ],
+        "financials": {
+          "avgUnitCost": 14.5,
+          "avgRetailPrice": 45,
+          "estimatedMargin": 67,
+          "sellThroughProjection": "Modéré (achat souvenir uniquement)"
         },
-        keyTakeaways: [
+        "keyTakeaways": [
           "Faible portabilité au quotidien en dehors de l'événement.",
           "Perception de produit publicitaire limitant le prix de vente conseillé.",
-          "Forte décote après l'événement en raison du marquage daté.",
-        ],
+          "Forte décote après l'événement en raison du marquage daté."
+        ]
       },
-      culturalApproach: {
-        title: "Approche Affinitaire Qloo (Simulée)",
-        subtitle: "Croisement entre musique modulaire, architecture et mode utilitaire",
-        positioningStatement:
-          "Une ligne de vêtements et d'objets conçue comme un label de design indépendant, valorisant la coupe et le détail subtil.",
-        fabricStrategy: "Molleton peigné 480 gsm coupe boxy, toile Jacquard 520 gsm et coton cardé lourd.",
-        visualIdentity: "Micro-typographie technique, schémas de routage sobres et étiquettes tissées externes.",
-        typography: "DIN 1451 & Monospace technique corps 8pt",
-        palette: [
-          { hex: "#27272A", name: "Asphalte Brut" },
-          { hex: "#A1A1AA", name: "Béton Banché" },
-          { hex: "#EA580C", name: "Orange Oscilloscope" },
-          { hex: "#F4F4F0", name: "Papier Calque" },
+      "culturalApproach": {
+        "title": "Qloo-Inspired Approach — Simulated",
+        "subtitle": "Croisement entre musique modulaire, architecture et mode utilitaire",
+        "positioningStatement": "An illustrative cultural collection combining the audience references; run an analysis to inspect real Qloo signals.",
+        "fabricStrategy": "Molleton peigné 480 gsm coupe boxy, toile Jacquard 520 gsm et coton cardé lourd.",
+        "visualIdentity": "Micro-typographie technique, schémas de routage sobres et étiquettes tissées externes.",
+        "typography": "DIN 1451 & Monospace technique corps 8pt",
+        "palette": [
+          {
+            "hex": "#27272A",
+            "name": "Asphalte Brut"
+          },
+          {
+            "hex": "#A1A1AA",
+            "name": "Béton Banché"
+          },
+          {
+            "hex": "#EA580C",
+            "name": "Orange Oscilloscope"
+          },
+          {
+            "hex": "#F4F4F0",
+            "name": "Papier Calque"
+          }
         ],
-        financials: {
-          avgUnitCost: 22.0,
-          avgRetailPrice: 92.0,
-          estimatedMargin: 76,
-          sellThroughProjection: "Élevé (désirabilité retail permanente)",
+        "financials": {
+          "avgUnitCost": 22,
+          "avgRetailPrice": 92,
+          "estimatedMargin": 76,
+          "sellThroughProjection": "Élevé (désirabilité retail permanente)"
         },
-        keyTakeaways: [
+        "keyTakeaways": [
           "Adéquation immédiate avec les codes vestimentaires réels de l'audience cible.",
           "Valorisation du prix de vente (+104% de chiffre d'affaires unitaire) grâce à la qualité perçue.",
-          "Durée de vie commerciale prolongée au-delà de l'événement.",
-        ],
-      },
+          "Durée de vie commerciale prolongée au-delà de l'événement."
+        ]
+      }
     },
-    products: [
+    "products": [
       {
-        id: "p1",
-        sku: "MN-FW26-HD01",
-        name: "Hoodie Architectonique 480gsm",
-        category: "Textile",
-        garmentType: "hoodie",
-        specs: "480 GSM Heavy French Terry",
-        fit: "Coupe Boxy / Épaules tombantes / Sans cordon",
-        finish: "Sérigraphie haute densité + Étiquette Tyvek cousue",
-        composition: "100% Coton Biologique Peigné",
-        unitCost: 28.5,
-        retailPrice: 115.0,
-        primaryColor: "#27272A",
-        secondaryColor: "#A1A1AA",
-        accentColor: "#EA580C",
-        culturalRationale:
-          "Répond à la préférence de l'audience pour les pièces structurées d'inspiration workwear japonais, sans logo ostentatoire.",
-        standardAlternative: "Sweat à capuche promotionnel 280 gsm avec logo poitrine.",
-        status: "approved",
-        reviewerNote: "Grammage et coupe validés avec l'atelier de confection.",
+        "id": "p1",
+        "sku": "MN-FW26-HD01",
+        "name": "Architectural 480 gsm Hoodie",
+        "category": "Textile",
+        "garmentType": "hoodie",
+        "specs": "480 GSM Heavy French Terry",
+        "fit": "Boxy fit / Dropped shoulders / No drawstring",
+        "finish": "High-density screen print and sewn Tyvek label",
+        "composition": "100% combed organic cotton",
+        "unitCost": 28.5,
+        "retailPrice": 115,
+        "primaryColor": "#27272A",
+        "secondaryColor": "#A1A1AA",
+        "accentColor": "#EA580C",
+        "culturalRationale": "Illustrative Japanese-workwear-inspired structure with discreet branding.",
+        "standardAlternative": "280 gsm promotional hoodie with chest logo.",
+        "status": "approved",
+        "reviewerNote": "Fabric weight and fit approved for this illustrative collection."
       },
       {
-        id: "p2",
-        sku: "MN-FW26-TB02",
-        name: "Cabas Disquaire Jacquard 12\"",
-        category: "Accessoires",
-        garmentType: "tote",
-        specs: "Toile Jacquard 520 GSM + Sangles Nylon",
-        fit: "Format structuré 34x34cm (capacité 15 vinyles)",
-        finish: "Motif tissé dans la masse + Boucle métal mat",
-        composition: "80% Coton recyclé / 20% Cordura",
-        unitCost: 16.0,
-        retailPrice: 68.0,
-        primaryColor: "#3F3F46",
-        secondaryColor: "#E4E4E7",
-        accentColor: "#EA580C",
-        culturalRationale:
-          "Remplace le tote bag promotionnel léger par un sac utilitaire calibré pour les acheteurs de disques vinyles et d'équipement.",
-        standardAlternative: "Tote bag écru 140 gsm imprimé sur une face.",
-        status: "approved",
-        reviewerNote: "Très forte marge prévisionnelle sur cet accessoire.",
+        "id": "p2",
+        "sku": "MN-FW26-TB02",
+        "name": "Jacquard Record-Shop Tote — 12-inch Records",
+        "category": "Accessories",
+        "garmentType": "tote",
+        "specs": "520 GSM jacquard canvas and nylon straps",
+        "fit": "Structured 34 × 34 cm format / Holds 15 records",
+        "finish": "Woven pattern and matte metal buckle",
+        "composition": "80% recycled cotton / 20% Cordura",
+        "unitCost": 16,
+        "retailPrice": 68,
+        "primaryColor": "#3F3F46",
+        "secondaryColor": "#E4E4E7",
+        "accentColor": "#EA580C",
+        "culturalRationale": "An illustrative utility bag sized for vinyl records and equipment.",
+        "standardAlternative": "140 gsm unbleached tote with one-sided print.",
+        "status": "approved",
+        "reviewerNote": "High calculated unit margin."
       },
       {
-        id: "p3",
-        sku: "MN-FW26-VN03",
-        name: "Édition Vinyle 180g + Livret Risographie",
-        category: "Objets & Éditions",
-        garmentType: "vinyl",
-        specs: "Vinyle 180g / Pochette Carton Brut 400g",
-        fit: "Gatefold avec bande Obi numérotée",
-        finish: "Impression Risographie 2 tons sur papier non couché",
-        composition: "PVC Vierge 180g / Papier Munken",
-        unitCost: 14.2,
-        retailPrice: 55.0,
-        primaryColor: "#18181B",
-        secondaryColor: "#A1A1AA",
-        accentColor: "#EA580C",
-        culturalRationale:
-          "Objet de collection éditorial combinant archive sonore et design graphique suisse.",
-        standardAlternative: "Compilation numérique ou affiche standard.",
-        status: "revision",
-        reviewerNote: "Vérifier le grammage du papier intérieur avec l'imprimeur.",
+        "id": "p3",
+        "sku": "MN-FW26-VN03",
+        "name": "180 g Vinyl Edition with Risograph Booklet",
+        "category": "Objects & Editions",
+        "garmentType": "vinyl",
+        "specs": "180 g vinyl / 400 g raw-card sleeve",
+        "fit": "Gatefold with numbered obi strip",
+        "finish": "Two-colour risograph on uncoated paper",
+        "composition": "180 g virgin PVC / Munken paper",
+        "unitCost": 14.2,
+        "retailPrice": 55,
+        "primaryColor": "#18181B",
+        "secondaryColor": "#A1A1AA",
+        "accentColor": "#EA580C",
+        "culturalRationale": "A synthetic editorial collectible combining a sound archive and Swiss graphic design.",
+        "standardAlternative": "Digital compilation or standard poster.",
+        "status": "revision",
+        "reviewerNote": "Check the inner paper weight with the printer."
       },
       {
-        id: "p4",
-        sku: "MN-FW26-CP04",
-        name: "Casquette 5-Panel Ripstop Technique",
-        category: "Accessoires",
-        garmentType: "cap",
-        specs: "Nylon Ripstop Déperlant 210D",
-        fit: "Couronne basse souple / Visière plate",
-        finish: "Micro-patch silicone + Boucle magnétique",
-        composition: "100% Nylon Technique",
-        unitCost: 11.5,
-        retailPrice: 48.0,
-        primaryColor: "#18181B",
-        secondaryColor: "#71717A",
-        accentColor: "#EA580C",
-        culturalRationale:
-          "Forte affinité entre le public de musique électronique et les équipements outdoor urbains sobres.",
-        standardAlternative: "Casquette trucker filet avec flocage mousse.",
-        status: "pending",
-        reviewerNote: "",
-      },
-    ],
+        "id": "p4",
+        "sku": "MN-FW26-CP04",
+        "name": "Technical Ripstop Five-Panel Cap",
+        "category": "Accessories",
+        "garmentType": "cap",
+        "specs": "210D water-repellent nylon ripstop",
+        "fit": "Soft low crown / Flat peak",
+        "finish": "Silicone micro-patch and magnetic buckle",
+        "composition": "100% technical nylon",
+        "unitCost": 11.5,
+        "retailPrice": 48,
+        "primaryColor": "#18181B",
+        "secondaryColor": "#71717A",
+        "accentColor": "#EA580C",
+        "culturalRationale": "An illustrative match between electronic music and restrained urban outdoor gear.",
+        "standardAlternative": "Mesh trucker cap with foam print.",
+        "status": "pending",
+        "reviewerNote": ""
+      }
+    ]
   },
-
-  lumiere: {
-    id: "lumiere",
-    brandName: "Cinéma Lumière & Roastery",
-    campaignTitle: "Collection Résidence — Édition 35mm",
-    season: "SS26",
-    summary:
-      "Ligne éditoriale croisant l'univers du cinéma d'auteur indépendant, des revues photographiques argentiques et des cafés de spécialité.",
-    profile: {
-      positioning: "Premium",
-      aestheticDepth: 75,
-      targetMargin: 35,
+  "lumiere": {
+    "id": "lumiere",
+    "brandName": "Cinéma Lumière & Roastery",
+    "campaignTitle": "Residency Collection — 35mm Edition",
+    "season": "SS26",
+    "summary": "An editorial collection combining independent auteur cinema, analogue photography journals and specialty coffee.",
+    "profile": {
+      "positioning": "Premium",
+      "aestheticDepth": 75,
+      "targetMargin": 35
     },
-    seeds: [
-      { id: "b1", label: "The Grand Budapest Hotel", domain: "Cinéma", weight: "Principal" },
-      { id: "b2", label: "Blue Bottle Coffee", domain: "Lifestyle", weight: "Principal" },
-      { id: "b3", label: "Fujifilm", domain: "Art & Design", weight: "Secondaire" },
-      { id: "b4", label: "A.P.C.", domain: "Mode", weight: "Secondaire" },
-    ],
-    insights: [
+    "seeds": [
       {
-        id: "in_b1",
-        title: "Esthétique « Équipe de Tournage » (Crew Gear)",
-        domains: ["Cinéma", "Mode"],
-        direction:
-          "Concevoir les pièces comme des dotations confidentielles d'studios de production ou d'archives universitaires.",
-        materialGuideline: "Jersey de coton cardé toucher sec (310 gsm) en teinte écru non blanchi.",
-        pitfallsToAvoid: ["Illustrations de caméras ou claps", "Citations explicites sur le café"],
+        "id": "b1",
+        "label": "The Grand Budapest Hotel",
+        "domain": "Cinéma",
+        "weight": "Principal"
       },
       {
-        id: "in_b2",
-        title: "Artisanat Sensoriel & Tactile",
-        domains: ["Lifestyle", "Art & Design"],
-        direction:
-          "Associer le textile à des objets du quotidien en matières naturelles brutes (grès chamotté, papier coton).",
-        materialGuideline: "Grès tourné artisanalement et broderie au point de chaînette.",
-        pitfallsToAvoid: ["Mugs publicitaires en porcelaine blanche brillante"],
+        "id": "b2",
+        "label": "Blue Bottle Coffee",
+        "domain": "Lifestyle",
+        "weight": "Principal"
       },
+      {
+        "id": "b3",
+        "label": "Fujifilm",
+        "domain": "Art & Design",
+        "weight": "Secondaire"
+      },
+      {
+        "id": "b4",
+        "label": "A.P.C.",
+        "domain": "Mode",
+        "weight": "Secondaire"
+      }
     ],
-    comparison: {
-      standardApproach: {
-        title: "Approche Promotionnelle Standard",
-        subtitle: "Juxtaposition littérale des thématiques cinéma et café",
-        positioningStatement:
-          "Produits dérivés classiques illustrant directement les symboles du cinéma et de la pause café.",
-        fabricStrategy: "T-shirt blanc optique 150 gsm et mug cylindrique promotionnel.",
-        visualIdentity: "Pictogrammes de bobines de film, tasses fumantes et slogans humoristiques.",
-        typography: "Police machine à écrire standard",
-        palette: [
-          { hex: "#4E342E", name: "Brun Café" },
-          { hex: "#000000", name: "Noir" },
-          { hex: "#FFFFFF", name: "Blanc Optique" },
+    "insights": [
+      {
+        "id": "in_b1",
+        "title": "Film-Crew Clothing",
+        "domains": [
+          "Cinéma",
+          "Mode"
         ],
-        financials: {
-          avgUnitCost: 9.0,
-          avgRetailPrice: 28.0,
-          estimatedMargin: 68,
-          sellThroughProjection: "Faible auprès d'une clientèle sensible au design",
+        "direction": "Design understated pieces inspired by production studios and university archives.",
+        "materialGuideline": "Dry-touch 310 gsm carded cotton jersey in unbleached ecru.",
+        "pitfallsToAvoid": [
+          "Camera or clapperboard illustrations",
+          "Overt coffee slogans"
+        ]
+      },
+      {
+        "id": "in_b2",
+        "title": "Tactile Craftsmanship",
+        "domains": [
+          "Lifestyle",
+          "Art & Design"
+        ],
+        "direction": "Pair textiles with everyday objects made from raw natural materials.",
+        "materialGuideline": "Hand-thrown grog stoneware and chain-stitch embroidery.",
+        "pitfallsToAvoid": [
+          "Glossy white promotional mugs"
+        ]
+      }
+    ],
+    "comparison": {
+      "standardApproach": {
+        "title": "Standard Promotional Approach",
+        "subtitle": "Juxtaposition littérale des thématiques cinéma et café",
+        "positioningStatement": "An illustrative promotional collection based on the event identity.",
+        "fabricStrategy": "T-shirt blanc optique 150 gsm et mug cylindrique promotionnel.",
+        "visualIdentity": "Pictogrammes de bobines de film, tasses fumantes et slogans humoristiques.",
+        "typography": "Police machine à écrire standard",
+        "palette": [
+          {
+            "hex": "#4E342E",
+            "name": "Brun Café"
+          },
+          {
+            "hex": "#000000",
+            "name": "Noir"
+          },
+          {
+            "hex": "#FFFFFF",
+            "name": "Blanc Optique"
+          }
+        ],
+        "financials": {
+          "avgUnitCost": 9,
+          "avgRetailPrice": 28,
+          "estimatedMargin": 68,
+          "sellThroughProjection": "Faible auprès d'une clientèle sensible au design"
         },
-        keyTakeaways: [
+        "keyTakeaways": [
           "Décalage esthétique avec les attentes d'un public cinéphile urbain.",
-          "Blanc optique perçu comme bas de gamme comparé aux teintes naturelles.",
-        ],
+          "Blanc optique perçu comme bas de gamme comparé aux teintes naturelles."
+        ]
       },
-      culturalApproach: {
-        title: "Approche Affinitaire Qloo (Simulée)",
-        subtitle: "Croisement entre édition indépendante, textile vintage et céramique",
-        positioningStatement:
-          "Une collection capsule sobre inspirée des vêtements d'archive de réalisateurs et de l'art de vivre nordique.",
-        fabricStrategy: "T-shirt lourd 310 gsm écru chiné, twill de coton brossé et grès artisanal.",
-        visualIdentity: "Typographie Serif condensée inspirée des génériques de films des années 1970.",
-        typography: "Garamond Condensé Italique & Sans-Serif micro",
-        palette: [
-          { hex: "#EAE5D9", name: "Écru Naturel" },
-          { hex: "#1B4332", name: "Vert Forêt" },
-          { hex: "#9A3412", name: "Terre de Sienne" },
-          { hex: "#27272A", name: "Noir Argentique" },
+      "culturalApproach": {
+        "title": "Qloo-Inspired Approach — Simulated",
+        "subtitle": "Croisement entre édition indépendante, textile vintage et céramique",
+        "positioningStatement": "An illustrative cultural collection combining the audience references; run an analysis to inspect real Qloo signals.",
+        "fabricStrategy": "T-shirt lourd 310 gsm écru chiné, twill de coton brossé et grès artisanal.",
+        "visualIdentity": "Typographie Serif condensée inspirée des génériques de films des années 1970.",
+        "typography": "Garamond Condensé Italique & Sans-Serif micro",
+        "palette": [
+          {
+            "hex": "#EAE5D9",
+            "name": "Écru Naturel"
+          },
+          {
+            "hex": "#1B4332",
+            "name": "Vert Forêt"
+          },
+          {
+            "hex": "#9A3412",
+            "name": "Terre de Sienne"
+          },
+          {
+            "hex": "#27272A",
+            "name": "Noir Argentique"
+          }
         ],
-        financials: {
-          avgUnitCost: 13.5,
-          avgRetailPrice: 58.0,
-          estimatedMargin: 77,
-          sellThroughProjection: "Très élevé (forte valeur de collection)",
+        "financials": {
+          "avgUnitCost": 13.5,
+          "avgRetailPrice": 58,
+          "estimatedMargin": 77,
+          "sellThroughProjection": "Très élevé (forte valeur de collection)"
         },
-        keyTakeaways: [
+        "keyTakeaways": [
           "Positionnement « Stealth Merch » : désirable même pour les personnes extérieures à l'événement.",
-          "Harmonisation chromatique inspirée des pellicules photographiques analogiques.",
-        ],
-      },
+          "Harmonisation chromatique inspirée des pellicules photographiques analogiques."
+        ]
+      }
     },
-    products: [
+    "products": [
       {
-        id: "pb1",
-        sku: "LM-SS26-TE01",
-        name: "T-Shirt Archive 310gsm « Sound Dept. »",
-        category: "Textile",
-        garmentType: "tee",
-        specs: "310 GSM Coton Cardé Toucher Sec",
-        fit: "Coupe droite relax / Col côtelé épais 3cm",
-        finish: "Broderie poitrine vert forêt + Sérigraphie à l'eau au dos",
-        composition: "100% Coton Biologique Non Blanchi",
-        unitCost: 15.8,
-        retailPrice: 65.0,
-        primaryColor: "#EAE5D9",
-        secondaryColor: "#1B4332",
-        accentColor: "#9A3412",
-        culturalRationale:
-          "Le col épais 3cm et le coton écru à main sèche correspondent aux standards des labels streetwear et cinéphiles actuels.",
-        standardAlternative: "T-shirt blanc léger avec impression numérique frontale.",
-        status: "approved",
-        reviewerNote: "Échantillon validé. Excellente tenue du col.",
+        "id": "pb1",
+        "sku": "LM-SS26-TE01",
+        "name": "Sound Dept. 310 gsm Archive T-Shirt",
+        "category": "Textile",
+        "garmentType": "tee",
+        "specs": "310 GSM dry-touch carded cotton",
+        "fit": "Relaxed straight fit / Thick 3 cm ribbed collar",
+        "finish": "Forest-green chest embroidery and water-based back print",
+        "composition": "100% unbleached organic cotton",
+        "unitCost": 15.8,
+        "retailPrice": 65,
+        "primaryColor": "#EAE5D9",
+        "secondaryColor": "#1B4332",
+        "accentColor": "#9A3412",
+        "culturalRationale": "An illustrative archive-inspired piece with a thick collar and dry-hand cotton.",
+        "standardAlternative": "Lightweight white T-shirt with digital front print.",
+        "status": "approved",
+        "reviewerNote": "Sample approved for the illustrative collection."
       },
       {
-        id: "pb2",
-        sku: "LM-SS26-MG02",
-        name: "Gobelet Céramique Grès Chamotté",
-        category: "Objets & Éditions",
-        garmentType: "ceramic",
-        specs: "Grès Pyrite 320ml — Cuisson 1280°C",
-        fit: "Format dégustation sans anse / Base brute",
-        finish: "Émail réactif céladon + Estampille en creux",
-        composition: "Argile de grès naturelle & émail sans plomb",
-        unitCost: 12.4,
-        retailPrice: 44.0,
-        primaryColor: "#D6CFC2",
-        secondaryColor: "#1B4332",
-        accentColor: "#9A3412",
-        culturalRationale:
-          "Conçu pour la dégustation de café filtre, s'intégrant naturellement dans un intérieur contemporain.",
-        standardAlternative: "Mug en porcelaine blanche imprimé par sublimation.",
-        status: "approved",
-        reviewerNote: "Production lancée en série limitée de 300 pièces.",
+        "id": "pb2",
+        "sku": "LM-SS26-MG02",
+        "name": "Handmade Grog Stoneware Tumbler",
+        "category": "Objects & Editions",
+        "garmentType": "ceramic",
+        "specs": "320 ml pyrite stoneware / Fired at 1280°C",
+        "fit": "Handle-free tasting format / Raw base",
+        "finish": "Reactive celadon glaze and impressed mark",
+        "composition": "Natural stoneware clay and lead-free glaze",
+        "unitCost": 12.4,
+        "retailPrice": 44,
+        "primaryColor": "#D6CFC2",
+        "secondaryColor": "#1B4332",
+        "accentColor": "#9A3412",
+        "culturalRationale": "An illustrative filter-coffee cup for contemporary interiors.",
+        "standardAlternative": "White porcelain mug with sublimation print.",
+        "status": "approved",
+        "reviewerNote": "Illustrative limited run of 300 pieces."
       },
       {
-        id: "pb3",
-        sku: "LM-SS26-CP03",
-        name: "Casquette 6-Panel Twill Émerisé",
-        category: "Accessoires",
-        garmentType: "cap",
-        specs: "Twill de Coton Brossé 10oz",
-        fit: "Couronne souple / Visière incurvée / Boucle laiton",
-        finish: "Broderie Serif condensée + Sous-visière verte",
-        composition: "100% Coton Brossé",
-        unitCost: 9.8,
-        retailPrice: 45.0,
-        primaryColor: "#1B4332",
-        secondaryColor: "#EAE5D9",
-        accentColor: "#9A3412",
-        culturalRationale:
-          "Pièce emblématique du vestiaire néo-preppy et des équipes de tournage cinéma.",
-        standardAlternative: "Casquette promotionnelle en polyester.",
-        status: "pending",
-        reviewerNote: "",
-      },
-    ],
+        "id": "pb3",
+        "sku": "LM-SS26-CP03",
+        "name": "Brushed Twill Six-Panel Cap",
+        "category": "Accessories",
+        "garmentType": "cap",
+        "specs": "10 oz brushed cotton twill",
+        "fit": "Soft crown / Curved peak / Brass buckle",
+        "finish": "Condensed serif embroidery and green underpeak",
+        "composition": "100% brushed cotton",
+        "unitCost": 9.8,
+        "retailPrice": 45,
+        "primaryColor": "#1B4332",
+        "secondaryColor": "#EAE5D9",
+        "accentColor": "#9A3412",
+        "culturalRationale": "An illustrative reference to film-crew clothing and contemporary preppy style.",
+        "standardAlternative": "Promotional polyester cap.",
+        "status": "pending",
+        "reviewerNote": ""
+      }
+    ]
   },
-
-  tokyo: {
-    id: "tokyo",
-    brandName: "Tokyo Sound Bar",
-    campaignTitle: "Kissa Sessions — Jazz & Denim",
-    season: "FW26",
-    summary:
-      "Tokyo Sound Bar - Capsule confidentielle croisant le jazz spirituel, l'art du denim brut et la céramique japonaise artisanale.",
-    profile: {
-      positioning: "Premium",
-      aestheticDepth: 85,
-      targetMargin: 35,
+  "tokyo": {
+    "id": "tokyo",
+    "brandName": "Tokyo Sound Bar",
+    "campaignTitle": "Kissa Sessions — Jazz & Denim",
+    "season": "FW26",
+    "summary": "Tokyo Sound Bar - An intimate collection blending spiritual jazz, raw denim and handmade Japanese ceramics.",
+    "profile": {
+      "positioning": "Premium",
+      "aestheticDepth": 85,
+      "targetMargin": 35
     },
-    seeds: [
-      { id: "t1", label: "John Coltrane", domain: "Musique", weight: "Principal" },
-      { id: "t2", label: "Our Legacy", domain: "Mode", weight: "Secondaire" },
-      { id: "t3", label: "Muji", domain: "Lifestyle", weight: "Subtil" },
-    ],
-    insights: [
+    "seeds": [
       {
-        id: "in_t1",
-        title: "Audiophile Analogique & Matériaux Nobles",
-        domains: ["Musique", "Art & Design"],
-        direction:
-          "Associer des accessoires d'écoute haute fidélité à des toiles de denim lourd d'inspiration japonaise.",
-        materialGuideline: "Denim selvedge 13oz, bois de noyer et composants audio blindés.",
-        pitfallsToAvoid: ["Plastiques brillants", "Logos ostentatoires"],
+        "id": "t1",
+        "label": "John Coltrane",
+        "domain": "Musique",
+        "weight": "Principal"
       },
+      {
+        "id": "t2",
+        "label": "Our Legacy",
+        "domain": "Mode",
+        "weight": "Secondaire"
+      },
+      {
+        "id": "t3",
+        "label": "Muji",
+        "domain": "Lifestyle",
+        "weight": "Subtil"
+      }
     ],
-    comparison: {
-      standardApproach: {
-        title: "Approche Promotionnelle Standard",
-        subtitle: "Merchandising bar générique",
-        positioningStatement: "Goodies promotionnels imprimés avec le logo du bar.",
-        fabricStrategy: "T-shirt blanc 140g et sous-bock carton.",
-        visualIdentity: "Logo typographique simple sur fond blanc.",
-        typography: "Helvetica Standard",
-        palette: [
-          { hex: "#18181B", name: "Noir" },
-          { hex: "#FAFAFA", name: "Blanc" },
+    "insights": [
+      {
+        "id": "in_t1",
+        "title": "Analogue Listening & Considered Materials",
+        "domains": [
+          "Musique",
+          "Art & Design"
         ],
-        financials: {
-          avgUnitCost: 12.0,
-          avgRetailPrice: 38.0,
-          estimatedMargin: 68,
-          sellThroughProjection: "Faible (achat souvenir occasionnel)",
-        },
-        keyTakeaways: ["Faible désirabilité en dehors de la visite physique."],
-      },
-      culturalApproach: {
-        title: "Approche Affinitaire Qloo",
-        subtitle: "Sélection audiophile et vestiaire contemporain",
-        positioningStatement: "Une capsule art de vivre et son haute fidélité connectée au Taste Graph.",
-        fabricStrategy: "Denim brut japonais 13oz, noyer américain et DAC USB-C audiophile.",
-        visualIdentity: "Lignes discrètes, marquages aveugles et finitions artisanales.",
-        typography: "Typographie japonaise minimale & Garamond",
-        palette: [
-          { hex: "#1E293B", name: "Indigo Brut" },
-          { hex: "#78350F", name: "Noyer Fumé" },
-          { hex: "#E2E8F0", name: "Papier Washi" },
+        "direction": "Pair high-fidelity listening accessories with heavyweight Japanese-inspired denim.",
+        "materialGuideline": "13 oz selvedge denim, walnut wood and shielded audio components.",
+        "pitfallsToAvoid": [
+          "Glossy plastics",
+          "Ostentatious logos"
+        ]
+      }
+    ],
+    "comparison": {
+      "standardApproach": {
+        "title": "Standard Promotional Approach",
+        "subtitle": "Merchandising bar générique",
+        "positioningStatement": "An illustrative promotional collection based on the event identity.",
+        "fabricStrategy": "T-shirt blanc 140g et sous-bock carton.",
+        "visualIdentity": "Logo typographique simple sur fond blanc.",
+        "typography": "Helvetica Standard",
+        "palette": [
+          {
+            "hex": "#18181B",
+            "name": "Noir"
+          },
+          {
+            "hex": "#FAFAFA",
+            "name": "Blanc"
+          }
         ],
-        financials: {
-          avgUnitCost: 26.5,
-          avgRetailPrice: 85.0,
-          estimatedMargin: 71,
-          sellThroughProjection: "Très élevé (pièces convoitées par les passionnés)",
+        "financials": {
+          "avgUnitCost": 12,
+          "avgRetailPrice": 38,
+          "estimatedMargin": 68,
+          "sellThroughProjection": "Faible (achat souvenir occasionnel)"
         },
-        keyTakeaways: ["Forte valeur perçue et panier moyen significativement augmenté."],
+        "keyTakeaways": [
+          "Faible désirabilité en dehors de la visite physique."
+        ]
       },
+      "culturalApproach": {
+        "title": "Qloo-Inspired Approach — Simulated",
+        "subtitle": "Sélection audiophile et vestiaire contemporain",
+        "positioningStatement": "An illustrative cultural collection combining the audience references; run an analysis to inspect real Qloo signals.",
+        "fabricStrategy": "Denim brut japonais 13oz, noyer américain et DAC USB-C audiophile.",
+        "visualIdentity": "Lignes discrètes, marquages aveugles et finitions artisanales.",
+        "typography": "Typographie japonaise minimale & Garamond",
+        "palette": [
+          {
+            "hex": "#1E293B",
+            "name": "Indigo Brut"
+          },
+          {
+            "hex": "#78350F",
+            "name": "Noyer Fumé"
+          },
+          {
+            "hex": "#E2E8F0",
+            "name": "Papier Washi"
+          }
+        ],
+        "financials": {
+          "avgUnitCost": 26.5,
+          "avgRetailPrice": 85,
+          "estimatedMargin": 71,
+          "sellThroughProjection": "Très élevé (pièces convoitées par les passionnés)"
+        },
+        "keyTakeaways": [
+          "Forte valeur perçue et panier moyen significativement augmenté."
+        ]
+      }
     },
-    products: [
+    "products": [
       {
-        id: "pt1",
-        sku: "TK-FW26-DN01",
-        name: "Surchemise Denim Brut Japonais 13 oz",
-        category: "Textile",
-        garmentType: "tee",
-        specs: "13 oz Selvedge Denim Kaihara",
-        fit: "Coupe droite / Boutons corozo / Sans délavage",
-        finish: "Lisière selvedge apparente + Point de chaînette",
-        composition: "100% Coton Selvedge Japonais",
-        unitCost: 38.0,
-        retailPrice: 135.0,
-        primaryColor: "#1E293B",
-        secondaryColor: "#CBD5E1",
-        accentColor: "#D97706",
-        culturalRationale: "Correspondance directe avec les amateurs de jazz analogique et de vestiaire workwear haut de gamme.",
-        standardAlternative: "Chemise en jean standard prélavée.",
-        status: "approved",
-        reviewerNote: "Pièce maîtresse de la sélection.",
+        "id": "pt1",
+        "sku": "TK-FW26-DN01",
+        "name": "13 oz Japanese Raw Denim Overshirt",
+        "category": "Textile",
+        "garmentType": "tee",
+        "specs": "13 oz Kaihara selvedge denim",
+        "fit": "Straight fit / Corozo buttons / Unwashed",
+        "finish": "Exposed selvedge and chain stitching",
+        "composition": "100% Japanese selvedge cotton",
+        "unitCost": 38,
+        "retailPrice": 135,
+        "primaryColor": "#1E293B",
+        "secondaryColor": "#CBD5E1",
+        "accentColor": "#D97706",
+        "culturalRationale": "An illustrative match for analogue jazz and premium workwear audiences.",
+        "standardAlternative": "Standard prewashed denim shirt.",
+        "status": "approved",
+        "reviewerNote": "Key piece in this illustrative selection."
       },
       {
-        id: "pt2",
-        sku: "TK-FW26-AU02",
-        name: "Convertisseur DAC Audio USB-C Haute Résolution",
-        category: "Accessoires",
-        garmentType: "audio",
-        specs: "Puce ES9038Q2M 32-bit/384kHz DSD256",
-        fit: "Boîtier aluminium usiné CNC / Câble cuivre OCC",
-        finish: "Anodisation gris titane",
-        composition: "Aluminium de qualité aéronautique",
-        unitCost: 19.5,
-        retailPrice: 65.0,
-        primaryColor: "#334155",
-        secondaryColor: "#94A3B8",
-        accentColor: "#F59E0B",
-        culturalRationale: "Recommandé par Qloo en affinité croisée avec les auditeurs de jazz acoustique nomades.",
-        standardAlternative: "Adaptateur audio générique en plastique.",
-        status: "approved",
-        reviewerNote: "Marge brute unitaire très confortable.",
-      },
-    ],
-  },
+        "id": "pt2",
+        "sku": "TK-FW26-AU02",
+        "name": "High-Resolution USB-C Audio DAC",
+        "category": "Accessories",
+        "garmentType": "audio",
+        "specs": "ES9038Q2M chip / 32-bit / 384 kHz / DSD256",
+        "fit": "CNC-machined aluminium case / OCC copper cable",
+        "finish": "Titanium-grey anodised finish",
+        "composition": "Aircraft-grade aluminium",
+        "unitCost": 19.5,
+        "retailPrice": 65,
+        "primaryColor": "#334155",
+        "secondaryColor": "#94A3B8",
+        "accentColor": "#F59E0B",
+        "culturalRationale": "Illustrative cross-domain matching for listeners of acoustic jazz.",
+        "standardAlternative": "Generic plastic audio adapter.",
+        "status": "approved",
+        "reviewerNote": "Comfortable calculated unit margin."
+      }
+    ]
+  }
 };
 
 // ============================================================================
@@ -865,7 +991,7 @@ const ProductIllustration: React.FC<ProductIllustrationProps> = ({
         )}
       </svg>
 
-      <span className="absolute top-2 right-2 text-[10px] text-slate-500">Illustration indicative</span>
+      <span className="absolute top-2 right-2 text-[10px] text-slate-500">Indicative illustration</span>
       {/* Color swatches */}
       <div className="absolute bottom-3 left-3 flex items-center gap-1.5 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full border border-slate-200/80 shadow-2xs">
         <span
@@ -929,9 +1055,9 @@ export default function App() {
     fetch(`/api/analysis/${encodeURIComponent(reqId)}`)
       .then((res) => res.json())
       .then((json) => {
-        if (!json?.success || !json?.data) throw new Error("Analyse introuvable. Lancez une nouvelle analyse.");
+        if (!json?.success || !json?.data) throw new Error("Analysis not found. Start a new analysis.");
         {
-          const comp = asStoredAnalysis(json.data as ABComparisonResult);
+          const comp = displayAnalysisEn(asStoredAnalysis(json.data as ABComparisonResult));
           setActiveAnalysisId(comp.id);
           setRealComparison(comp);
           setCustomBrief(comp.brief);
@@ -960,7 +1086,7 @@ export default function App() {
           const prov: AnalysisProvenance = {
             qlooMode: dataState,
             qlooEntitiesCount: comp.provenance?.anchors?.length || 0,
-            llmModelUsed: comp.provenance?.planner || "Mode non renseigné",
+            llmModelUsed: comp.provenance?.planner || "Mode not specified",
             catalogSkusEvaluated: comp.provenance?.catalog_count || 0,
             executionTimestamp: comp.created_at,
           };
@@ -975,12 +1101,12 @@ export default function App() {
           setProducts(mappedProds);
         }
       })
-      .catch((error) => setApiError(error instanceof Error ? error.message : "Impossible de charger l’analyse."));
+      .catch((error) => setApiError(error instanceof Error ? error.message : "Unable to load the analysis."));
   }, []);
 
   // --- État interactif : Catalogue & Approbations ---
   const [products, setProducts] = useState<CatalogProduct[]>(currentWorkspace.products);
-  const [categoryFilter, setCategoryFilter] = useState<string>("Tous");
+  const [categoryFilter, setCategoryFilter] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedProduct, setSelectedProduct] = useState<CatalogProduct | null>(null);
   const [noteDrafts, setNoteDrafts] = useState<Record<string, string>>({});
@@ -1031,7 +1157,7 @@ export default function App() {
     setSeeds((prev) => prev.filter((s) => s.id !== id));
   };
 
-  // Exécuter l'analyse réelle via /api/analyze avec bascule gracieuse
+  // Run analysis réelle via /api/analyze avec bascule gracieuse
   const handleRunAnalysis = async (explicitBrief?: string, activeSeeds: CulturalSeed[] = seeds) => {
     const version = ++requestVersion.current;
     setIsAnalyzing(true);
@@ -1054,12 +1180,12 @@ export default function App() {
 
       if (!res.ok) {
         const errJson = await res.json().catch(() => ({}));
-        throw new Error(errJson.message || errJson.error || `Erreur HTTP ${res.status}`);
+        throw new Error(errJson.message || errJson.error || `HTTP error ${res.status}`);
       }
 
       const resBody = await res.json();
       if (version !== requestVersion.current) return;
-      const comp: ABComparisonResult = resBody.data;
+      const comp: ABComparisonResult = displayAnalysisEn(resBody.data);
       if (resBody.success && comp) {
         setSubmittedInput(JSON.stringify(input));
         setNoteDrafts({});
@@ -1073,7 +1199,7 @@ export default function App() {
         const prov: AnalysisProvenance = {
           qlooMode: dataState,
           qlooEntitiesCount: comp.provenance?.anchors.length || 0,
-          llmModelUsed: comp.provenance?.planner || "Mode non renseigné",
+          llmModelUsed: comp.provenance?.planner || "Mode not specified",
           catalogSkusEvaluated: comp.provenance?.catalog_count || 0,
           executionTimestamp: comp.created_at,
         };
@@ -1088,12 +1214,12 @@ export default function App() {
 
         const modeBadge = qlooStateLabel(dataState);
         setAnalysisBanner(
-          `Analyse CultMerch terminée (ID: ${comp.id.slice(-8)}) • Mode: ${modeBadge} • ${comp.provenance?.catalog_count || 0} SKUs traités • Écart de marge théorique : ${signed(comp.comparison_metrics.margin_delta_eur)} €`
+          `CultMerch analysis complete (ID: ${comp.id.slice(-8)}) • Mode: ${modeBadge} • ${comp.provenance?.catalog_count || 0} SKUs evaluated • Calculated margin difference: ${signed(comp.comparison_metrics.margin_delta_eur)} €`
         );
       }
     } catch (err: unknown) {
       if (version !== requestVersion.current) return;
-      const msg = err instanceof Error ? err.message : "Erreur de connexion";
+      const msg = err instanceof Error ? err.message : "Connection error";
       setApiError(msg);
       setAnalysisBanner(null);
     } finally {
@@ -1116,12 +1242,12 @@ export default function App() {
       const response = await fetch(`/api/collection/${activeAnalysisId}/approve`, {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ productSku: productId, action: status === "approved" ? "APPROVE" : "REQUEST_REVISION", productNotes: productId ? undefined : noteDrafts,
-          notes: productId ? noteDrafts[productId] : "Validation de toutes les références depuis le studio." }),
+          notes: productId ? noteDrafts[productId] : "All products approved in the studio." }),
       });
       const body = await response.json();
-      if (!response.ok || !body.success) throw new Error(body.error || "Validation non enregistrée");
+      if (!response.ok || !body.success) throw new Error(body.error || "Approval could not be saved");
       if (version !== requestVersion.current) return;
-      const updated = asStoredAnalysis(body.data as ABComparisonResult);
+      const updated = displayAnalysisEn(asStoredAnalysis(body.data as ABComparisonResult));
       setProvenance((previous) => previous ? { ...previous, qlooMode: updated.branchB_with_qloo.data_state } : previous);
       setRealComparison(updated);
       const mapped = updated.branchB_with_qloo.items.map((item, index) => ({
@@ -1130,9 +1256,9 @@ export default function App() {
       }));
       setProducts(mapped);
       if (selectedProduct) setSelectedProduct(mapped.find((product) => product.id === selectedProduct.id) || null);
-      setAnalysisBanner(updated.status === "APPROVED" ? "Collection validée : toutes les décisions sont enregistrées. Export disponible." : "Décision enregistrée pour cette référence. La collection reste à valider.");
+      setAnalysisBanner(updated.status === "APPROVED" ? "Collection approved: all decisions saved. Export available." : "Product decision saved. The collection still needs approval.");
     } catch (error) {
-      if (version === requestVersion.current) setApiError(error instanceof Error ? error.message : "Validation non enregistrée");
+      if (version === requestVersion.current) setApiError(error instanceof Error ? error.message : "Approval could not be saved");
     } finally { setIsReviewing(false); }
   };
   const handleProductStatus = (productId: string, status: ApprovalStatus) => submitReview(productId, status);
@@ -1175,7 +1301,7 @@ export default function App() {
 
   const filteredProducts = useMemo(() => {
     return products.filter((p) => {
-      const matchesCat = categoryFilter === "Tous" || p.category === categoryFilter;
+      const matchesCat = categoryFilter === "All" || p.category === categoryFilter;
       const matchesQuery =
         !searchQuery.trim() ||
         p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -1186,12 +1312,12 @@ export default function App() {
 
   const navItems: { id: NavSection; label: string; icon: React.ElementType; badge?: string }[] = [
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
-    { id: "analyses", label: "Analyses", icon: SlidersHorizontal, badge: `${seeds.length}` },
+    { id: "analyses", label: "Analysis", icon: SlidersHorizontal, badge: `${seeds.length}` },
     { id: "collections", label: "Collections", icon: GitCompare },
-    { id: "catalogue", label: "Catalogue", icon: ShoppingBag, badge: `${products.length}` },
+    { id: "catalogue", label: "Catalog", icon: ShoppingBag, badge: `${products.length}` },
     {
       id: "approbations",
-      label: "Approbations",
+      label: "Approvals",
       icon: CheckCircle2,
       badge: `${metrics.approved}/${metrics.total}`,
     },
@@ -1208,7 +1334,7 @@ export default function App() {
     ? /tokyo sound bar/i.test(realComparison.brief) ? "Tokyo Sound Bar"
       : /cinéma lumière|cinema lumiere/i.test(realComparison.brief) ? "Cinéma Lumière & Roastery"
       : /monolith festival/i.test(realComparison.brief) ? "Monolith Festival"
-      : "Audience personnalisée"
+      : "Custom audience"
     : currentWorkspace.brandName;
 
   const displayWorkspace: WorkspaceDataset = realComparison ? {
@@ -1218,8 +1344,8 @@ export default function App() {
     summary: realComparison.brief,
     insights: realComparison.branchB_with_qloo.items.map((item) => ({
       id: item.product.sku, title: item.product.name, domains: ["Lifestyle"],
-      direction: item.qloo_evidence?.length ? `Correspondances Qloo : ${Array.from(new Set(item.qloo_evidence.map((signal) => signal.name))).join(", ")}.` : "Aucune correspondance Qloo explicite. Sélection selon le brief, la marge et le stock.",
-      materialGuideline: item.product.notes_matieres.join(", ") || "Non renseigné dans le catalogue",
+      direction: item.qloo_evidence?.length ? `Qloo matches: ${Array.from(new Set(item.qloo_evidence.map((signal) => signal.name))).join(", ")}.` : "No explicit Qloo match. Selection uses the brief, margin and stock.",
+      materialGuideline: item.product.notes_matieres.join(", ") || "Not specified in the catalog",
       pitfallsToAvoid: [],
     })),
   } : currentWorkspace;
@@ -1255,10 +1381,10 @@ export default function App() {
           {/* Workspace Switcher */}
           <div className="space-y-1.5">
             <label className="text-[11px] font-medium uppercase tracking-wider text-slate-400 px-1 block">
-              Exemples de brief
+              Example briefs
             </label>
             <select
-              aria-label="Sélecteur de collection"
+              aria-label="Example brief selector"
               value={workspaceKey}
               onChange={(e) => handleSwitchWorkspace(e.target.value)}
               className="w-full bg-slate-50 hover:bg-slate-100/80 transition-colors border border-slate-200 rounded-lg px-3 py-2 text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-900/10 cursor-pointer"
@@ -1327,11 +1453,11 @@ export default function App() {
               />
               {provenance
                 ? qlooStateLabel(provenance.qlooMode)
-                : "Données de prévisualisation"}
+                : "Preview data"}
             </div>
             {provenance
-              ? `${provenance.catalogSkusEvaluated} produits évalués • ${provenance.llmModelUsed}`
-              : "Lancez une analyse pour vérifier les données Qloo disponibles."}
+              ? `${provenance.catalogSkusEvaluated} products evaluated • ${provenance.llmModelUsed}`
+              : "Run an analysis to inspect available Qloo data."}
           </div>
 
           <button
@@ -1340,7 +1466,7 @@ export default function App() {
           >
             <span className="flex items-center gap-2">
               <Code2 className="w-3.5 h-3.5 text-slate-500" />
-              Exports & traçabilité
+              Exports & provenance
             </span>
             <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
           </button>
@@ -1357,7 +1483,7 @@ export default function App() {
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="lg:hidden p-2 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50"
-              aria-label="Ouvrir le menu"
+              aria-label="Open navigation"
             >
               <Menu className="w-4 h-4" />
             </button>
@@ -1387,7 +1513,7 @@ export default function App() {
               />
               {provenance
                 ? qlooStateLabel(provenance.qlooMode)
-                : "Aperçu illustratif"}
+                : "Illustrative preview"}
             </span>
 
             <button
@@ -1396,7 +1522,7 @@ export default function App() {
               className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium transition-all shadow-2xs disabled:opacity-60 cursor-pointer"
             >
               <RefreshCw className={`w-3.5 h-3.5 ${isAnalyzing ? "animate-spin" : ""}`} />
-              <span>{isAnalyzing ? "Calcul de l'analyse..." : "Actualiser l'analyse"}</span>
+              <span>{isAnalyzing ? "Running analysis..." : "Run analysis again"}</span>
             </button>
           </div>
         </header>
@@ -1452,7 +1578,7 @@ export default function App() {
               onClick={() => setAnalysisBanner(null)}
               className="text-emerald-700 hover:text-emerald-950 font-medium"
             >
-              Fermer
+              Close
             </button>
           </div>
         )}
@@ -1460,9 +1586,9 @@ export default function App() {
         {/* Page Container */}
         <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-8 py-8 space-y-8">
           <JuryGuide />
-          {apiError && <div role="alert" className="rounded-xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-900">{apiError}</div>}
-          {isStale && <div role="status" className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">Paramètres modifiés. Relancez l’analyse pour actualiser les recommandations et réactiver la validation et l’export.</div>}
-          {!realComparison && <div className="rounded-xl bg-slate-100 p-4 text-sm text-slate-700">Aperçu illustratif : les collections et indicateurs ci-dessous sont fictifs. Décrivez votre audience, puis lancez une analyse pour voir ce que Qloo change dans la sélection.</div>}
+          {apiError && <div role="alert" className="rounded-xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-900">{textEn(apiError)}</div>}
+          {isStale && <div role="status" className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">Settings changed. Run a new analysis to update recommendations and enable approval and export.</div>}
+          {!realComparison && <div className="rounded-xl bg-slate-100 p-4 text-sm text-slate-700">Illustrative preview: the collections and metrics below are synthetic. Describe your audience and run an analysis to see how Qloo changes the selection.</div>}
           {realComparison && activeNav === "analyses" && <AnalysisEvidence result={realComparison} />}
           {activeNav === "collections" && realComparison && <CollectionComparison result={realComparison} />}
           {/* =================================================================
@@ -1474,7 +1600,7 @@ export default function App() {
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                 <div>
                   <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">
-                    Vue d'ensemble • {displayWorkspace.season}
+                    OVERVIEW • {displayWorkspace.season}
                   </span>
                   <h1 className="text-2xl font-semibold tracking-tight text-slate-900 mt-1">
                     {realComparison
@@ -1492,13 +1618,13 @@ export default function App() {
                     onClick={() => setActiveNav("analyses")}
                     className="px-3.5 py-2 rounded-lg bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-xs font-medium transition-colors shadow-2xs cursor-pointer"
                   >
-                    Configurer l'audience
+                    Configure audience
                   </button>
                   <button
                     onClick={() => setActiveNav("collections")}
                     className="px-3.5 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium transition-colors shadow-2xs flex items-center gap-1.5 cursor-pointer"
                   >
-                    <span>Comparer les collections</span>
+                    <span>Compare collections</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
@@ -1513,15 +1639,15 @@ export default function App() {
                     </div>
                     <div>
                       <h2 className="text-sm font-semibold text-slate-900">
-                        Commande de l'Agent IA en Langage Naturel
+                        Describe your audience
                       </h2>
                       <p className="text-xs text-slate-500">
-                        Décrivez l'univers ou le brief de votre capsule : l'agent déduit les affinités culturelles (Qloo), applique les contraintes financières et assemble la collection.
+                        Describe the audience for your collection. The agent queries Qloo cultural affinities, applies margin and stock constraints, and assembles a collection.
                       </p>
                     </div>
                   </div>
                   <span className="text-[11px] font-medium px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-200/80 self-start sm:self-auto shrink-0">
-                    {provenance ? qlooStateLabel(provenance.qlooMode) : "Aperçu — lancer une analyse"}
+                    {provenance ? qlooStateLabel(provenance.qlooMode) : "Preview — run an analysis"}
                   </span>
                 </div>
 
@@ -1538,9 +1664,9 @@ export default function App() {
                         type="text"
                         value={customBrief}
                         onChange={(e) => setCustomBrief(e.target.value)}
-                        aria-label="Brief de la collection"
+                        aria-label="Collection brief"
                         maxLength={2000}
-                        placeholder="Ex: Capsule streetwear technique pour fans d'électro minimale, d'architecture brutaliste et de design suisse..."
+                        placeholder="Example: Technical streetwear for fans of minimal electronic music, brutalist architecture and Swiss design..."
                         className="w-full bg-slate-50 border border-slate-200 rounded-lg pl-3.5 pr-4 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-slate-900 transition-colors"
                       />
                     </div>
@@ -1550,20 +1676,20 @@ export default function App() {
                       className="px-5 py-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-2xs disabled:opacity-50 cursor-pointer shrink-0"
                     >
                       <RefreshCw className={`w-3.5 h-3.5 ${isAnalyzing ? "animate-spin" : ""}`} />
-                      <span>{isAnalyzing ? "L'agent analyse..." : "Exécuter l'analyse"}</span>
+                      <span>{isAnalyzing ? "The agent is analysing..." : "Run analysis"}</span>
                     </button>
                   </div>
 
-                  <p className="text-xs text-slate-500">{seeds.length} référence(s) culturelle(s) ajoutée(s) au brief · Marge minimale : {profile.targetMargin}%. <button type="button" className="underline underline-offset-2" onClick={() => setActiveNav("analyses")}>Configurer ces paramètres</button></p>
+                  <p className="text-xs text-slate-500">{seeds.length} cultural reference(s) added to the brief · Minimum margin: {profile.targetMargin}%. <button type="button" className="underline underline-offset-2" onClick={() => setActiveNav("analyses")}>Edit these settings</button></p>
                   {/* Suggestions de briefs rapides */}
                   <div className="flex items-center gap-1.5 flex-wrap pt-1">
-                    <span className="text-[11px] text-slate-400 font-medium">Exemples :</span>
+                    <span className="text-[11px] text-slate-400 font-medium">Examples:</span>
                     {[
                       {
                         workspaceKey: "monolith",
-                        label: "Monolith Festival (Techno & Brutalisme)",
+                        label: "Monolith Festival (Techno & Brutalism)",
                         brief:
-                          "Monolith Festival - Capsule Automne/Hiver inspirée des synthétiseurs modulaires, de l'architecture brutaliste et du workwear technique.",
+                          "Monolith Festival - Fall/Winter collection inspired by modular synthesisers, brutalist architecture and technical workwear.",
                         seeds: [
                           { id: "s1", label: "Kraftwerk", domain: "Musique" as CulturalDomain, weight: "Principal" as const },
                           { id: "s2", label: "Acronym", domain: "Mode" as CulturalDomain, weight: "Secondaire" as const },
@@ -1572,9 +1698,9 @@ export default function App() {
                       },
                       {
                         workspaceKey: "lumiere",
-                        label: "Cinéma Lumière (Cinéphiles & Céramique)",
+                        label: "Cinema Lumière (Film & Ceramics)",
                         brief:
-                          "Cinéma Lumière & Roastery - Capsule sobre croisant le cinéma d'auteur 35mm, les cafés de spécialité et les matières brutes.",
+                          "Cinema Lumière & Roastery - A restrained collection blending 35mm auteur cinema, specialty coffee and raw materials.",
                         seeds: [
                           { id: "b1", label: "Jean-Luc Godard", domain: "Cinéma" as CulturalDomain, weight: "Principal" as const },
                           { id: "b2", label: "Blue Bottle Coffee", domain: "Lifestyle" as CulturalDomain, weight: "Principal" as const },
@@ -1585,7 +1711,7 @@ export default function App() {
                         workspaceKey: "tokyo",
                         label: "Tokyo Sound Bar (Jazz & Denim)",
                         brief:
-                          "Tokyo Sound Bar - Capsule confidentielle croisant le jazz spirituel, l'art du denim brut et la céramique japonaise artisanale.",
+                          "Tokyo Sound Bar - An intimate collection blending spiritual jazz, raw denim and handmade Japanese ceramics.",
                         seeds: [
                           { id: "t1", label: "John Coltrane", domain: "Musique" as CulturalDomain, weight: "Principal" as const },
                           { id: "t2", label: "Our Legacy", domain: "Mode" as CulturalDomain, weight: "Secondaire" as const },
@@ -1617,7 +1743,7 @@ export default function App() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div className="bg-white p-5 rounded-xl border border-slate-200/80 shadow-2xs space-y-1.5">
                   <div className="flex items-center justify-between text-xs text-slate-500 font-medium">
-                    <span>Marge brute prévisionnelle</span>
+                    <span>Average product gross margin</span>
                     <TrendingUp className="w-4 h-4 text-emerald-600" />
                   </div>
                   <div className="flex items-baseline gap-2">
@@ -1626,20 +1752,20 @@ export default function App() {
                     </span>
                     {realComparison ? (
                       <span className={`text-xs font-medium ${realComparison.comparison_metrics.margin_delta_eur >= 0 ? "text-emerald-600" : "text-amber-600"}`}>
-                        {signed(realComparison.comparison_metrics.margin_delta_eur)} € vs sans Qloo
+                        {signed(realComparison.comparison_metrics.margin_delta_eur)} EUR vs without Qloo
                       </span>
                     ) : (
-                      <span className="text-xs font-medium text-slate-400">Aperçu fictif</span>
+                      <span className="text-xs font-medium text-slate-400">Synthetic preview</span>
                     )}
                   </div>
                   <p className="text-xs text-slate-400">
-                    Calcul sur le catalogue fictif, sans ventes mesurées
+                    Calculated from a synthetic catalog; no measured sales
                   </p>
                 </div>
 
                 <div className="bg-white p-5 rounded-xl border border-slate-200/80 shadow-2xs space-y-1.5">
                   <div className="flex items-center justify-between text-xs text-slate-500 font-medium">
-                    <span>Prix retail moyen</span>
+                    <span>Average retail price</span>
                     <ShoppingBag className="w-4 h-4 text-slate-400" />
                   </div>
                   <div className="flex items-baseline gap-2">
@@ -1647,17 +1773,17 @@ export default function App() {
                       {metrics.avgRetail} €
                     </span>
                     <span className="text-xs text-slate-500">
-                      {realComparison ? "Sélection calculée" : "Exemple illustratif"}
+                      {realComparison ? "Calculated selection" : "Illustrative example"}
                     </span>
                   </div>
                   <p className="text-xs text-slate-400">
-                    Prix issus du catalogue de démonstration
+                    Prices from the demonstration catalog
                   </p>
                 </div>
 
                 <div className="bg-white p-5 rounded-xl border border-slate-200/80 shadow-2xs space-y-1.5">
                   <div className="flex items-center justify-between text-xs text-slate-500 font-medium">
-                    <span>Signaux culturels actifs</span>
+                    <span>Cultural signals</span>
                     <Layers className="w-4 h-4 text-slate-400" />
                   </div>
                   <div className="flex items-baseline gap-2">
@@ -1665,17 +1791,17 @@ export default function App() {
                       {realComparison?.provenance?.signals.length ?? seeds.length}
                     </span>
                     <span className="text-xs text-slate-500">
-                      {realComparison ? `${provenance?.qlooEntitiesCount || 0} entités résolues` : `${displayWorkspace.insights.length} exemples éditoriaux`}
+                      {realComparison ? `${provenance?.qlooEntitiesCount || 0} resolved entities` : `${displayWorkspace.insights.length} editorial examples`}
                     </span>
                   </div>
                   <p className="text-xs text-slate-400">
-                    {provenance ? qlooStateLabel(provenance.qlooMode) : "Données d’affinités simulées"}
+                    {provenance ? qlooStateLabel(provenance.qlooMode) : "Simulated affinity data"}
                   </p>
                 </div>
 
                 <div className="bg-white p-5 rounded-xl border border-slate-200/80 shadow-2xs space-y-1.5">
                   <div className="flex items-center justify-between text-xs text-slate-500 font-medium">
-                    <span>Statut d'approbation</span>
+                    <span>Approval status</span>
                     <CheckCircle2 className="w-4 h-4 text-slate-400" />
                   </div>
                   <div className="flex items-baseline gap-2">
@@ -1683,7 +1809,7 @@ export default function App() {
                       {metrics.approved} / {metrics.total}
                     </span>
                     <span className="text-xs font-medium text-slate-600">
-                      ({metrics.approvalRate}% validés)
+                      ({metrics.approvalRate}% approved)
                     </span>
                   </div>
                   <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden mt-2">
@@ -1700,10 +1826,10 @@ export default function App() {
                 <div className="flex items-center justify-between">
                   <div>
                     <h2 className="text-sm font-semibold text-slate-900">
-                      Flux de conception de la collection
+                      Collection workflow
                     </h2>
                     <p className="text-xs text-slate-500">
-                      Parcours structuré de l'analyse culturelle jusqu'au bon à tirer (BAT).
+                      A structured workflow from cultural analysis to final approval.
                     </p>
                   </div>
                 </div>
@@ -1712,31 +1838,31 @@ export default function App() {
                   {[
                     {
                       step: "01",
-                      title: "Audience & Signaux",
-                      desc: `${seeds.length} repères culturels configurés pour orienter la direction artistique.`,
+                      title: "Audience & Signals",
+                      desc: `${seeds.length} cultural references configured to guide the collection.`,
                       target: "analyses" as NavSection,
-                      cta: "Ajuster l'audience",
+                      cta: "Edit audience",
                     },
                     {
                       step: "02",
-                      title: "Comparatif Stratégique",
-                      desc: "Évaluation de l'écart de valeur entre une collection standard et l'approche affinitaire.",
+                      title: "Controlled Comparison",
+                      desc: "Compare collections with and without cultural affinity signals.",
                       target: "collections" as NavSection,
-                      cta: "Voir le comparatif",
+                      cta: "View comparison",
                     },
                     {
                       step: "03",
-                      title: "Catalogue & Coûts",
-                      desc: `${products.length} références détaillées avec grammages, finitions et marges.`,
+                      title: "Catalog & Costs",
+                      desc: `${products.length} products with specifications, finishes and margins.`,
                       target: "catalogue" as NavSection,
-                      cta: "Explorer les produits",
+                      cta: "Explore products",
                     },
                     {
                       step: "04",
-                      title: "Approbation Finale",
-                      desc: `${metrics.pending + metrics.revision} référence(s) en attente de validation avant mise en production.`,
+                      title: "Final Approval",
+                      desc: `${metrics.pending + metrics.revision} product(s) awaiting approval before export.`,
                       target: "approbations" as NavSection,
-                      cta: "Valider le lancement",
+                      cta: "Review collection",
                     },
                   ].map((wf) => (
                     <div
@@ -1746,7 +1872,7 @@ export default function App() {
                     >
                       <div className="space-y-2">
                         <span className="text-[11px] font-mono font-semibold text-slate-400">
-                          ÉTAPE {wf.step}
+                          STEP {wf.step}
                         </span>
                         <h3 className="text-sm font-semibold text-slate-900">
                           {wf.title}
@@ -1771,10 +1897,10 @@ export default function App() {
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <h2 className="text-sm font-semibold text-slate-900">
-                        Correspondances par produit
+                        Evidence by product
                       </h2>
                       <span className="text-[11px] text-slate-400">
-                        {provenance ? qlooStateLabel(provenance.qlooMode) : "Exemple simulé"}
+                        {provenance ? qlooStateLabel(provenance.qlooMode) : "Simulated example"}
                       </span>
                     </div>
 
@@ -1787,10 +1913,10 @@ export default function App() {
                           <div className="flex items-center gap-1.5 flex-wrap">
                             {insight.domains.map((d) => (
                               <span
-                                key={d}
+                                key={labelEn(d)}
                                 className="text-[10px] font-medium px-2 py-0.5 rounded bg-white text-slate-600 border border-slate-200"
                               >
-                                {d}
+                                {labelEn(d)}
                               </span>
                             ))}
                           </div>
@@ -1802,7 +1928,7 @@ export default function App() {
                           </p>
                           <div className="pt-1 text-[11px] text-slate-500">
                             <span className="font-medium text-slate-700">
-                              Matières du catalogue :{" "}
+                              Catalog materials:{" "}
                             </span>
                             {insight.materialGuideline}
                           </div>
@@ -1815,7 +1941,7 @@ export default function App() {
                     onClick={() => setActiveNav("analyses")}
                     className="w-full py-2 text-xs font-medium text-slate-600 hover:text-slate-900 border-t border-slate-100 flex items-center justify-center gap-1 cursor-pointer"
                   >
-                    <span>Modifier les signaux d'entrée</span>
+                    <span>Edit audience signals</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
@@ -1825,17 +1951,17 @@ export default function App() {
                   <div className="flex items-center justify-between">
                     <div>
                       <h2 className="text-sm font-semibold text-slate-900">
-                        Pièces principales de la collection
+                        Selected products
                       </h2>
                       <p className="text-xs text-slate-500">
-                        Cliquez sur une pièce pour inspecter sa fiche technique et ses marges.
+                        Select a product to inspect its specifications and margin.
                       </p>
                     </div>
                     <button
                       onClick={() => setActiveNav("catalogue")}
                       className="text-xs font-medium text-slate-600 hover:text-slate-900 flex items-center gap-1 cursor-pointer"
                     >
-                      <span>Tout le catalogue</span>
+                      <span>View catalog</span>
                       <ChevronRight className="w-3.5 h-3.5" />
                     </button>
                   </div>
@@ -1882,7 +2008,7 @@ export default function App() {
                                 {prod.retailPrice} €
                               </span>
                               <span className="text-[11px] text-emerald-600 font-medium">
-                                Marge {margin}%
+                                Margin {margin}%
                               </span>
                             </div>
 
@@ -1896,10 +2022,10 @@ export default function App() {
                               }`}
                             >
                               {prod.status === "approved"
-                                ? "Approuvé"
+                                ? "Approved"
                                 : prod.status === "revision"
-                                ? "À réviser"
-                                : "En attente"}
+                                ? "Needs revision"
+                                : "Pending"}
                             </span>
                           </div>
                         </div>
@@ -1919,20 +2045,20 @@ export default function App() {
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                 <div>
                   <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">
-                    Étape 1 • Calibration Culturelle
+                    STEP 1 • CULTURAL REFERENCES
                   </span>
                   <h1 className="text-2xl font-semibold tracking-tight text-slate-900 mt-1">
-                    Audience & Recommandations Créatives
+                    Audience & Cultural Signals
                   </h1>
                   <p className="text-sm text-slate-600 mt-1 max-w-2xl">
-                    Définissez les entités culturelles de votre audience pour rechercher des affinités et classer les références du catalogue.
+                    Define audience references to find cross-domain affinities and rank catalog products.
                   </p>
                 </div>
                 <button
                   onClick={() => setActiveNav("collections")}
                   className="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium flex items-center gap-1.5 self-start sm:self-auto cursor-pointer"
                 >
-                  <span>Comparer les collections générées</span>
+                  <span>Compare generated collections</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -1945,53 +2071,53 @@ export default function App() {
                     <div className="flex items-center justify-between">
                       <div>
                         <h2 className="text-base font-semibold text-slate-900">
-                          Signaux culturels de l'audience
+                          Audience cultural references
                         </h2>
                         <p className="text-xs text-slate-500 mt-0.5">
-                          Ces références alimentent la recherche d'affinités croisées.
+                          These references drive cross-domain affinity searches.
                         </p>
                       </div>
                       <span className="text-xs font-medium text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md">
-                        {seeds.length} actifs
+                        {seeds.length} active
                       </span>
                     </div>
 
                     <form onSubmit={handleAddSeed} className="grid grid-cols-1 sm:grid-cols-12 gap-2.5">
                       <select
-                        aria-label="Domaine"
+                        aria-label="Domain"
                         value={newSeedDomain}
                         onChange={(e) => setNewSeedDomain(e.target.value as CulturalDomain)}
                         className="sm:col-span-3 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-700 focus:outline-none focus:border-slate-900"
                       >
-                        <option value="Musique">Musique</option>
-                        <option value="Cinéma">Cinéma</option>
-                        <option value="Mode">Mode</option>
+                        <option value="Musique">Music</option>
+                        <option value="Cinéma">Film & TV</option>
+                        <option value="Mode">Fashion</option>
                         <option value="Art & Design">Art & Design</option>
                         <option value="Lifestyle">Lifestyle</option>
-                        <option value="Édition">Édition</option>
+                        <option value="Édition">Books & Publishing</option>
                       </select>
 
                       <input
                         type="text"
                         value={newSeedInput}
                         onChange={(e) => setNewSeedInput(e.target.value)}
-                        placeholder="Ajouter une entité précise (ex: Daft Punk, Aesop...)"
+                        placeholder="Add a specific entity (e.g. Daft Punk, Aesop...)"
                         maxLength={120}
                         disabled={seeds.length >= 8}
                         className="sm:col-span-5 bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-slate-900"
                       />
 
                       <select
-                        aria-label="Importance"
+                        aria-label="Priority"
                         value={newSeedWeight}
                         onChange={(e) =>
                           setNewSeedWeight(e.target.value as CulturalSeed["weight"])
                         }
                         className="sm:col-span-2 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 text-xs text-slate-700 focus:outline-none focus:border-slate-900"
                       >
-                        <option value="Principal">Principal</option>
-                        <option value="Secondaire">Secondaire</option>
-                        <option value="Subtil">Subtil</option>
+                        <option value="Principal">Primary</option>
+                        <option value="Secondaire">Secondary</option>
+                        <option value="Subtil">Subtle</option>
                       </select>
 
                       <button
@@ -1999,11 +2125,11 @@ export default function App() {
                         className="sm:col-span-2 flex items-center justify-center gap-1 px-3 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium transition-colors cursor-pointer"
                       >
                         <Plus className="w-3.5 h-3.5" />
-                        <span>Ajouter</span>
+                        <span>Add</span>
                       </button>
                     </form>
 
-                    <p className="text-xs text-slate-500">{seeds.length}/8 références. Chaque nom est recherché dans Qloo. Priorités de classement : Principal 3, Secondaire 2, Subtil 1.</p>
+                    <p className="text-xs text-slate-500">{seeds.length}/8 references. Each name is searched in Qloo. Ranking priorities: Primary 3, Secondary 2, Subtle 1.</p>
                     {/* Liste épurée des signaux */}
                     <div className="divide-y divide-slate-100 border-t border-slate-100">
                       {seeds.map((seed) => (
@@ -2013,7 +2139,7 @@ export default function App() {
                         >
                           <div className="flex items-center gap-3">
                             <span className="text-[11px] font-medium px-2.5 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200/60">
-                              {seed.domain}
+                              {labelEn(seed.domain)}
                             </span>
                             <span className="text-sm font-medium text-slate-900">
                               {seed.label}
@@ -2030,12 +2156,12 @@ export default function App() {
                                   : "bg-slate-50 text-slate-500 border border-slate-200"
                               }`}
                             >
-                              {seed.weight}
+                              {labelEn(seed.weight)}
                             </span>
                             <button
                               onClick={() => handleRemoveSeed(seed.id)}
                               className="p-1 text-slate-400 hover:text-slate-700 rounded transition-colors cursor-pointer"
-                              title="Retirer"
+                              title="Remove"
                             >
                               <X className="w-4 h-4" />
                             </button>
@@ -2048,20 +2174,20 @@ export default function App() {
                   {/* Paramètres de positionnement commercial */}
                   <div className="bg-white rounded-xl border border-slate-200/80 shadow-2xs p-6 space-y-5">
                     <h2 className="text-base font-semibold text-slate-900">
-                      Contraintes de sélection
+                      Selection constraints
                     </h2>
 
                     <div className="max-w-md">
                       <div>
                         <div className="flex justify-between text-xs font-medium text-slate-700 mb-2">
-                          <span>Objectif de marge brute</span>
+                          <span>Minimum product gross margin</span>
                           <span className="text-emerald-700 font-semibold">
                             {profile.targetMargin}%
                           </span>
                         </div>
                         <input
                           type="range"
-                          aria-label="Marge minimale"
+                          aria-label="Minimum margin"
                           min="35"
                           max="85"
                           value={profile.targetMargin}
@@ -2074,7 +2200,7 @@ export default function App() {
                           className="w-full accent-slate-900 h-1.5 bg-slate-200 rounded-lg cursor-pointer"
                         />
                         <span className="text-[11px] text-slate-400 block mt-1">
-                          Exclut tout produit sous ce seuil. Les stocks doivent être supérieurs à zéro.
+                          Exclude products below this margin. Stock must be greater than zero.
                         </span>
                       </div>
                     </div>
@@ -2087,14 +2213,14 @@ export default function App() {
                     <div className="flex items-center justify-between border-b border-slate-100 pb-4">
                       <div>
                         <h2 className="text-base font-semibold text-slate-900">
-                          Synthèse des affinités croisées
+                          Cross-domain affinity summary
                         </h2>
                         <p className="text-xs text-slate-500 mt-0.5">
-                          Correspondances entre les signaux collectés et les produits retenus.
+                          Matches between collected signals and selected products.
                         </p>
                       </div>
                       <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200/60">
-                        {provenance ? qlooStateLabel(provenance.qlooMode) : "Simulé"}
+                        {provenance ? qlooStateLabel(provenance.qlooMode) : "Simulated"}
                       </span>
                     </div>
 
@@ -2128,7 +2254,7 @@ export default function App() {
 
                           <div className="p-2.5 rounded-lg bg-white border border-slate-200/60 text-xs">
                             <span className="font-medium text-slate-900 block mb-0.5">
-                              Matières du catalogue
+                              Catalog materials
                             </span>
                             <span className="text-slate-600">
                               {node.materialGuideline}
@@ -2137,7 +2263,7 @@ export default function App() {
 
                           <div>
                             <span className="text-[11px] font-medium text-slate-500 block mb-1.5">
-                              Limites documentées :
+                              Documented limitations:
                             </span>
                             <div className="flex flex-wrap gap-1.5">
                               {node.pitfallsToAvoid.map((p) => (
@@ -2164,8 +2290,8 @@ export default function App() {
           ================================================================= */}
           {activeNav === "collections" && !realComparison && (
             <section className="space-y-5">
-              <h1 className="text-2xl font-semibold text-slate-900">Aperçu du comparatif de collections</h1>
-              <p className="text-sm text-slate-600">Exemples éditoriaux fictifs. Lancez une analyse pour comparer les références réellement sélectionnées avec et sans Qloo.</p>
+              <h1 className="text-2xl font-semibold text-slate-900">Collection comparison preview</h1>
+              <p className="text-sm text-slate-600">Synthetic editorial examples. Run an analysis to compare actual selections with and without Qloo.</p>
               <div className="grid md:grid-cols-2 gap-5">
                 {[currentWorkspace.comparison.standardApproach, currentWorkspace.comparison.culturalApproach].map((direction) => (
                   <div className="rounded-xl border border-slate-200 bg-white p-6 space-y-3" key={direction.title}>
@@ -2175,7 +2301,7 @@ export default function App() {
                   </div>
                 ))}
               </div>
-              <button className="rounded-lg bg-slate-900 text-white px-4 py-2 text-sm" onClick={() => setActiveNav("dashboard")}>Définir un brief et lancer l’analyse</button>
+              <button className="rounded-lg bg-slate-900 text-white px-4 py-2 text-sm" onClick={() => setActiveNav("dashboard")}>Enter a brief and run analysis</button>
             </section>
           )}
 
@@ -2187,13 +2313,13 @@ export default function App() {
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                 <div>
                   <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">
-                    Étape 3 • Développement Produit
+                    STEP 3 • PRODUCT DEVELOPMENT
                   </span>
                   <h1 className="text-2xl font-semibold tracking-tight text-slate-900 mt-1">
-                    Catalogue & Spécifications Techniques
+                    Catalog & Product Specifications
                   </h1>
                   <p className="text-sm text-slate-600 mt-1">
-                    Consultez les fiches techniques, la structure de coûts et la justification culturelle de chaque référence.
+                    Inspect specifications, costs and cultural evidence for each product.
                   </p>
                 </div>
 
@@ -2201,7 +2327,7 @@ export default function App() {
                   onClick={() => setActiveNav("approbations")}
                   className="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium flex items-center gap-1.5 self-start sm:self-auto cursor-pointer"
                 >
-                  <span>Passer aux approbations ({metrics.approved}/{metrics.total})</span>
+                  <span>Review approvals ({metrics.approved}/{metrics.total})</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -2209,7 +2335,7 @@ export default function App() {
               {/* Barre de filtres et recherche */}
               <div className="bg-white rounded-xl border border-slate-200/80 shadow-2xs p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-1.5 flex-wrap">
-                  {["Tous", "Textile", "Accessoires", "Objets & Éditions"].map(
+                  {["All", "Textile", "Accessories", "Objects & Editions"].map(
                     (cat) => (
                       <button
                         key={cat}
@@ -2232,7 +2358,7 @@ export default function App() {
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Rechercher par nom ou SKU..."
+                    placeholder="Search by name or SKU..."
                     className="w-full bg-slate-50 border border-slate-200 rounded-lg pl-8 pr-3 py-1.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-slate-900"
                   />
                 </div>
@@ -2273,10 +2399,10 @@ export default function App() {
                             }`}
                           >
                             {product.status === "approved"
-                              ? "Approuvé"
+                              ? "Approved"
                               : product.status === "revision"
-                              ? "À réviser"
-                              : "En attente"}
+                              ? "Needs revision"
+                              : "Pending"}
                           </span>
                         </div>
 
@@ -2309,7 +2435,7 @@ export default function App() {
                         {/* Recommandation culturelle concise */}
                         <div className="p-3 rounded-lg bg-slate-50 border border-slate-200/60 text-xs text-slate-600 leading-relaxed">
                           <span className="font-medium text-slate-900 block mb-0.5">
-                            Justification culturelle :
+                            Cultural rationale:
                           </span>
                           {product.culturalRationale}
                         </div>
@@ -2320,7 +2446,7 @@ export default function App() {
                         <div className="flex items-center gap-4 text-xs">
                           <div>
                             <span className="text-slate-400 block text-[11px]">
-                              Coût unitaire
+                              Unit cost
                             </span>
                             <span className="font-medium text-slate-700">
                               {product.unitCost.toFixed(2)} €
@@ -2328,7 +2454,7 @@ export default function App() {
                           </div>
                           <div>
                             <span className="text-slate-400 block text-[11px]">
-                              Prix retail
+                              Retail price
                             </span>
                             <span className="font-semibold text-slate-900">
                               {product.retailPrice.toFixed(0)} €
@@ -2336,7 +2462,7 @@ export default function App() {
                           </div>
                           <div>
                             <span className="text-slate-400 block text-[11px]">
-                              Marge brute
+                              Gross margin
                             </span>
                             <span className="font-semibold text-emerald-700">
                               {marginPct}% (+{unitMargin.toFixed(1)} €)
@@ -2348,7 +2474,7 @@ export default function App() {
                           onClick={() => setSelectedProduct(product)}
                           className="px-3 py-1.5 rounded-lg bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-xs font-medium transition-colors shadow-2xs cursor-pointer shrink-0"
                         >
-                          Fiche détaillée
+                          Product details
                         </button>
                       </div>
                     </div>
@@ -2366,13 +2492,13 @@ export default function App() {
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                 <div>
                   <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">
-                    Étape 4 • Gouvernance & Bon à Tirer
+                    STEP 4 • REVIEW & APPROVAL
                   </span>
                   <h1 className="text-2xl font-semibold tracking-tight text-slate-900 mt-1">
-                    Validation de la Collection
+                    Collection Approval
                   </h1>
                   <p className="text-sm text-slate-600 mt-1">
-                    Révisez chaque référence, ajoutez vos instructions d'atelier et validez les pièces pour débloquer l'export de production.
+                    Review each product, add notes and approve the collection to enable export.
                   </p>
                 </div>
 
@@ -2382,14 +2508,14 @@ export default function App() {
                     disabled={!canReview}
                     className="px-3.5 py-2 rounded-lg bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-xs font-medium transition-colors shadow-2xs cursor-pointer disabled:opacity-50"
                   >
-                    {isReviewing ? "Enregistrement…" : "Tout approuver"}
+                    {isReviewing ? "Saving…" : "Approve all"}
                   </button>
                   <button
                     onClick={() => setIsApiModalOpen(true)}
                     className="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium transition-colors shadow-2xs flex items-center gap-1.5 cursor-pointer"
                   >
                     <Code2 className="w-3.5 h-3.5" />
-                    <span>Exporter la collection</span>
+                    <span>Export collection</span>
                   </button>
                 </div>
               </div>
@@ -2399,19 +2525,19 @@ export default function App() {
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-semibold text-slate-900">
-                      Avancement des validations : {metrics.approved} sur {metrics.total} références approuvées
+                      Approval progress: {metrics.approved} of {metrics.total} products approved
                     </span>
                   </div>
                   <p className="text-xs text-slate-500">
                     {metrics.approvalRate === 100
-                      ? "Toutes les références sont validées et prêtes pour l'export ERP / Production."
-                      : "Certaines pièces nécessitent encore une décision ou un ajustement technique."}
+                      ? "All products are approved and ready for export."
+                      : "Some products still need a decision or revision."}
                   </p>
                 </div>
 
                 <div className="w-full sm:w-56 space-y-1.5">
                   <div className="flex justify-between text-xs font-medium">
-                    <span className="text-slate-500">Progression</span>
+                    <span className="text-slate-500">Progress</span>
                     <span className="text-slate-900">{metrics.approvalRate}%</span>
                   </div>
                   <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
@@ -2458,15 +2584,15 @@ export default function App() {
                             </p>
                             <div className="flex items-center gap-3 mt-1.5 text-xs">
                               <span className="text-slate-600">
-                                Coût : <strong>{product.unitCost.toFixed(2)} €</strong>
+                                Cost: <strong>{product.unitCost.toFixed(2)} €</strong>
                               </span>
                               <span className="text-slate-300">|</span>
                               <span className="text-slate-600">
-                                Retail : <strong>{product.retailPrice} €</strong>
+                                Retail: <strong>{product.retailPrice} €</strong>
                               </span>
                               <span className="text-slate-300">|</span>
                               <span className="text-emerald-700 font-medium">
-                                Marge : {marginPct}%
+                                Margin: {marginPct}%
                               </span>
                             </div>
                           </div>
@@ -2486,7 +2612,7 @@ export default function App() {
                             }`}
                           >
                             <Check className="w-3.5 h-3.5" />
-                            <span>Approuver</span>
+                            <span>Approve</span>
                           </button>
 
                           <button
@@ -2500,7 +2626,7 @@ export default function App() {
                                 : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50"
                             }`}
                           >
-                            Demander révision
+                            Request revision
                           </button>
                         </div>
                       </div>
@@ -2520,14 +2646,14 @@ export default function App() {
                               [product.id]: e.target.value,
                             })
                           }
-                          placeholder="Ajouter une note de confection ou un commentaire de validation..."
+                          placeholder="Add a production note or review comment..."
                           className="flex-1 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-slate-900"
                         />
                         <button
                           onClick={() => setSelectedProduct(product)}
                           className="text-xs font-medium text-slate-500 hover:text-slate-900 shrink-0 cursor-pointer"
                         >
-                          Voir fiche complète →
+                          View product details →
                         </button>
                       </div>
                     </div>
@@ -2578,7 +2704,7 @@ export default function App() {
 
                 <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/70 space-y-1">
                   <span className="text-[11px] font-medium text-slate-500 block">
-                    Alternative promotionnelle écartée :
+                    Standard alternative:
                   </span>
                   <p className="text-xs text-slate-600">
                     {selectedProduct.standardAlternative}
@@ -2589,23 +2715,23 @@ export default function App() {
               <div className="space-y-4 text-xs">
                 <div className="space-y-2.5">
                   <h3 className="font-semibold text-slate-900 uppercase tracking-wider text-[11px]">
-                    Cahier des charges confection
+                    Product specifications
                   </h3>
                   <div className="grid grid-cols-2 gap-2.5 p-3.5 rounded-xl bg-slate-50 border border-slate-200/70">
                     <div>
-                      <span className="text-slate-400 block">Grammage</span>
+                      <span className="text-slate-400 block">Weight / materials</span>
                       <span className="font-medium text-slate-800">
                         {selectedProduct.specs}
                       </span>
                     </div>
                     <div>
-                      <span className="text-slate-400 block">Coupe</span>
+                      <span className="text-slate-400 block">Fit</span>
                       <span className="font-medium text-slate-800">
                         {selectedProduct.fit}
                       </span>
                     </div>
                     <div>
-                      <span className="text-slate-400 block">Finition</span>
+                      <span className="text-slate-400 block">Finish</span>
                       <span className="font-medium text-slate-800">
                         {selectedProduct.finish}
                       </span>
@@ -2621,7 +2747,7 @@ export default function App() {
 
                 <div className="space-y-1.5">
                   <h3 className="font-semibold text-slate-900 uppercase tracking-wider text-[11px]">
-                    Preuves culturelles & méthode de sélection
+                    Cultural evidence & selection method
                   </h3>
                   <p className="text-slate-600 leading-relaxed p-3.5 rounded-xl bg-slate-50 border border-slate-200/70">
                     {selectedProduct.culturalRationale}
@@ -2631,7 +2757,7 @@ export default function App() {
 
                 <div className="grid grid-cols-3 gap-2 p-3.5 rounded-xl bg-emerald-50/60 border border-emerald-200/70">
                   <div>
-                    <span className="text-slate-500 block text-[11px]">Coût</span>
+                    <span className="text-slate-500 block text-[11px]">Cost</span>
                     <span className="font-semibold text-slate-900 text-sm">
                       {selectedProduct.unitCost.toFixed(2)} €
                     </span>
@@ -2643,7 +2769,7 @@ export default function App() {
                     </span>
                   </div>
                   <div>
-                    <span className="text-slate-500 block text-[11px]">Marge</span>
+                    <span className="text-slate-500 block text-[11px]">Margin</span>
                     <span className="font-semibold text-emerald-700 text-sm">
                       {Math.round(
                         ((selectedProduct.retailPrice - selectedProduct.unitCost) /
@@ -2659,13 +2785,13 @@ export default function App() {
 
             <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
               <span className="text-xs text-slate-500">
-                Statut :{" "}
+                Status:{" "}
                 <strong className="text-slate-900">
                   {selectedProduct.status === "approved"
-                    ? "Approuvé"
+                    ? "Approved"
                     : selectedProduct.status === "revision"
-                    ? "En révision"
-                    : "En attente"}
+                    ? "In revision"
+                    : "Pending"}
                 </strong>
               </span>
               <div className="flex items-center gap-2">
@@ -2676,7 +2802,7 @@ export default function App() {
                   }
                   className="px-3.5 py-2 rounded-lg border border-slate-200 hover:bg-slate-50 text-xs font-medium text-slate-700 cursor-pointer"
                 >
-                  Demander une révision
+                  Request revision
                 </button>
                 <button
                   disabled={!canReview}
@@ -2685,7 +2811,7 @@ export default function App() {
                   }
                   className="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium cursor-pointer"
                 >
-                  Approuver cette pièce
+                  Approve this item
                 </button>
               </div>
             </div>
@@ -2702,10 +2828,10 @@ export default function App() {
             <div className="flex items-start justify-between gap-4 border-b border-slate-100 pb-4">
               <div>
                 <h2 className="text-lg font-semibold text-slate-900">
-                  Exporter la collection validée
+                  Export the approved collection
                 </h2>
                 <p className="text-xs text-slate-500 mt-0.5">
-                  Exports JSON et CSV du catalogue de démonstration. Un connecteur Shopify ou ERP reste nécessaire pour publier en boutique.
+                  JSON and CSV exports from the demonstration catalog. A Shopify or ERP connector is still required to publish to a store.
                 </p>
               </div>
               <button
@@ -2716,7 +2842,7 @@ export default function App() {
               </button>
             </div>
 
-            <p className="text-xs text-slate-600">{canExport ? "Collection approuvée. Les exports incluent la provenance et les décisions enregistrées." : "L’export sera disponible après une analyse à jour et l’approbation de toutes les références."}</p>
+            <p className="text-xs text-slate-600">{canExport ? "Collection approved. Exports include provenance and saved decisions." : "Export becomes available after a current analysis and approval of every product."}</p>
             {exportNotice && (
               <div role="status" className="rounded-lg bg-amber-50 border border-amber-200/80 p-3 text-xs text-amber-900">
                 {exportNotice}
@@ -2729,7 +2855,7 @@ export default function App() {
                 onClick={(e) => {
                   if (!canExport) {
                     e.preventDefault();
-                    setExportNotice("Veuillez lancer une analyse à jour et approuver l'ensemble des références avant de pouvoir exporter.");
+                    setExportNotice("Run a current analysis and approve every product before exporting.");
                   }
                 }}
                 target="_blank"
@@ -2741,7 +2867,7 @@ export default function App() {
                 }`}
               >
                 <Download className="w-3.5 h-3.5" />
-                <span>Télécharger Manifeste E-Commerce (.json)</span>
+                <span>Download Commerce Manifest (.json)</span>
               </a>
 
               <a
@@ -2749,7 +2875,7 @@ export default function App() {
                 onClick={(e) => {
                   if (!canExport) {
                     e.preventDefault();
-                    setExportNotice("Veuillez lancer une analyse à jour et approuver l'ensemble des références avant de pouvoir exporter.");
+                    setExportNotice("Run a current analysis and approve every product before exporting.");
                   }
                 }}
                 target="_blank"
@@ -2761,7 +2887,7 @@ export default function App() {
                 }`}
               >
                 <Download className="w-3.5 h-3.5" />
-                <span>Télécharger Grille Logistique (.csv)</span>
+                <span>Download Logistics Sheet (.csv)</span>
               </a>
             </div>
 
@@ -2789,14 +2915,14 @@ export default function App() {
                           .filter((p) => p.status === "approved")
                           .map((p) => ({
                             sku: p.sku,
-                            name: p.name,
+                            name: productNameEn(p),
                             unitCost: p.unitCost,
                             retailPrice: p.retailPrice,
                             note: p.reviewerNote,
                           })),
                       }
                     : {
-                        _simulationNotice: "UI Preview Data — Exécutez l'analyse pour sérialiser le Taste Graph réel",
+                        _simulationNotice: "UI Preview Data — Run analysis to export actual Qloo results",
                         workspaceId: displayWorkspace.id,
                         season: displayWorkspace.season,
                         audienceProfile: profile,
@@ -2805,7 +2931,7 @@ export default function App() {
                           .filter((p) => p.status === "approved")
                           .map((p) => ({
                             sku: p.sku,
-                            name: p.name,
+                            name: productNameEn(p),
                             unitCost: p.unitCost,
                             retailPrice: p.retailPrice,
                             note: p.reviewerNote,
@@ -2822,12 +2948,12 @@ export default function App() {
                 {copied ? (
                   <>
                     <Check className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>Copié</span>
+                    <span>Copied</span>
                   </>
                 ) : (
                   <>
                     <Copy className="w-3.5 h-3.5" />
-                    <span>Copier le JSON</span>
+                    <span>Copy JSON</span>
                   </>
                 )}
               </button>

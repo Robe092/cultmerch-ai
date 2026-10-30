@@ -35,19 +35,19 @@ describe("🎭 Tests Navigateur End-to-End & Interactions Utilisateur (Puppeteer
     assert.ok(title.includes("CultMerch") || (await page.content()).includes("CultMerch"));
 
     // Vérifier la présence du champ de saisie du brief naturel
-    const briefInput = await page.$('input[placeholder*="Capsule streetwear"]');
+    const briefInput = await page.$('input[placeholder*="Technical streetwear"]');
     assert.ok(briefInput, "Le champ de saisie de brief en langage naturel doit être présent");
   });
 
   it("2. Saisie d'un brief en langage naturel et exécution réelle de l'analyse agentique", async () => {
-    const briefInput = await page.$('input[placeholder*="Capsule streetwear"]');
+    const briefInput = await page.$('input[placeholder*="Technical streetwear"]');
     assert.ok(briefInput);
 
     // Vider le champ et taper un brief ciblé
     await briefInput.click({ count: 3 });
     await briefInput.type("Capsule Techno & Architecture Suisse Minimaliste");
 
-    // Cliquer sur le bouton 'Exécuter l'analyse'
+    // Cliquer sur le bouton 'Run analysis'
     const submitBtn = await page.$('button[type="submit"]');
     assert.ok(submitBtn, "Le bouton de soumission doit être présent");
     await submitBtn.click();
@@ -57,9 +57,9 @@ describe("🎭 Tests Navigateur End-to-End & Interactions Utilisateur (Puppeteer
       () => {
         const text = document.body.innerText;
         return (
-          text.includes("Analyse CultMerch terminée") ||
-          text.includes("Mode: Sandbox Taste Graph") ||
-          text.includes("Mode: API Live")
+          text.includes("CultMerch analysis complete") ||
+          text.includes("Mode: Simulation — synthetic data") ||
+          text.includes("Mode: Live Qloo")
         );
       },
       { timeout: 60000 }
@@ -67,7 +67,7 @@ describe("🎭 Tests Navigateur End-to-End & Interactions Utilisateur (Puppeteer
 
     const bodyText = await page.evaluate(() => document.body.innerText);
     assert.ok(
-      bodyText.includes("Analyse CultMerch terminée") || bodyText.includes("50 SKUs traités"),
+      bodyText.includes("CultMerch analysis complete") || bodyText.includes("50 SKUs evaluated"),
       "L'interface doit confirmer l'exécution de l'analyse avec les 50 SKUs évalués"
     );
   });
@@ -100,11 +100,11 @@ describe("🎭 Tests Navigateur End-to-End & Interactions Utilisateur (Puppeteer
     );
   });
 
-  it("4. Navigation vers l'onglet 'Catalogue' et ouverture du Drawer Détail Produit", async () => {
-    // Cliquer sur l'onglet 'Catalogue'
+  it("4. Navigation vers l'onglet 'Catalog' et ouverture du Drawer Détail Produit", async () => {
+    // Cliquer sur l'onglet 'Catalog'
     const clicked = await page.evaluate(() => {
       const buttons = Array.from(document.querySelectorAll("button"));
-      const catBtn = buttons.find((b) => b.textContent?.includes("Catalogue"));
+      const catBtn = buttons.find((b) => b.textContent?.includes("Catalog"));
       if (catBtn) {
         catBtn.click();
         return true;
@@ -112,7 +112,7 @@ describe("🎭 Tests Navigateur End-to-End & Interactions Utilisateur (Puppeteer
       return false;
     });
 
-    assert.ok(clicked, "Le bouton 'Catalogue' doit être cliquable");
+    assert.ok(clicked, "Le bouton 'Catalog' doit être cliquable");
     await new Promise((r) => setTimeout(r, 600));
 
     // Vérifier la présence des illustrations techniques SVG de vêtements (viewBox 0 0 240 180)
@@ -139,11 +139,11 @@ describe("🎭 Tests Navigateur End-to-End & Interactions Utilisateur (Puppeteer
     assert.ok(drawerOpen, "Le drawer détail produit doit s'ouvrir au clic sur une pièce");
   });
 
-  it("5. Navigation vers 'Approbations' et validation HITL de la collection", async () => {
-    // Cliquer sur l'onglet 'Approbations'
+  it("5. Navigation vers 'Approvals' et validation HITL de la collection", async () => {
+    // Cliquer sur l'onglet 'Approvals'
     const clicked = await page.evaluate(() => {
       const buttons = Array.from(document.querySelectorAll("button"));
-      const appBtn = buttons.find((b) => b.textContent?.includes("Approbations"));
+      const appBtn = buttons.find((b) => b.textContent?.includes("Approvals"));
       if (appBtn) {
         appBtn.click();
         return true;
@@ -151,13 +151,13 @@ describe("🎭 Tests Navigateur End-to-End & Interactions Utilisateur (Puppeteer
       return false;
     });
 
-    assert.ok(clicked, "Le bouton 'Approbations' doit être cliquable");
+    assert.ok(clicked, "Le bouton 'Approvals' doit être cliquable");
     await new Promise((r) => setTimeout(r, 600));
 
-    // Cliquer sur 'Tout approuver'
+    // Cliquer sur 'Approve all'
     const approveClicked = await page.evaluate(() => {
       const buttons = Array.from(document.querySelectorAll("button"));
-      const btn = buttons.find((b) => b.textContent?.includes("Tout approuver"));
+      const btn = buttons.find((b) => b.textContent?.includes("Approve all"));
       if (btn) {
         btn.click();
         return true;
@@ -165,27 +165,27 @@ describe("🎭 Tests Navigateur End-to-End & Interactions Utilisateur (Puppeteer
       return false;
     });
 
-    assert.ok(approveClicked, "Le bouton 'Tout approuver' doit être présent et cliquable");
+    assert.ok(approveClicked, "Le bouton 'Approve all' doit être présent et cliquable");
     await new Promise((r) => setTimeout(r, 600));
 
     // Vérifier que le statut visuel reflète l'approbation
     const validationText = await page.evaluate(() => document.body.innerText);
     assert.ok(
-      validationText.includes("validée") ||
-        validationText.includes("Approuver") ||
-        validationText.includes("Bon à Tirer"),
+      validationText.includes("approved") ||
+        validationText.includes("Approve") ||
+        validationText.includes("Final Approval"),
       "L'interface doit confirmer la validation des pièces"
     );
   });
 
   it("6. Exports après validation et provenance mesurée", async () => {
-    // Cliquer sur le bouton 'Exports & traçabilité' ou 'Exporter la collection'
+    // Cliquer sur le bouton 'Exports & provenance' ou 'Export collection'
     const modalOpened = await page.evaluate(() => {
       const buttons = Array.from(document.querySelectorAll("button"));
       const btn = buttons.find(
         (b) =>
-          b.textContent?.includes("Exports & traçabilité") ||
-          b.textContent?.includes("Exporter la collection")
+          b.textContent?.includes("Exports & provenance") ||
+          b.textContent?.includes("Export collection")
       );
       if (btn) {
         btn.click();
@@ -200,7 +200,7 @@ describe("🎭 Tests Navigateur End-to-End & Interactions Utilisateur (Puppeteer
     // Vérifier que la modale présente l’export métier
     const modalContent = await page.evaluate(() => document.body.innerText);
     assert.ok(
-      modalContent.includes("Exporter la collection validée"),
+      modalContent.includes("Export the approved collection"),
       "La modal de connexion backend doit s'afficher"
     );
 
@@ -209,11 +209,11 @@ describe("🎭 Tests Navigateur End-to-End & Interactions Utilisateur (Puppeteer
 
     // Vérifier les boutons d'export JSON et CSV
     assert.ok(
-      modalContent.includes("Télécharger Manifeste E-Commerce (.json)"),
+      modalContent.includes("Download Commerce Manifest (.json)"),
       "Le lien de téléchargement JSON doit être présent"
     );
     assert.ok(
-      modalContent.includes("Télécharger Grille Logistique (.csv)"),
+      modalContent.includes("Download Logistics Sheet (.csv)"),
       "Le lien de téléchargement CSV doit être présent"
     );
   });
