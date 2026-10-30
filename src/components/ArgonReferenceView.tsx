@@ -1312,7 +1312,7 @@ export default function App() {
 
   const navItems: { id: NavSection; label: string; icon: React.ElementType; badge?: string }[] = [
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
-    { id: "analyses", label: "Analysis", icon: SlidersHorizontal, badge: `${seeds.length}` },
+    { id: "analyses", label: "Audience & evidence", icon: SlidersHorizontal },
     { id: "collections", label: "Collections", icon: GitCompare },
     { id: "catalogue", label: "Catalog", icon: ShoppingBag, badge: `${products.length}` },
     {
@@ -1340,7 +1340,7 @@ export default function App() {
   const displayWorkspace: WorkspaceDataset = realComparison ? {
     ...currentWorkspace,
     brandName: displayBrandName,
-    campaignTitle: realComparison.branchB_with_qloo.title || currentWorkspace.campaignTitle,
+    campaignTitle: "Qloo Cultural Capsule",
     summary: realComparison.brief,
     insights: realComparison.branchB_with_qloo.items.map((item) => ({
       id: item.product.sku, title: item.product.name, domains: ["Lifestyle"],
@@ -1385,10 +1385,11 @@ export default function App() {
             </label>
             <select
               aria-label="Example brief selector"
-              value={workspaceKey}
+              value={realComparison ? "active-analysis" : workspaceKey}
               onChange={(e) => handleSwitchWorkspace(e.target.value)}
               className="w-full bg-slate-50 hover:bg-slate-100/80 transition-colors border border-slate-200 rounded-lg px-3 py-2 text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-900/10 cursor-pointer"
             >
+              {realComparison && <option value="active-analysis" disabled>{displayBrandName} — saved analysis</option>}
               {Object.values(WORKSPACES).map((ws) => (
                 <option key={ws.id} value={ws.id}>
                   {ws.brandName} ({ws.season})
@@ -1532,13 +1533,15 @@ export default function App() {
           <div className="lg:hidden bg-white border-b border-slate-200 px-4 py-3 space-y-2">
             <div className="pb-2">
               <select
-                value={workspaceKey}
+                aria-label="Example brief selector"
+                value={realComparison ? "active-analysis" : workspaceKey}
                 onChange={(e) => {
                   handleSwitchWorkspace(e.target.value);
                   setMobileMenuOpen(false);
                 }}
                 className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs font-medium text-slate-800"
               >
+                {realComparison && <option value="active-analysis" disabled>{displayBrandName} — saved analysis</option>}
                 {Object.values(WORKSPACES).map((ws) => (
                   <option key={ws.id} value={ws.id}>
                     {ws.brandName} ({ws.season})
@@ -1603,9 +1606,7 @@ export default function App() {
                     OVERVIEW • {displayWorkspace.season}
                   </span>
                   <h1 className="text-2xl font-semibold tracking-tight text-slate-900 mt-1">
-                    {realComparison
-                      ? realComparison.branchB_with_qloo.title
-                      : displayWorkspace.campaignTitle}
+                    {displayWorkspace.campaignTitle}
                   </h1>
                   <p className="text-sm text-slate-600 mt-1 max-w-2xl">
                     {realComparison
@@ -1680,7 +1681,7 @@ export default function App() {
                     </button>
                   </div>
 
-                  <p className="text-xs text-slate-500">{seeds.length} cultural reference(s) added to the brief · Minimum margin: {profile.targetMargin}%. <button type="button" className="underline underline-offset-2" onClick={() => setActiveNav("analyses")}>Edit these settings</button></p>
+                  <p className="text-xs text-slate-500">{seeds.length > 0 ? `${seeds.length} extra cultural reference(s) added to the brief` : "No extra references — Qloo uses the audience brief"} · Minimum margin: {profile.targetMargin}%. <button type="button" className="underline underline-offset-2" onClick={() => setActiveNav("analyses")}>Edit these settings</button></p>
                   {/* Suggestions de briefs rapides */}
                   <div className="flex items-center gap-1.5 flex-wrap pt-1">
                     <span className="text-[11px] text-slate-400 font-medium">Examples:</span>
@@ -1839,7 +1840,7 @@ export default function App() {
                     {
                       step: "01",
                       title: "Audience & Signals",
-                      desc: `${seeds.length} cultural references configured to guide the collection.`,
+                      desc: seeds.length > 0 ? `${seeds.length} extra cultural references configured to guide the collection.` : "The audience brief guides the cultural analysis.",
                       target: "analyses" as NavSection,
                       cta: "Edit audience",
                     },
